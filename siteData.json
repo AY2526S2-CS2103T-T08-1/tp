@@ -10,7 +10,7 @@
         "john-doe": "John Doe",
         "chen-ping": "Chen Ping",
         "deltaminor": "deltaMinor",
-        "jean-doe": "Jean Doe",
+        "allison-law": "Allison Law",
         "justin-cheng": "Justin Cheng"
       },
       "headingKeywords": {}
@@ -133,6 +133,11 @@
       "headings": {
         "addressbook-level-3": "AddressBook Level-3"
       },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/allison.md",
+      "headings": {},
       "headingKeywords": {}
     },
     {
