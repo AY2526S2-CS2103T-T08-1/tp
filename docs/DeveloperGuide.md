@@ -300,14 +300,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `B2B4U` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Check User Guide**
 
 **MSS**
 
 1. User requests user guide
-2. AddressBook provides user guide
+2. B2B4U provides user guide
 
     Use case ends
 
@@ -316,15 +316,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to create a new contact with certain parameters
-2. AddressBook saves the new contact
-3. AddressBook displays confirmation that the new contact is saved
+2. B2B4U saves the new contact
+3. B2B4U displays confirmation that the new contact is saved
 
     Use case ends
 
 **Extensions**
 
 * 1a. The new contact is invalid
-  * 1a1. AddressBook shows an error message
+  * 1a1. B2B4U shows an error message
 
     Use case ends.
 
@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list contacts
-2. AddressBook shows a list of all stored contacts
+2. B2B4U shows a list of all stored contacts
 
     Use case ends.
 
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <u>view contacts (UC3)</u>
 2. User requests to delete a specific person in the list
-3. AddressBook deletes the contact
+3. B2B4U deletes the contact
 
     Use case ends.
 
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 2a. The given index is invalid.
-  * 2a1. AddressBook shows an error message.
+  * 2a1. B2B4U shows an error message.
 
     Use case resumes at step 1.
 
@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list contacts which fulfill given criteria
-2. AddressBook shows a list of all contacts which fulfill given criteria
+2. B2B4U shows a list of all contacts which fulfill given criteria
 
     Use case ends.
 
@@ -370,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list contacts sorted by a given criteria
-2. AddressBook shows a list of all contacts in order of given criteria
+2. B2B4U shows a list of all contacts in order of given criteria
 
     Use case ends.
 
