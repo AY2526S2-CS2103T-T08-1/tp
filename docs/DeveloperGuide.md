@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -290,11 +290,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | add a new contact             |                                                                        |
+| `* * *`  | user                                       | delete a contact              | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a contact by name        | locate details of contacts without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `*`      | user with many contacts in the address book | sort contacts by name         | locate a contact easily                                                 |
 
 *{More to be added}*
 
@@ -302,14 +302,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list contacts
+2.  AddressBook shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  AddressBook deletes the contact
 
     Use case ends.
 
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given request is invalid (e.g. referenced person does not exist).
+* 3a. The given request is invalid (e.g. referenced contact does not exist).
 
     * 3a1. AddressBook shows an error message.
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Command**: A structured line of text entered by the user to instruct the application to perform a specific action.
-* **Person**: A single contact entry stored in the address book, containing one or more pieces of contact information such as name, phone number, email, or address.
+* **Contact**: A single contact entry stored in the address book, containing one or more pieces of contact information such as name, phone number, email, or address.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,17 +372,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
