@@ -1,59 +1,61 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Xing Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cxyu629.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/cxyu629)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead, Developer
+* Responsibilities: Deadlines, Scheduling and Tracking
 
-### Jane Doe
+### Chen Ping
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/p12010304.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/p12010304)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: In charge of UI component, maintaining the quality of project documents (UG/DG), and ensuring deliverables meet project standards.
 
-### Johnny Doe
+### Davin Khor
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/deltaminor.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/deltaMinor)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality, In charge of UI Mockup
 
-### Jean Doe
+### Allison Law
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/allisonllx.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/allisonllx)]
+[[portfolio](team/allisonllx.md)]
+
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
+
+### Justin Cheng
+
+<img src="images/justatin555.png" width="200px">
+
+[[github](http://github.com/justatin555)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables + Integration
