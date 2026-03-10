@@ -8,14 +8,18 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.contact.exceptions.ContactNotFoundException;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
 
 /**
- * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
- * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding and updating of
- * contacts uses Contact#isSameContact(Contact) for equality so as to ensure that the contact being added or updated is
- * unique in terms of identity in the UniqueContactList. However, the removal of a contact uses Contact#equals(Object) so
+ * A list of contacts that enforces uniqueness between its elements and does not
+ * allow nulls.
+ * A contact is considered unique by comparing using
+ * {@code Contact#isSameContact(Contact)}. As such, adding and updating of
+ * contacts uses Contact#isSameContact(Contact) for equality so as to ensure
+ * that the contact being added or updated is
+ * unique in terms of identity in the UniqueContactList. However, the removal of
+ * a contact uses Contact#equals(Object) so
  * as to ensure that the contact with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -25,11 +29,12 @@ import seedu.address.model.contact.exceptions.ContactNotFoundException;
 public class UniqueContactList implements Iterable<Contact> {
 
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Contact> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Contact> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent contact as the given argument.
+     * Returns true if the list contains an equivalent contact as the given
+     * argument.
      */
     public boolean contains(Contact toCheck) {
         requireNonNull(toCheck);
@@ -51,7 +56,8 @@ public class UniqueContactList implements Iterable<Contact> {
     /**
      * Replaces the contact {@code target} in the list with {@code editedContact}.
      * {@code target} must exist in the list.
-     * The contact identity of {@code editedContact} must not be the same as another existing contact in the list.
+     * The contact identity of {@code editedContact} must not be the same as another
+     * existing contact in the list.
      */
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);

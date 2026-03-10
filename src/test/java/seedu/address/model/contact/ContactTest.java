@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalContacts.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 
 public class ContactTest {
