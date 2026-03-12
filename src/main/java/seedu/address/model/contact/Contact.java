@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -59,8 +60,19 @@ public class Contact {
         return address;
     }
 
+    /**
+     * Returns a {@code List} containing every {@code Note} in this contact.
+     * Use {@code getNotesString()} instead for the notes in string format.
+     */
     public List<Note> getNotes() {
         return notes;
+    }
+
+    /**
+     * Returns the notes formatted as a string, with every note separated by line break.
+     */
+    public String getNotesString() {
+        return notes.stream().map(note -> note.value).collect(Collectors.joining("\n"));
     }
 
     /**

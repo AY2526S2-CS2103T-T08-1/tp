@@ -57,8 +57,7 @@ public class ContactCard extends UiPart<Region> {
         address.setText(contact.getAddress().map(address -> address.value).orElse(""));
         email.setText(contact.getEmail().map(email -> email.value).orElse(""));
         if (!contact.getNotes().isEmpty()) {
-            String notesText = contact.getNotes().stream().map(note -> note.value).collect(Collectors.joining("\n"));
-            notes.setText(notesText);
+            notes.setText(contact.getNotesString());
             notes.getParent().setStyle("-fx-background-color: #000000");
         } else {
             notes.getParent().setVisible(false);

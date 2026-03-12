@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -91,8 +92,8 @@ public class ContactDetailPanel extends UiPart<Region> {
         }
 
         // Notes
-        if (!contact.getNotes().value.isEmpty()) {
-            notes.setText(contact.getNotes().value);
+        if (!contact.getNotes().isEmpty()) {
+            notes.setText(contact.getNotesString());
             notesContainer.setVisible(true);
             notesContainer.setManaged(true);
         } else {
