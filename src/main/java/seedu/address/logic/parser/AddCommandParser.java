@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        
+
         boolean isNamePrefixPresent = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean isPhonePrefixPresent = argMultimap.getValue(PREFIX_PHONE).isPresent();
         boolean isEmailPrefixPresent = argMultimap.getValue(PREFIX_EMAIL).isPresent();

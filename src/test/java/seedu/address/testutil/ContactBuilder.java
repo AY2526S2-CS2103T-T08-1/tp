@@ -75,7 +75,7 @@ public class ContactBuilder {
      * Sets the {@code Address} of the {@code Contact} that we are building.
      */
     public ContactBuilder withAddress(String address) {
-        this.address = Optional.of(new Address(address));
+        this.address = address != null ? Optional.of(new Address(address)) : Optional.empty();
         return this;
     }
 
@@ -83,7 +83,7 @@ public class ContactBuilder {
      * Sets the {@code Phone} of the {@code Contact} that we are building.
      */
     public ContactBuilder withPhone(String phone) {
-        this.phone = Optional.of(new Phone(phone));
+        this.phone = phone != null ? Optional.of(new Phone(phone)) : Optional.empty();
         return this;
     }
 
@@ -91,7 +91,7 @@ public class ContactBuilder {
      * Sets the {@code Email} of the {@code Contact} that we are building.
      */
     public ContactBuilder withEmail(String email) {
-        this.email = Optional.of(new Email(email));
+        this.email = email != null ? Optional.of(new Email(email)) : Optional.empty();
         return this;
     }
 
