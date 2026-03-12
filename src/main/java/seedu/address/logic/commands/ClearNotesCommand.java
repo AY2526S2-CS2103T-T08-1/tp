@@ -1,17 +1,16 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Note;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 /**
  * Remove lines of notes from an existing contact in the address book.
@@ -30,6 +29,7 @@ public class ClearNotesCommand extends NoteCommand {
 
         this.index = index;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Contact> lastShownList = model.getFilteredContactList();
@@ -41,7 +41,7 @@ public class ClearNotesCommand extends NoteCommand {
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
 
         Contact editedContact = new Contact(contactToEdit.getName(), contactToEdit.getPhone(), contactToEdit.getEmail(),
-                contactToEdit.getAddress(), new ArrayList<>(), contactToEdit.getTags());
+            contactToEdit.getAddress(), new ArrayList<>(), contactToEdit.getTags());
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);

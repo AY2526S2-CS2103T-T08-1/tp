@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Note;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 /**
  * Remove lines of notes from an existing contact in the address book.
@@ -24,7 +24,7 @@ public class RemoveNotesCommand extends NoteCommand {
     private final int numLines;
 
     /**
-     * @param index Index of the contact in the filtered contact list.
+     * @param index    Index of the contact in the filtered contact list.
      * @param numLines How many lines of notes to remove.
      */
     public RemoveNotesCommand(Index index, int numLines) {
@@ -33,6 +33,7 @@ public class RemoveNotesCommand extends NoteCommand {
         this.index = index;
         this.numLines = numLines;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Contact> lastShownList = model.getFilteredContactList();
@@ -49,7 +50,7 @@ public class RemoveNotesCommand extends NoteCommand {
         newNotes = newNotes.subList(Math.min(numLines, numExistingLines), numExistingLines);
 
         Contact editedContact = new Contact(contactToEdit.getName(), contactToEdit.getPhone(), contactToEdit.getEmail(),
-                contactToEdit.getAddress(), newNotes, contactToEdit.getTags());
+            contactToEdit.getAddress(), newNotes, contactToEdit.getTags());
 
         model.setContact(contactToEdit, editedContact);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
@@ -80,6 +81,6 @@ public class RemoveNotesCommand extends NoteCommand {
         // state check
         RemoveNotesCommand e = (RemoveNotesCommand) other;
         return index.equals(e.index)
-                && numLines == e.numLines;
+            && numLines == e.numLines;
     }
 }

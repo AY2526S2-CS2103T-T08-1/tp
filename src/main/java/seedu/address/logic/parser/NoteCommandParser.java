@@ -54,7 +54,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * Parses the given {@code String} in the context of the {@code RemoveNotesCommand}
      * and returns a {@code RemoveNotesCommand} object for execution.
      * @param index Previously parsed index of the contact to remove notes from.
-     * @param args The remaining arguments after parsing the index, expected to be in the format "c/NUM_LINES_TO_REMOVE".
+     * @param args The remaining arguments after parsing the index,
+     *             expected to be in the format "c/NUM_LINES_TO_REMOVE".
      * @return A RemoveNotesCommand object with the specified index and number of lines to remove.
      */
     private RemoveNotesCommand parseRemoveNotesCommand(Index index, String args) throws ParseException {
