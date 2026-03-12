@@ -10,20 +10,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
     // Allowed special characters in local-part
     private static final String SPECIAL_CHARACTERS = "._%+-";
-    
+
     // Local part: one or more alphanumeric or allowed special characters
     private static final String LOCAL_PART_REGEX = "[A-Za-z0-9](([A-Za-z0-9_+%-]|(\\.(?!\\.)))*[A-Za-z0-9])?";
- 
+
     private static final String DOMAIN_LABEL = "(?!-)[A-Za-z0-9-]+(?<!-)";
-    
+
     // Domain part: alphanumeric characters or hyphens, separated by periods, ending with TLD >= 2 chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_LABEL + "\\.)+" + "[A-Za-z]{2,}";
-    
+
     // Complete email regex
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     // Constraints message
-    public static final String MESSAGE_CONSTRAINTS = (
+    public static final String MESSAGE_CONSTRAINTS =
             "Emails should be of the format local-part@domain and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and the special characters "
             + SPECIAL_CHARACTERS + ", and must:\n"
@@ -35,8 +35,8 @@ public class Email {
             + "       - start and end with an alphanumeric character\n"
             + "       - contain only alphanumeric characters or hyphens in between\n"
             + "       - be at least 1 character long\n"
-            + "   The last domain label (top-level domain) must be at least 2 characters long, and must be alphabetic.");
-    
+            + "   The last domain label (top-level domain) must be at least 2 characters long, and must be alphabetic.";
+
     public final String value;
 
     /**
