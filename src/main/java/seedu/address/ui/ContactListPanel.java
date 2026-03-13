@@ -50,7 +50,9 @@ public class ContactListPanel extends UiPart<Region> {
      * Scrolls the list to the top.
      */
     public void scrollToTop() {
-        contactListView.scrollTo(0);
+        if (contactListView.getItems().size() > 0) {
+            contactListView.scrollTo(0);
+        }
     }
 
     /**
@@ -58,6 +60,8 @@ public class ContactListPanel extends UiPart<Region> {
      */
     public void scrollToBottom() {
         int finalIndex = contactListView.getItems().size() - 1;
-        contactListView.scrollTo(contactListView.getItems().get(finalIndex));
+        if (finalIndex >= 0) {
+            contactListView.scrollTo(contactListView.getItems().get(finalIndex));
+        }
     }
 }
