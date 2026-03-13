@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.contact.Contact;
 
 /**
- * An UI component that displays information of a {@code Contact}.
+ * A UI component that displays information of a {@code Contact}.
  */
 public class ContactCard extends UiPart<Region> {
 
@@ -52,9 +52,24 @@ public class ContactCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
         name.getParent().getParent().setStyle("-fx-background-color: #3c3e3f");
-        phone.setText(contact.getPhone().map(phone -> phone.value).orElse(""));
-        address.setText(contact.getAddress().map(address -> address.value).orElse(""));
-        email.setText(contact.getEmail().map(email -> email.value).orElse(""));
+        if (contact.getPhone().isPresent()) {
+            phone.setText(contact.getPhone().map(phone -> phone.value).orElse(""));
+        } else {
+            phone.setVisible(false);
+            phone.setManaged(false);
+        }
+        if (contact.getAddress().isPresent()) {
+            address.setText(contact.getAddress().map(address -> address.value).orElse(""));
+        } else {
+            address.setVisible(false);
+            address.setManaged(false);
+        }
+        if (contact.getEmail().isPresent()) {
+            email.setText(contact.getEmail().map(email -> email.value).orElse(""));
+        } else {
+            email.setVisible(false);
+            email.setManaged(false);
+        }
         if (!contact.getNotes().isEmpty()) {
             notes.setText(contact.getNotesString());
             notes.getParent().setStyle("-fx-background-color: #000000");
@@ -70,5 +85,29 @@ public class ContactCard extends UiPart<Region> {
             tags.setVisible(false);
             tags.setManaged(false);
         }
+    }
+
+    public boolean isNameVisible() {
+        return name.isVisible();
+    }
+
+    public boolean isPhoneVisible() {
+        return phone.isVisible();
+    }
+
+    public boolean isAddressVisible() {
+        return address.isVisible();
+    }
+
+    public boolean isEmailVisible() {
+        return email.isVisible();
+    }
+
+    public boolean isNotesVisible() {
+        return notes.getParent().isVisible();
+    }
+
+    public boolean isTagsVisible() {
+        return tags.isVisible();
     }
 }
