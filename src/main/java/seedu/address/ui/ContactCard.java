@@ -86,4 +86,28 @@ public class ContactCard extends UiPart<Region> {
             tags.setManaged(false);
         }
     }
+
+    public boolean isNameVisible() {
+        return name.isVisible();
+    }
+
+    public boolean isPhoneVisible() {
+        return phone.isVisible();
+    }
+
+    public boolean isAddressVisible() {
+        return address.isVisible();
+    }
+
+    public boolean isEmailVisible() {
+        return email.isVisible();
+    }
+
+    public boolean isNotesVisible() {
+        return notes.getParent().isVisible();
+    }
+
+    public boolean isTagsVisible() {
+        return tags.isVisible();
+    }
 }
