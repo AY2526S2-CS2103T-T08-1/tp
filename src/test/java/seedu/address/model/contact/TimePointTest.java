@@ -210,5 +210,7 @@ public class TimePointTest {
         assertTrue(t2.toString().equals("Jan 1 2024"));
         TimePoint t3 = TimePoint.of(LocalDateTime.of(2024, 1, 19, 10, 0));
         assertTrue(t3.toString().equals("10:00 Jan 19 2024"));
+        TimePoint t4 = TimePoint.of(LocalDateTime.of(2024, 1, 19, 10, 25));
+        assertTrue(t4.toString().equals("10:25 Jan 19 2024"));
     }
 }

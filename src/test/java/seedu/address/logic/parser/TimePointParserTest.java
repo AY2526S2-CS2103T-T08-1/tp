@@ -10,6 +10,18 @@ import org.junit.jupiter.api.Test;
 
 
 public class TimePointParserTest {
+
+    @Test
+    public void emptyTimePointTest() {
+        assertEquals(null, toTimePoint(""));
+        assertEquals(null, toTimePoint(null));
+    }
+
+    @Test
+    public void singleWordInputTest() {
+        assertEquals("gumbo", toTimePoint("gumbo").getTime());
+    }
+
     @Test
     public void twoWordDateTests() {
         // existing

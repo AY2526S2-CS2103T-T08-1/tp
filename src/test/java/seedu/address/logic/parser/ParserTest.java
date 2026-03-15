@@ -13,6 +13,7 @@ public class ParserTest {
         assertFalse(Parser.isInteger("4.5"));
         assertFalse(Parser.isInteger("abc"));
         assertFalse(Parser.isInteger(""));
+        assertFalse(Parser.isInteger(null));
     }
 
     @Test
