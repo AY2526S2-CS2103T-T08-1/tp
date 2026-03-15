@@ -1,16 +1,18 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
 
 /**
- * An UI component that displays information of a {@code Contact}.
+ * A UI component that displays information of a {@code Contact}.
  */
 public class ContactCard extends UiPart<Region> {
 
@@ -39,6 +41,8 @@ public class ContactCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private VBox notesContainer;
+    @FXML
     private Label notes;
     @FXML
     private FlowPane tags;
@@ -55,17 +59,34 @@ public class ContactCard extends UiPart<Region> {
         phone.setText(contact.getPhone().map(phone -> phone.value).orElse(""));
         address.setText(contact.getAddress().map(address -> address.value).orElse(""));
         email.setText(contact.getEmail().map(email -> email.value).orElse(""));
-        if (!contact.getNotes().isEmpty()) {
-            notes.setText(contact.getNotesString());
-            notes.getParent().setStyle("-fx-background-color: #000000");
+        if (!(contact.getNotes().isEmpty() && contact.getReminders().isEmpty())) {
+            contact.getReminders().forEach(
+                    reminder -> {
+                        notesContainer.getChildren().add(
+                                notesContainer.getChildren().size() - 1,
+                                new ReminderLabel(reminder, notesContainer.getStyleClass().toString())); });
+            if (!contact.getNotes().isEmpty()) {
+                notes.setText(contact.getNotesString());
+            } else {
+                notes.setVisible(false);
+                notes.setManaged(false);
+            }
+            notesContainer.setStyle("-fx-background-color: #000000");
         } else {
-            notes.getParent().setVisible(false);
-            notes.getParent().setManaged(false);
+            notesContainer.setVisible(false);
+            notesContainer.setManaged(false);
         }
-        if (!contact.getTags().isEmpty()) {
+        if (!(contact.getTags().isEmpty() && contact.getReminders().isEmpty())) {
             contact.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            if (!contact.getReminders().isEmpty()) {
+                Label reminderLabel = new Label("Reminder");
+                if (ReminderWindow.hasDueReminders(List.of(contact))) {
+                    reminderLabel.getStyleClass().add("warning-label");
+                }
+                tags.getChildren().add(reminderLabel);
+            }
         } else {
             tags.setVisible(false);
             tags.setManaged(false);
