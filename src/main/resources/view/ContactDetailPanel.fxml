@@ -9,7 +9,7 @@
 
 <VBox fx:id="detailPane" styleClass="contact-detail-panel" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets top="15" right="15" bottom="15" left="15" />
+        <Insets bottom="15" left="15" right="15" top="15" />
     </padding>
 
     <!-- Header with Name -->
@@ -59,6 +59,21 @@
         <Label styleClass="detail-label" text="Address:" />
         <Label fx:id="address" styleClass="detail-value" text="\$address" wrapText="true" />
     </VBox>
+
+    <!-- Reminders -->
+   <VBox fx:id="remindersContainer" styleClass="detail-section" VBox.vgrow="ALWAYS">
+      <padding>
+         <Insets bottom="10" />
+      </padding>
+      <children>
+         <Label styleClass="detail-label, bold" text="Reminders:" />
+         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+            <content>
+               <VBox fx:id="reminders" styleClass="detail-value"/>
+            </content>
+         </ScrollPane>
+      </children>
+   </VBox>
 
     <!-- Notes -->
     <VBox fx:id="notesContainer" styleClass="detail-section" VBox.vgrow="ALWAYS">

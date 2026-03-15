@@ -1,18 +1,17 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Reminder;
 
 /**
- * An UI component that displays information of a {@code Contact}.
+ * A UI component that displays information of a {@code Contact}.
  */
 public class ContactCard extends UiPart<Region> {
 
@@ -41,6 +40,8 @@ public class ContactCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private VBox notesContainer;
+    @FXML
     private Label notes;
     @FXML
     private FlowPane tags;
@@ -58,13 +59,21 @@ public class ContactCard extends UiPart<Region> {
         address.setText(contact.getAddress().map(address -> address.value).orElse(""));
         email.setText(contact.getEmail().map(email -> email.value).orElse(""));
         if (!(contact.getNotes().isEmpty() && contact.getReminders().isEmpty())) {
-            String notesText = contact.getNotesString();
-            notesText += contact.getReminders().stream().map(Reminder::toString).collect(Collectors.joining("\n"));
-            notes.setText(notesText);
-            notes.getParent().setStyle("-fx-background-color: #000000");
+            contact.getReminders().forEach(
+                    reminder -> {
+                        notesContainer.getChildren().add(
+                                notesContainer.getChildren().size() - 1,
+                                new ReminderLabel(reminder, notesContainer.getStyleClass().toString())); });
+            if (!contact.getNotes().isEmpty()) {
+                notes.setText(contact.getNotesString());
+            } else {
+                notes.setVisible(false);
+                notes.setManaged(false);
+            }
+            notesContainer.setStyle("-fx-background-color: #000000");
         } else {
-            notes.getParent().setVisible(false);
-            notes.getParent().setManaged(false);
+            notesContainer.setVisible(false);
+            notesContainer.setManaged(false);
         }
         if (!contact.getTags().isEmpty()) {
             contact.getTags().stream()
