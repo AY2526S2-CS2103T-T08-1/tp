@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -21,17 +23,21 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Snapshot;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.ContactUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -68,6 +74,59 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_undoCommand_hitLimit() throws Exception {
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        assertCommandSuccess(undoCommand, LogicManager.UNDO_LIMIT_MESSAGE, model);
+    }
+
+    @Test
+    public void execute_undoCommand_success() throws Exception {
+        Contact contact = new ContactBuilder().build();
+        String validCommand = ContactUtil.getAddCommand(contact);
+        String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(contact));
+        Snapshot initialSnapshot = model.getSnapshot();
+
+        assertCommandSuccess(validCommand, expectedMessage, model);
+
+        Snapshot postCommandSnapshot = model.getSnapshot();
+        assertFalse(initialSnapshot.equals(postCommandSnapshot));
+
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        assertCommandSuccess(undoCommand, String.format(UndoCommand.MESSAGE_UNDO_SUCCESS, expectedMessage), model);
+
+        Snapshot undoCommandSnapshot = model.getSnapshot();
+        assertTrue(initialSnapshot.equals(undoCommandSnapshot));
+
+        assertCommandSuccess(undoCommand, LogicManager.UNDO_LIMIT_MESSAGE, model);
+    }
+
+    @Test
+    public void execute_redoCommand_hitLimit() throws Exception {
+        String redoCommand = RedoCommand.COMMAND_WORD;
+        assertCommandSuccess(redoCommand, LogicManager.REDO_LIMIT_MESSAGE, model);
+    }
+
+    @Test
+    public void execute_redoCommand_success() throws Exception {
+        Contact contact = new ContactBuilder().build();
+        String validCommand = ContactUtil.getAddCommand(contact);
+        String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(contact));
+
+        assertCommandSuccess(validCommand, expectedMessage, model);
+        Snapshot postCommandSnapshot = model.getSnapshot();
+
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        assertCommandSuccess(undoCommand, String.format(UndoCommand.MESSAGE_UNDO_SUCCESS, expectedMessage), model);
+        String redoCommand = RedoCommand.COMMAND_WORD;
+        assertCommandSuccess(redoCommand, String.format(RedoCommand.MESSAGE_REDO_SUCCESS, expectedMessage), model);
+
+        Snapshot redoCommandSnapshot = model.getSnapshot();
+        assertTrue(postCommandSnapshot.equals(redoCommandSnapshot));
+
+        assertCommandSuccess(redoCommand, LogicManager.REDO_LIMIT_MESSAGE, model);
     }
 
     @Test

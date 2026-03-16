@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
 
-    private Predicate<Contact> contactPredicate;
+    private Predicate<Contact> filterPredicate;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
-        contactPredicate = PREDICATE_SHOW_ALL_CONTACTS;
+        filterPredicate = PREDICATE_SHOW_ALL_CONTACTS;
     }
 
     public ModelManager() {
@@ -136,7 +136,7 @@ public class ModelManager implements Model {
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
-        contactPredicate = predicate;
+        filterPredicate = predicate;
     }
 
     //=========== Snapshot ================================================================================
@@ -148,7 +148,7 @@ public class ModelManager implements Model {
     public Snapshot getSnapshot() {
         ArrayList<Contact> copyContacts = new ArrayList<>();
         getAddressBook().getContactList().forEach(contact -> copyContacts.add(contact.copy()));
-        return new Snapshot(copyContacts, getUserPrefs(), contactPredicate);
+        return new Snapshot(copyContacts, getUserPrefs(), filterPredicate);
     }
 
     /**
@@ -160,6 +160,7 @@ public class ModelManager implements Model {
         addressBook.setContacts(snapshot.contactList());
         setUserPrefs(snapshot.userPrefs());
         filteredContacts.setPredicate(snapshot.filterPredicate());
+        filterPredicate = snapshot.filterPredicate();
     }
 
     //=========== Override ================================================================================

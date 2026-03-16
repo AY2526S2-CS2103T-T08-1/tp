@@ -77,7 +77,7 @@ public class LogicManager implements Logic {
             if (snapshotsToShift > 0) {
                 snapshotPosition += snapshotsToShift;
                 commandResult = new CommandResult(
-                        commandResult.getFeedbackToUser() + snapshots.get(snapshotPosition).getKey(),
+                        String.format(commandResult.getFeedbackToUser(), snapshots.get(snapshotPosition).getKey()),
                         snapshotsToShift);
                 model.copySnapshot(snapshots.get(snapshotPosition).getValue());
             } else {
@@ -88,7 +88,7 @@ public class LogicManager implements Logic {
             if (snapshotsToShift > 0) {
                 snapshotPosition -= snapshotsToShift;
                 commandResult = new CommandResult(
-                        commandResult.getFeedbackToUser() + snapshots.get(snapshotPosition + 1).getKey(),
+                        String.format(commandResult.getFeedbackToUser(), snapshots.get(snapshotPosition + 1).getKey()),
                         -snapshotsToShift);
                 model.copySnapshot(snapshots.get(snapshotPosition).getValue());
             } else {
