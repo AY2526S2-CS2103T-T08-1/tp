@@ -60,6 +60,6 @@ public class Phone implements Comparable<Phone> {
 
     @Override
     public int compareTo(Phone o) {
-        return this.value.compareToIgnoreCase(o.value);
+        return this.value.replace("+", "").compareTo(o.value.replace("+", ""));
     }
 }

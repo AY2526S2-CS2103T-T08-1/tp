@@ -1,5 +1,7 @@
 package seedu.address.model.contact;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 import java.util.Map;
 
@@ -44,7 +46,15 @@ public final class ContactComparator implements Comparator<Contact> {
 
     private final Comparator<Contact> comparator;
 
+    /**
+     * Constructs a ContactComparator with the specified field and order.
+     *
+     * @param field The field to sort by.
+     * @param order The order to sort in.
+     * @throws NullPointerException if either field or order is null.
+     */
     public ContactComparator(Field field, Order order) {
+        requireAllNonNull(field, order);
         this.comparator = getComparator(field, order);
     }
 
