@@ -248,7 +248,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowContactDetail()) {
+            if (commandResult.isHideContactDetail()) {
+                contactDetailPanel.clearContact();
+                hideContactDetailPanel();
+            } else if (commandResult.isShowContactDetail()) {
                 commandResult.getContactToView().ifPresent(contact -> {
                     contactDetailPanel.setContact(contact);
                     viewedContactName = contact.getName();

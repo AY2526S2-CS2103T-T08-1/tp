@@ -60,7 +60,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", contactToView=null}";
+                + ", exit=" + commandResult.isExit() + ", contactToView=null"
+                + ", hideContactDetail=false}";
         assertEquals(expected, commandResult.toString());
     }
 
@@ -68,6 +69,18 @@ public class CommandResultTest {
     public void getContactToView_noContact_returnsEmptyOptional() {
         CommandResult commandResult = new CommandResult("feedback");
         assertTrue(commandResult.getContactToView().isEmpty());
+    }
+
+    @Test
+    public void isHideContactDetail_default_returnsFalse() {
+        CommandResult commandResult = new CommandResult("feedback");
+        assertFalse(commandResult.isHideContactDetail());
+    }
+
+    @Test
+    public void isHideContactDetail_hideTrue_returnsTrue() {
+        CommandResult commandResult = new CommandResult("feedback", false, false, null, true);
+        assertTrue(commandResult.isHideContactDetail());
     }
 
     @Test
