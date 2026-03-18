@@ -46,4 +46,22 @@ public class ContactListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Scrolls the list to the top.
+     */
+    public void scrollToTop() {
+        if (contactListView.getItems().size() > 0) {
+            contactListView.scrollTo(0);
+        }
+    }
+
+    /**
+     * Scrolls the list to the bottom.
+     */
+    public void scrollToBottom() {
+        int finalIndex = contactListView.getItems().size() - 1;
+        if (finalIndex >= 0) {
+            contactListView.scrollTo(contactListView.getItems().get(finalIndex));
+        }
+    }
 }
