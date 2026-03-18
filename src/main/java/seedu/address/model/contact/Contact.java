@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,6 +20,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Contact {
+
+    // Unique identifier
+    private final UUID id;
 
     // Identity fields
     private final Name name;
@@ -32,22 +36,23 @@ public class Contact {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Generates a new unique ID.
      */
     public Contact(
             Name name, Optional<Phone> phone, Optional<Email> email,
             Optional<Address> address, List<Note> notes, Set<Tag> tags) {
-        this(name, phone, email, address, Optional.empty(), notes, tags);
+        this(UUID.randomUUID(), name, phone, email, address, Optional.empty(), notes, tags);
     }
 
     /**
-     * Every field must be present and not null.
+     * Creates a Contact with a specified ID. Used when preserving identity across edits or deserialization.
      */
     public Contact(
-            Name name, Optional<Phone> phone, Optional<Email> email,
+            UUID id, Name name, Optional<Phone> phone, Optional<Email> email,
             Optional<Address> address, Optional<LastContacted> lastContacted,
             List<Note> notes, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, lastContacted, notes, tags);
+        requireAllNonNull(id, name, phone, email, address, tags);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +60,10 @@ public class Contact {
         this.lastContacted = lastContacted;
         this.notes = List.copyOf(notes);
         this.tags.addAll(tags);
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public Name getName() {
