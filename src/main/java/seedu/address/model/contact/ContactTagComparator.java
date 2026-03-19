@@ -1,11 +1,11 @@
 package seedu.address.model.contact;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
-import java.util.Map;
 import java.util.Optional;
+
 import seedu.address.model.tag.RankedTag;
-import seedu.address.model.tag.Tag;
 
 /**
  * Comparator for sorting contacts based on specified field and order.
@@ -18,7 +18,7 @@ public final class ContactTagComparator implements Comparator<Contact> {
     /**
      * Constructs a ContactTagComparator for the specified tag and order.
      *
-     * @param tag The tag to sort by.
+     * @param tag   The tag to sort by.
      * @param order The order to sort in.
      * @throws NullPointerException if either field or order is null.
      */
@@ -26,6 +26,20 @@ public final class ContactTagComparator implements Comparator<Contact> {
         requireAllNonNull(tag, order);
         this.tag = tag;
         this.order = order;
+    }
+
+    /**
+     * Extract a specific {@code RankedTag} from a {@code Contact}.
+     *
+     * @param contact The contact with the tag.
+     * @param tagName The name of the tag.
+     * @return The {@code RankedTag} if present, nothing otherwise.
+     */
+    private static Optional<RankedTag> extractRankedTag(Contact contact, String tagName) {
+        return contact.getTags().stream()
+            .filter(tag -> !tag.name.isEmpty() && tag.name.equals(tagName) && tag instanceof RankedTag)
+            .map(tag -> (RankedTag) tag)
+            .findFirst();
     }
 
     @Override
@@ -61,18 +75,5 @@ public final class ContactTagComparator implements Comparator<Contact> {
     @Override
     public int hashCode() {
         return ("t/" + tag).hashCode();
-    }
-
-    /**
-     * Extract a specific {@code RankedTag} from a {@code Contact}.
-     * @param contact The contact with the tag.
-     * @param tagName The name of the tag.
-     * @return The {@code RankedTag} if present, nothing otherwise.
-     */
-    private static Optional<RankedTag> extractRankedTag(Contact contact, String tagName) {
-        return contact.getTags().stream()
-            .filter(tag -> !tag.name.isEmpty() && tag.name.equals(tagName) && tag instanceof RankedTag)
-            .map(tag -> (RankedTag) tag)
-            .findFirst();
     }
 }

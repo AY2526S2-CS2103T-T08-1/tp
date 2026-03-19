@@ -7,10 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
@@ -31,31 +33,15 @@ public class SortCommandParser implements Parser<SortCommand> {
     );
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns a SortCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Extracts comparators from a {@code ArgumentMultimap} and combines them into a single {@code Comparator<Contact>}.
+     *
+     * @param argMultimap The arguments to sort by.
+     * @throws ParseException If there are no valid arguments to sort by.
      */
-    public SortCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-
-        // Checks that argument(s) are provided
-        if (args.isBlank()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
-
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-
-        Comparator<Contact> combinedComparator = makeCombinedComparator(argMultimap);
-
-        return new SortCommand(combinedComparator);
-    }
-
     private static Comparator<Contact> makeCombinedComparator(ArgumentMultimap argMultimap) throws ParseException {
         ContactComparatorSet combinedComparator = new ContactComparatorSet();
 
-        for (Prefix prefix : new Prefix[] { PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS }) {
+        for (Prefix prefix : new Prefix[] {PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS}) {
             Optional<String> values = argMultimap.getValue(prefix);
 
             if (values.isEmpty()) {
@@ -83,9 +69,32 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         if (combinedComparator.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         return combinedComparator;
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public SortCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+
+        // Checks that argument(s) are provided
+        if (args.isBlank()) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+
+        Comparator<Contact> combinedComparator = makeCombinedComparator(argMultimap);
+
+        return new SortCommand(combinedComparator);
     }
 }

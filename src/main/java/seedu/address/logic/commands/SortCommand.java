@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Comparator;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -23,17 +25,17 @@ public class SortCommand extends Command {
     public static final String DESCENDING_KEYWORD = "DESC";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts by the given fields "
-            + "and displays them as a list with index numbers.\n"
-            + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
-            + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
-            + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_EMAIL + "john@example.com "
-            + PREFIX_TAG + "friend";
+        + "and displays them as a list with index numbers.\n"
+        + "Parameters: "
+        + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
+        + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
+        + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "John Doe "
+        + PREFIX_EMAIL + "john@example.com "
+        + PREFIX_TAG + "friend";
 
     private final Comparator<Contact> comparator;
 
@@ -46,7 +48,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortDisplayedContactList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getDisplayedContactList().size()));
+            String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getDisplayedContactList().size()));
     }
 
     @Override
@@ -66,7 +68,7 @@ public class SortCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("comparator", comparator)
-                .toString();
+            .add("comparator", comparator)
+            .toString();
     }
 }
