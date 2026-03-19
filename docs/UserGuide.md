@@ -71,6 +71,14 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Viewing help : `Handle unknown commands`
+
+Validate and guide unknown tasks / actions for users.​
+
+![error message](images/errorMessage.png)
+
+
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
