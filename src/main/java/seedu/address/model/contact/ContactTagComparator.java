@@ -24,6 +24,7 @@ public final class ContactTagComparator implements Comparator<Contact> {
      */
     public ContactTagComparator(String tag, ContactComparator.Order order) {
         requireAllNonNull(tag, order);
+
         this.tag = tag;
         this.order = order;
     }
