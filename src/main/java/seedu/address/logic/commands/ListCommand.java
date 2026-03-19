@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import seedu.address.model.Model;
 
@@ -18,7 +17,11 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        model.resetDisplayedContactList();
+
+        String feedback = MESSAGE_SUCCESS;
+        model.saveSnapshot(feedback);
+        return new CommandResult(feedback);
     }
 }

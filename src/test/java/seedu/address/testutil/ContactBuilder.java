@@ -10,6 +10,8 @@ import java.util.UUID;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.LastContacted;
+import seedu.address.model.contact.LastUpdated;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
@@ -31,6 +33,8 @@ public class ContactBuilder {
     private Optional<Phone> phone;
     private Optional<Email> email;
     private Optional<Address> address;
+    private Optional<LastContacted> lastContacted;
+    private LastUpdated lastUpdated;
     private List<Note> notes;
     private Set<Tag> tags;
 
@@ -43,6 +47,8 @@ public class ContactBuilder {
         phone = Optional.of(new Phone(DEFAULT_PHONE));
         email = Optional.of(new Email(DEFAULT_EMAIL));
         address = Optional.of(new Address(DEFAULT_ADDRESS));
+        lastContacted = Optional.empty();
+        lastUpdated = LastUpdated.now();
         notes = new ArrayList<>();
         tags = new HashSet<>();
     }
@@ -56,6 +62,8 @@ public class ContactBuilder {
         phone = contactToCopy.getPhone();
         email = contactToCopy.getEmail();
         address = contactToCopy.getAddress();
+        lastContacted = contactToCopy.getLastContacted();
+        lastUpdated = contactToCopy.getLastUpdated();
         notes = contactToCopy.getNotes();
         tags = new HashSet<>(contactToCopy.getTags());
     }
@@ -108,8 +116,24 @@ public class ContactBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LastContacted} of the {@code Contact} that we are building.
+     */
+    public ContactBuilder withLastContacted(String lastContacted) {
+        this.lastContacted = lastContacted != null ? Optional.of(new LastContacted(lastContacted)) : Optional.empty();
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastUpdated} of the {@code Contact} that we are building.
+     */
+    public ContactBuilder withLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated != null ? new LastUpdated(lastUpdated) : LastUpdated.now();
+        return this;
+    }
+
     public Contact build() {
-        return new Contact(id, name, phone, email, address, notes, tags);
+        return new Contact(id, name, phone, email, address, lastContacted, lastUpdated, notes, tags);
     }
 
 }

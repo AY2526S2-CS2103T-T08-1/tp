@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.tag.RankedTag;
 
 /**
  * A UI component that displays information of a {@code Contact}.
@@ -40,6 +41,10 @@ public class ContactCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label lastContacted;
+    @FXML
+    private Label lastUpdated;
+    @FXML
     private VBox notesContainer;
     @FXML
     private FlowPane tags;
@@ -53,9 +58,45 @@ public class ContactCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
         name.getParent().getParent().setStyle("-fx-background-color: #3c3e3f");
-        phone.setText(contact.getPhone().map(phone -> phone.value).orElse(""));
-        address.setText(contact.getAddress().map(address -> address.value).orElse(""));
-        email.setText(contact.getEmail().map(email -> email.value).orElse(""));
+        contact.getPhone().ifPresentOrElse(phone -> {
+            this.phone.setText(phone.value);
+            this.phone.setVisible(true);
+            this.phone.setManaged(true);
+        }, () -> {
+            this.phone.setText("");
+            this.phone.setVisible(false);
+            this.phone.setManaged(false);
+        });
+        contact.getAddress().ifPresentOrElse(address -> {
+            this.address.setText(address.value);
+            this.address.setVisible(true);
+            this.address.setManaged(true);
+        }, () -> {
+            this.address.setText("");
+            this.address.setVisible(false);
+            this.address.setManaged(false);
+        });
+        contact.getEmail().ifPresentOrElse(email -> {
+            this.email.setText(email.value);
+            this.email.setVisible(true);
+            this.email.setManaged(true);
+        }, () -> {
+            this.email.setText("");
+            this.email.setVisible(false);
+            this.email.setManaged(false);
+        });
+        contact.getLastContacted().ifPresentOrElse(lastContacted -> {
+            this.lastContacted.setText("Last Contacted: " + lastContacted);
+            this.lastContacted.setVisible(true);
+            this.lastContacted.setManaged(true);
+        }, () -> {
+            this.lastContacted.setText("");
+            this.lastContacted.setVisible(false);
+            this.lastContacted.setManaged(false);
+        });
+        this.lastUpdated.setText("Last Updated: " + contact.getLastUpdated());
+        this.lastUpdated.setVisible(true);
+        this.lastUpdated.setManaged(true);
         if (!(contact.getNotes().isEmpty())) {
             contact.getNotes().forEach(
                     note -> {
@@ -68,8 +109,12 @@ public class ContactCard extends UiPart<Region> {
         }
         if (!(contact.getTags().isEmpty() && contact.getReminders().isEmpty())) {
             contact.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .sorted(Comparator.comparing(tag -> tag.name))
+                    .forEach(tag -> tags.getChildren().add(
+                        tag instanceof RankedTag
+                            ? new RankedTagLabel((RankedTag) tag)
+                            : new Label(tag.name)));
+
             if (!contact.getReminders().isEmpty()) {
                 Label reminderLabel = new Label("Reminder");
                 if (contact.hasDueReminders()) {

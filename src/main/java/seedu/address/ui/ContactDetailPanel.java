@@ -27,6 +27,10 @@ public class ContactDetailPanel extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label lastContacted;
+    @FXML
+    private Label lastUpdated;
+    @FXML
     private VBox notes;
     @FXML
     private FlowPane tags;
@@ -38,6 +42,10 @@ public class ContactDetailPanel extends UiPart<Region> {
     private VBox emailContainer;
     @FXML
     private VBox addressContainer;
+    @FXML
+    private VBox lastContactedContainer;
+    @FXML
+    private VBox lastUpdatedContainer;
     @FXML
     private VBox notesContainer;
 
@@ -90,6 +98,21 @@ public class ContactDetailPanel extends UiPart<Region> {
             addressContainer.setManaged(false);
         }
 
+        // Last Contacted
+        if (contact.getLastContacted().isPresent()) {
+            lastContacted.setText(contact.getLastContacted().get().toString());
+            lastContactedContainer.setVisible(true);
+            lastContactedContainer.setManaged(true);
+        } else {
+            lastContactedContainer.setVisible(false);
+            lastContactedContainer.setManaged(false);
+        }
+
+        // Last Updated
+        lastUpdated.setText(contact.getLastUpdated().toString());
+        lastUpdatedContainer.setVisible(true);
+        lastUpdatedContainer.setManaged(true);
+
         // Notes
         notes.getChildren().clear();
         if (!contact.getNotes().isEmpty()) {
@@ -108,8 +131,8 @@ public class ContactDetailPanel extends UiPart<Region> {
         tags.getChildren().clear();
         if (!contact.getTags().isEmpty()) {
             contact.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .sorted(Comparator.comparing(tag -> tag.name))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.name)));
             tagsContainer.setVisible(true);
             tagsContainer.setManaged(true);
         } else {
@@ -129,6 +152,8 @@ public class ContactDetailPanel extends UiPart<Region> {
         phone.setText("");
         email.setText("");
         address.setText("");
+        lastContacted.setText("");
+        lastUpdated.setText("");
         tags.getChildren().clear();
         notes.getChildren().clear();
 
@@ -138,6 +163,10 @@ public class ContactDetailPanel extends UiPart<Region> {
         emailContainer.setManaged(false);
         addressContainer.setVisible(false);
         addressContainer.setManaged(false);
+        lastContactedContainer.setVisible(false);
+        lastContactedContainer.setManaged(false);
+        lastUpdatedContainer.setVisible(false);
+        lastUpdatedContainer.setManaged(false);
         notesContainer.setVisible(false);
         notesContainer.setManaged(false);
         tagsContainer.setVisible(false);

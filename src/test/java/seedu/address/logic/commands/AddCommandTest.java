@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalContacts.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Snapshot;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 
@@ -154,12 +156,37 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Contact> getFilteredContactList() {
+        public ObservableList<Contact> getDisplayedContactList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredContactList(Predicate<Contact> predicate) {
+        public void resetDisplayedContactList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortDisplayedContactList(Comparator<Contact> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterDisplayedContactList(Predicate<Contact> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Snapshot getSnapshot() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveSnapshot(String snapshotName) {
+            return;
+        }
+
+        @Override
+        public String moveSnapshot(int offset) throws IndexOutOfBoundsException {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -211,7 +238,11 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredContactList(Predicate<Contact> predicate) {
+        public void filterDisplayedContactList(Predicate<Contact> predicate) {
+        }
+
+        @Override
+        public void resetDisplayedContactList() {
         }
     }
 

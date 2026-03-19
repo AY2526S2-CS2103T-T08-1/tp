@@ -39,6 +39,7 @@ public class ContactDetailPanelTest extends GuiUnitTest {
                     .withPhone("12345678")
                     .withEmail("test@example.com")
                     .withAddress("123 Test St")
+                    .withLastContacted("22/02/26")
                     .withTags("tag1", "tag2")
                     .withNotes("Test notes")
                     .build();
@@ -90,6 +91,33 @@ public class ContactDetailPanelTest extends GuiUnitTest {
                     .withAddress("123 Test St")
                     .build();
             assertDoesNotThrow(() -> panel.setContact(addressOnlyContact));
+        });
+    }
+
+    @Test
+    public void setContact_contactWithOnlyLastContacted_success() throws Exception {
+        runAndWait(() -> {
+            ContactDetailPanel panel = new ContactDetailPanel();
+            Contact lastContactedOnlyContact = new ContactBuilder()
+                    .withName("Last Contacted Only")
+                    .withLastContacted("22/02/26")
+                    .build();
+            assertDoesNotThrow(() -> panel.setContact(lastContactedOnlyContact));
+        });
+    }
+
+    @Test
+    public void setContact_contactWithOnlyLastUpdated_success() throws Exception {
+        runAndWait(() -> {
+            ContactDetailPanel panel = new ContactDetailPanel();
+            Contact lastUpdatedOnlyContact = new ContactBuilder()
+                    .withName("Last Updated Only")
+                    .withPhone(null)
+                    .withEmail(null)
+                    .withAddress(null)
+                    .withLastContacted(null)
+                    .build();
+            assertDoesNotThrow(() -> panel.setContact(lastUpdatedOnlyContact));
         });
     }
 
@@ -179,6 +207,34 @@ public class ContactDetailPanelTest extends GuiUnitTest {
                 panel.setContact(fullContact);
                 panel.setContact(minimalContact);
                 panel.setContact(fullContact);
+            });
+        });
+    }
+
+    @Test
+    public void setContact_transitionIncludesMissingLastUpdated_success() throws Exception {
+        runAndWait(() -> {
+            ContactDetailPanel panel = new ContactDetailPanel();
+            Contact fullContact = new ContactBuilder()
+                    .withName("Full")
+                    .withPhone("12345678")
+                    .withEmail("full@test.com")
+                    .withAddress("Full Address")
+                    .withLastContacted("22/02/26")
+                    .withTags("tag1")
+                    .withNotes("Full notes")
+                    .build();
+            Contact noLastUpdatedContact = new ContactBuilder()
+                    .withName("Previously Missing Last Updated")
+                    .build();
+            Contact minimalContact = new ContactBuilder()
+                    .withName("Minimal")
+                    .build();
+
+            assertDoesNotThrow(() -> {
+                panel.setContact(fullContact);
+                panel.setContact(noLastUpdatedContact);
+                panel.setContact(minimalContact);
             });
         });
     }

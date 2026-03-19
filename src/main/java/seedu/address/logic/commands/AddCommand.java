@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_CONTACTED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,12 +27,14 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE | "
             + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_LAST_CONTACTED + "LAST_CONTACTED] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_LAST_CONTACTED + "22/02/26 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney\n"
             + "Note that at least one of PHONE or EMAIL must be provided";
@@ -61,12 +64,17 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
+        model.resetDisplayedContactList();
         if (model.hasSimilarContact(toAdd)) {
             message = MESSAGE_SUCCESS_SIMILAR;
+            model.filterDisplayedContactList(toAdd::isSimilarContact);
         }
 
         model.addContact(toAdd);
-        return new CommandResult(String.format(message, Messages.format(toAdd)));
+
+        String feedback = String.format(message, Messages.format(toAdd));
+        model.saveSnapshot(feedback);
+        return new CommandResult(feedback);
     }
 
     @Override
