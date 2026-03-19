@@ -32,20 +32,14 @@ public class MainWindowVisibleGuiTest extends GuiUnitTest {
     private MainWindow mainWindow;
     private StubLogic logic;
 
-    @BeforeEach
-    public void setUp() throws Exception {
+    @Test
+    public void scroll_success() throws Exception {
         logic = new StubLogic();
         runAndWait(() -> {
             Stage stage = new Stage();
             mainWindow = new MainWindow(stage, logic);
             mainWindow.show();
             mainWindow.fillInnerParts();
-        });
-    }
-
-    @Test
-    public void scroll_success() throws Exception {
-        runAndWait(() -> {
             logic.setNextResult(new CommandResult(ListCommand.MESSAGE_SUCCESS));
             assertDoesNotThrow(() -> mainWindow.executeCommand("list"));
             logic.setNextResult(
