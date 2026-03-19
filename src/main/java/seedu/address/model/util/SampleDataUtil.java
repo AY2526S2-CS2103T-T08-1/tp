@@ -30,7 +30,7 @@ public class SampleDataUtil {
                 Optional.of(new Email("alexyeoh@example.com")),
                 Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
                 EMPTY_NOTES,
-                getTagSet("friends")),
+                getTagSet("friends:best")),
             new Contact(new Name("Bernice Yu"), Optional.of(new Phone("99272758")),
                 Optional.of(new Email("berniceyu@example.com")),
                 Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),

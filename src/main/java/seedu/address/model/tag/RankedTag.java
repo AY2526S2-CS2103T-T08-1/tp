@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class RankedTag extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Ranked tag ranks should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Ranked tag values should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String rank;

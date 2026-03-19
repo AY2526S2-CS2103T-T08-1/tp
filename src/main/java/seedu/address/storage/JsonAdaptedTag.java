@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.RankedTag;
@@ -10,31 +12,28 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Tag}.
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = JsonAdaptedRankedTag.class)
+})
 class JsonAdaptedTag {
 
-    private final String name;
-    private final String rank;
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tag's %s field is missing!";
+    protected final String name;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code name} and {@code rank}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code name}.
+     * @param name The name of the tag.
      */
     @JsonCreator
-    public JsonAdaptedTag(String[] tagParams) {
-        if (tagParams.length == 0) {
-            throw new IllegalArgumentException("Tag parameters cannot be empty");
-        }
-
-        if (tagParams.length > 2) {
-            throw new IllegalArgumentException("Cannot have more than 2 tag parameters");
-        }
-
-        this.name = tagParams[0];
-
-        if (tagParams.length == 2) {
-            this.rank = tagParams[1];
-        } else {
-            this.rank = null;
-        }
+    public JsonAdaptedTag(
+        @JsonProperty("name") String name
+    ) {
+        this.name = name;
     }
 
     /**
@@ -42,17 +41,6 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(Tag source) {
         name = source.name;
-
-        if (source instanceof RankedTag) {
-            rank = ((RankedTag) source).rank;
-        } else {
-            rank = null;
-        }
-    }
-
-    @JsonValue
-    public String[] getTagParams() {
-        return rank != null ? new String[] { name, rank } : new String[] { name };
     }
 
     /**
@@ -61,14 +49,60 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
+        }
+
         if (!Tag.isValidTagName(name)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        boolean isRankedTag = rank != null;
+        return new Tag(name);
+    }
+}
 
-        if (!isRankedTag) {
-            return new Tag(name);
+class JsonAdaptedRankedTag extends JsonAdaptedTag {
+
+    protected final String rank;
+
+    /**
+     * Constructs a {@code JsonAdaptedRankedTag} with the given {@code name} and {@code rank}.
+     * @param name The name of the tag.
+     * @param rank The rank of the tag.
+     */
+    @JsonCreator
+    public JsonAdaptedRankedTag(
+        @JsonProperty("name") String name,
+        @JsonProperty("rank") String rank
+    ) {
+        super(name);
+        this.rank = rank;
+    }
+
+    /**
+     * Converts a given {@code RankedTag} into this class for Jackson use.
+     */
+    public JsonAdaptedRankedTag(RankedTag source) {
+        super(source.name);
+        rank = source.rank;
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted ranked tag object into the model's {@code RankedTag} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     */
+    public RankedTag toModelType() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
+        }
+
+        if (!RankedTag.isValidTagName(name)) {
+            throw new IllegalValueException(RankedTag.MESSAGE_CONSTRAINTS);
+        }
+
+        if (rank == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "rank"));
         }
 
         if (!RankedTag.isValidTagValue(rank)) {
@@ -77,5 +111,4 @@ class JsonAdaptedTag {
 
         return new RankedTag(name, rank);
     }
-
 }
