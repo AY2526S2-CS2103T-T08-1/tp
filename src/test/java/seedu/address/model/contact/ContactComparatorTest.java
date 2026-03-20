@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class ContactComparatorTest {
                 .withPhone("11111111")
                 .withEmail("alice@test.com")
                 .withAddress("A Street")
-                .withLastUpdated("22/02/26")
+                .withLastUpdated(LocalDateTime.of(2026, 2, 22, 10, 0))
                 .build();
 
         Contact bob = new ContactBuilder()
@@ -45,7 +46,7 @@ public class ContactComparatorTest {
                 .withPhone("22222222")
                 .withEmail("bob@test.com")
                 .withAddress("B Street")
-                .withLastUpdated("23/02/26")
+                .withLastUpdated(LocalDateTime.of(2026, 2, 23, 11, 1))
                 .build();
 
         ContactComparator comparator = new ContactComparator(field, Order.ASCENDING);
@@ -65,7 +66,7 @@ public class ContactComparatorTest {
                 .withPhone("11111111")
                 .withEmail("alice@test.com")
                 .withAddress("A Street")
-                .withLastUpdated("22/02/26")
+                .withLastUpdated(LocalDateTime.of(2026, 2, 22, 10, 0))
                 .build();
 
         Contact bob = new ContactBuilder()
@@ -73,7 +74,7 @@ public class ContactComparatorTest {
                 .withPhone("22222222")
                 .withEmail("bob@test.com")
                 .withAddress("B Street")
-                .withLastUpdated("23/02/26")
+                .withLastUpdated(LocalDateTime.of(2026, 2, 23, 10, 0))
                 .build();
 
         ContactComparator comparator = new ContactComparator(field, Order.DESCENDING);
@@ -115,21 +116,5 @@ public class ContactComparatorTest {
 
     private static Stream<Field> nullableFields() {
         return Stream.of(Field.PHONE, Field.EMAIL, Field.ADDRESS);
-    }
-
-    @Test
-    public void compare_lastUpdatedStringFallback_ascendingUsesLexicalOrder() {
-        Contact alpha = new ContactBuilder()
-                .withName("Alpha")
-                .withLastUpdated("alpha")
-                .build();
-        Contact zeta = new ContactBuilder()
-                .withName("Zeta")
-                .withLastUpdated("zeta")
-                .build();
-
-        ContactComparator comparator = new ContactComparator(Field.LAST_UPDATED, Order.ASCENDING);
-
-        assertTrue(comparator.compare(alpha, zeta) < 0);
     }
 }

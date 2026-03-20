@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.UiManager.hide;
 
 import java.io.IOException;
 
@@ -47,12 +48,9 @@ public class NoteLabel extends HBox {
         if (note.timePoint != null) {
             reminderTime.setText(note.timePoint.toString());
         } else {
-            reminderHeader.setVisible(false);
-            reminderHeader.setManaged(false);
-            onText.setVisible(false);
-            onText.setManaged(false);
-            reminderTime.setVisible(false);
-            reminderTime.setManaged(false);
+            hide(reminderHeader);
+            hide(onText);
+            hide(reminderNote);
         }
     }
 
@@ -71,7 +69,6 @@ public class NoteLabel extends HBox {
      * Hides the "Reminder: " header of the {@code ReminderLabel}.
      */
     public void hideHeader() {
-        reminderHeader.setVisible(false);
-        reminderHeader.setManaged(false);
+        hide(reminderHeader);
     }
 }

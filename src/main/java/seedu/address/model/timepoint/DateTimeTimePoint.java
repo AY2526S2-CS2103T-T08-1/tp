@@ -54,14 +54,22 @@ public class DateTimeTimePoint extends TimePoint<LocalDateTime> {
         return false;
     }
 
-    @Override
-    public String toString() {
-        LocalDateTime localDateTime = this.getTime();
+    /**
+     * Returns a string for a {@code LocalDateTime} formatted to have a Month abbreviation.
+     * This formatting is used for {@code DateTimeTimePoint}'s {@code toString()} method as well.
+     */
+    public static String stringify(LocalDateTime localDateTime) {
         return localDateTime.getHour()
                 + ":" + (localDateTime.getMinute() < 10 ? "0" : "") + localDateTime.getMinute()
                 + ", " + TimePoint.PASCAL_MTHS[localDateTime.getMonthValue() - 1]
                 + " " + localDateTime.getDayOfMonth()
                 + ", " + localDateTime.getYear();
+    }
+
+    @Override
+    public String toString() {
+        LocalDateTime localDateTime = this.getTime();
+        return stringify(localDateTime);
     }
 
     @Override

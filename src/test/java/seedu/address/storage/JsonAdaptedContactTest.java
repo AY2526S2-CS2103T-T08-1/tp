@@ -17,7 +17,6 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.LastContacted;
-import seedu.address.model.contact.LastUpdated;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Phone;
 import seedu.address.testutil.ContactBuilder;
@@ -36,7 +35,8 @@ public class JsonAdaptedContactTest {
     private static final Optional<String> VALID_EMAIL = BENSON.getEmail().map(Email::toString);
     private static final Optional<String> VALID_ADDRESS = BENSON.getAddress().map(Address::toString);
     private static final Optional<String> VALID_LAST_CONTACTED = BENSON.getLastContacted().map(Object::toString);
-    private static final Optional<String> VALID_LAST_UPDATED = Optional.of(BENSON.getLastUpdated().toString());
+    private static final Optional<String> VALID_LAST_UPDATED =
+            Optional.of(BENSON.getLastUpdated().format(JsonAdaptedContact.LAST_UPDATED_FIELD_FORMATTER));
     private static final List<String> VALID_NOTES = BENSON.getNotes().stream()
             .map(note -> note.value)
             .collect(Collectors.toList());
@@ -283,7 +283,8 @@ public class JsonAdaptedContactTest {
                 new JsonAdaptedContact(
                         VALID_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_LAST_CONTACTED, Optional.of(" "), VALID_NOTES, VALID_TAGS);
-        assertThrows(IllegalValueException.class, LastUpdated.MESSAGE_CONSTRAINTS, contact::toModelType);
+        assertThrows(IllegalValueException.class,
+                JsonAdaptedContact.LAST_UPDATED_FIELD_MESSAGE_CONSTRAINT, contact::toModelType);
     }
 
     @Test

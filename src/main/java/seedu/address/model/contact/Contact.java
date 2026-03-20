@@ -2,6 +2,7 @@ package seedu.address.model.contact;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Contact {
     // Data fields
     private final Optional<Address> address;
     private final Optional<LastContacted> lastContacted;
-    private final LastUpdated lastUpdated;
+    private final LocalDateTime lastUpdated;
     private final List<Note> notes;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -43,8 +44,8 @@ public class Contact {
             Name name, Optional<Phone> phone, Optional<Email> email,
             Optional<Address> address, Optional<LastContacted> lastContacted,
             List<Note> notes, Set<Tag> tags) {
-        this(UUID.randomUUID(), name, phone, email, address, lastContacted, LastUpdated.now(),
-                notes, tags);
+        this(UUID.randomUUID(), name, phone, email, address, lastContacted,
+                LocalDateTime.now(), notes, tags);
     }
 
     /**
@@ -55,7 +56,8 @@ public class Contact {
             UUID id, Name name, Optional<Phone> phone, Optional<Email> email,
             Optional<Address> address, Optional<LastContacted> lastContacted,
             List<Note> notes, Set<Tag> tags) {
-        this(id, name, phone, email, address, lastContacted, LastUpdated.now(), notes, tags);
+        this(id, name, phone, email, address,
+                lastContacted, LocalDateTime.now(), notes, tags);
     }
 
     /**
@@ -64,7 +66,7 @@ public class Contact {
     public Contact(
             UUID id, Name name, Optional<Phone> phone, Optional<Email> email,
             Optional<Address> address, Optional<LastContacted> lastContacted,
-            LastUpdated lastUpdated,
+            LocalDateTime lastUpdated,
             List<Note> notes, Set<Tag> tags) {
         requireAllNonNull(id, name, phone, email, address, lastContacted, lastUpdated, tags);
         this.id = id;
@@ -109,7 +111,7 @@ public class Contact {
         return lastContacted;
     }
 
-    public LastUpdated getLastUpdated() {
+    public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }
 

@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -83,6 +84,22 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    /**
+     * Hides a node by setting its {@code visible} and {@code managed} attributes to {@code false}.
+     */
+    public static void hide(Node node) {
+        node.setVisible(false);
+        node.setManaged(false);
+    }
+
+    /**
+     * Shows a node by setting its {@code visible} and {@code managed} attributes to {@code true}.
+     */
+    public static void show(Node node) {
+        node.setVisible(true);
+        node.setManaged(true);
     }
 
 }

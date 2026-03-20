@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +19,6 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.LastContacted;
-import seedu.address.model.contact.LastUpdated;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
@@ -29,6 +31,11 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedContact {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
+
+    public static final String LAST_UPDATED_FIELD_MESSAGE_CONSTRAINT =
+            "Last updated field must be in yyyy-MM-dd'T'HH:mm format";
+    public static final DateTimeFormatter LAST_UPDATED_FIELD_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     private final String id;
     private final String name;
@@ -87,7 +94,7 @@ class JsonAdaptedContact {
         email = source.getEmail().map(email -> email.value);
         address = source.getAddress().map(address -> address.value);
         lastContacted = source.getLastContacted().map(LastContacted::toString);
-        lastUpdated = Optional.of(source.getLastUpdated().toString());
+        lastUpdated = Optional.of(source.getLastUpdated().format(LAST_UPDATED_FIELD_FORMATTER));
         notes.addAll(source.getNotes().stream().map(Note::toJsonString).collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map((Tag tag) -> tag instanceof RankedTag
@@ -169,12 +176,15 @@ class JsonAdaptedContact {
             throw new IllegalValueException(LastContacted.MESSAGE_CONSTRAINTS);
         }
         final Optional<LastContacted> modelLastContacted = lastContacted.map(LastContacted::new);
-        if (lastUpdated.isPresent() && !LastUpdated.isValidLastUpdated(lastUpdated.get())) {
-            throw new IllegalValueException(LastUpdated.MESSAGE_CONSTRAINTS);
+
+        final LocalDateTime modelLastUpdated;
+        try {
+            modelLastUpdated = lastUpdated
+                    .map(str -> LocalDateTime.parse(str, LAST_UPDATED_FIELD_FORMATTER))
+                    .orElseGet(LocalDateTime :: now);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(LAST_UPDATED_FIELD_MESSAGE_CONSTRAINT);
         }
-        final LastUpdated modelLastUpdated = lastUpdated
-            .map(LastUpdated::new)
-            .orElseGet(LastUpdated::now);
 
         final List<Note> modelNotes = notes.stream().map(Note::fromJsonString).collect(Collectors.toList());
 

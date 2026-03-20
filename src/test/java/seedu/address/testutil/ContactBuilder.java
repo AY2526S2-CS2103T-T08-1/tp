@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,6 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.LastContacted;
-import seedu.address.model.contact.LastUpdated;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
@@ -34,7 +34,7 @@ public class ContactBuilder {
     private Optional<Email> email;
     private Optional<Address> address;
     private Optional<LastContacted> lastContacted;
-    private LastUpdated lastUpdated;
+    private LocalDateTime lastUpdated;
     private List<Note> notes;
     private Set<Tag> tags;
 
@@ -48,7 +48,7 @@ public class ContactBuilder {
         email = Optional.of(new Email(DEFAULT_EMAIL));
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         lastContacted = Optional.empty();
-        lastUpdated = LastUpdated.now();
+        lastUpdated = LocalDateTime.now();
         notes = new ArrayList<>();
         tags = new HashSet<>();
     }
@@ -127,8 +127,8 @@ public class ContactBuilder {
     /**
      * Sets the {@code LastUpdated} of the {@code Contact} that we are building.
      */
-    public ContactBuilder withLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated != null ? new LastUpdated(lastUpdated) : LastUpdated.now();
+    public ContactBuilder withLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated != null ? lastUpdated : LocalDateTime.now();
         return this;
     }
 
