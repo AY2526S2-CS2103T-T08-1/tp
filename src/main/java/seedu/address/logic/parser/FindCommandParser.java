@@ -79,7 +79,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             argMultimap.getAllValues(PREFIX_LAST_CONTACTED).forEach(
                     keyword -> cumulativePredicate.addPredicate(makeLastContactedPredicate(" " + keyword)));
         } else {
-            cumulativePredicate.addPredicate(contact -> contact.getLastContacted().isPresent());
+            cumulativePredicate.addPredicate(Contact::hasLastContacted);
         }
         argMultimap.getAllValues(PREFIX_TAG).forEach(
                 keyword -> cumulativePredicate.addPredicate((Contact contact) -> contact.hasTag(keyword)));

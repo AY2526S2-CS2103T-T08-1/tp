@@ -251,7 +251,7 @@ public class Contact {
      */
     public boolean lastContactedIsSameDayAs(TimePoint timePoint) {
         if (timePoint == null) {
-            return true;
+            return false;
         }
         return lastContacted
                 .map(lastContacted -> lastContacted.value.isSameDayAs(timePoint))
@@ -264,7 +264,7 @@ public class Contact {
      */
     public boolean lastContactedIsBefore(TimePoint timePoint) {
         if (timePoint == null) {
-            return true;
+            return false;
         }
         return lastContacted
                 .map(lastContacted -> lastContacted.value.isBefore(timePoint))
@@ -277,11 +277,18 @@ public class Contact {
      */
     public boolean lastContactedIsAfter(TimePoint timePoint) {
         if (timePoint == null) {
-            return true;
+            return false;
         }
         return lastContacted
                 .map(lastContacted -> lastContacted.value.isAfter(timePoint))
                 .orElse(false);
+    }
+
+    /**
+     * Returns true if this contact has a {@code LastContact}.
+     */
+    public boolean hasLastContacted() {
+        return lastContacted.isPresent();
     }
 
     /**
