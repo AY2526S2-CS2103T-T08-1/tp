@@ -21,7 +21,8 @@ public class SetAddressBookFilePathCommandTest {
         CommandResult commandResult = setCommand.execute(model);
         assertEquals(UserPrefs.formatAddressBookFilePath("new_book"), model.getAddressBookFilePath());
         assertEquals(
-                String.format(SetAddressBookFilePathCommand.MESSAGE_SUCCESS, "data\\new_book.json"),
+                String.format(SetAddressBookFilePathCommand.MESSAGE_SUCCESS,
+                        UserPrefs.formatAddressBookFilePath("new_book")),
                 commandResult.getFeedbackToUser());
     }
 
