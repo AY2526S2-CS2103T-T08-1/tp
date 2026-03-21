@@ -22,20 +22,20 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String DESCENDING_KEYWORD = "DESC";
+    public static final String ASCENDING_KEYWORD = "asc";
+    public static final String DESCENDING_KEYWORD = "desc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts by the given fields "
         + "and displays them as a list with index numbers.\n"
         + "Parameters: "
-        + "[" + PREFIX_NAME + "NAME_KEYWORDS] "
-        + "[" + PREFIX_PHONE + "PHONE_KEYWORDS] "
-        + "[" + PREFIX_EMAIL + "EMAIL_KEYWORDS] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "[" + PREFIX_NAME + ASCENDING_KEYWORD + " | " + DESCENDING_KEYWORD + "] "
+        + "[" + PREFIX_PHONE + ASCENDING_KEYWORD + " | " + DESCENDING_KEYWORD + "] "
+        + "[" + PREFIX_EMAIL + ASCENDING_KEYWORD + " | " + DESCENDING_KEYWORD + "] "
+        + "[" + PREFIX_ADDRESS + ASCENDING_KEYWORD + " | " + DESCENDING_KEYWORD + "] "
+        + "[" + PREFIX_TAG + "TAG:" + ASCENDING_KEYWORD + " | " + DESCENDING_KEYWORD + "]...\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + "John Doe "
-        + PREFIX_EMAIL + "john@example.com "
-        + PREFIX_TAG + "friend";
+        + PREFIX_NAME + ASCENDING_KEYWORD + " "
+        + PREFIX_TAG + "friends:" + ASCENDING_KEYWORD;
 
     private final Comparator<Contact> comparator;
 

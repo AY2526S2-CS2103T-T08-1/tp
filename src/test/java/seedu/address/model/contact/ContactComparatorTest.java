@@ -10,21 +10,21 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import seedu.address.model.contact.ContactComparator.Field;
 import seedu.address.model.contact.ContactComparator.Order;
+import seedu.address.model.contact.ContactFieldComparator.Field;
 import seedu.address.testutil.ContactBuilder;
 
 public class ContactComparatorTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ContactComparator(null, null));
+        assertThrows(NullPointerException.class, () -> new ContactFieldComparator(null, null));
     }
 
     @Test
     public void hasAllComparators() {
         for (Field field : Field.values()) {
             for (Order order : Order.values()) {
-                assertDoesNotThrow(() -> new ContactComparator(field, order));
+                assertDoesNotThrow(() -> new ContactFieldComparator(field, order));
             }
         }
     }
@@ -48,7 +48,7 @@ public class ContactComparatorTest {
                 .withLastUpdated("23/02/26")
                 .build();
 
-        ContactComparator comparator = new ContactComparator(field, Order.ASCENDING);
+        ContactFieldComparator comparator = new ContactFieldComparator(field, Order.ASCENDING);
 
         assertTrue(comparator.compare(alice, bob) < 0);
     }
@@ -76,7 +76,7 @@ public class ContactComparatorTest {
                 .withLastUpdated("23/02/26")
                 .build();
 
-        ContactComparator comparator = new ContactComparator(field, Order.DESCENDING);
+        ContactFieldComparator comparator = new ContactFieldComparator(field, Order.DESCENDING);
 
         assertTrue(comparator.compare(alice, bob) > 0);
     }
@@ -108,7 +108,7 @@ public class ContactComparatorTest {
             return;
         }
 
-        ContactComparator comparator = new ContactComparator(field, Order.ASCENDING);
+        ContactFieldComparator comparator = new ContactFieldComparator(field, Order.ASCENDING);
 
         assertTrue(comparator.compare(presentValue, missingValue) < 0);
     }
@@ -128,7 +128,7 @@ public class ContactComparatorTest {
                 .withLastUpdated("zeta")
                 .build();
 
-        ContactComparator comparator = new ContactComparator(Field.LAST_UPDATED, Order.ASCENDING);
+        ContactFieldComparator comparator = new ContactFieldComparator(Field.LAST_UPDATED, Order.ASCENDING);
 
         assertTrue(comparator.compare(alpha, zeta) < 0);
     }

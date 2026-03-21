@@ -15,15 +15,16 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactComparator;
+import seedu.address.model.contact.ContactFieldComparator;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
 public class SortCommandTest {
     private static final Comparator<Contact> NAME_COMPARATOR =
-        new ContactComparator(ContactComparator.Field.NAME, ContactComparator.Order.ASCENDING);
+        new ContactFieldComparator(ContactFieldComparator.Field.NAME, ContactComparator.Order.ASCENDING);
     private static final Comparator<Contact> EMAIL_COMPARATOR =
-        new ContactComparator(ContactComparator.Field.EMAIL, ContactComparator.Order.ASCENDING);
+        new ContactFieldComparator(ContactFieldComparator.Field.EMAIL, ContactComparator.Order.ASCENDING);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

@@ -20,6 +20,6 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() throws ParseException {
-        assertNotNull(PARSER.parse("n/ASC p/DESC e/ a/ lu/ t/friends"));
+        assertNotNull(PARSER.parse(" n/ASC t/friends:DESC"));
     }
 }

@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.contact.ContactComparator;
+import seedu.address.model.contact.ContactFieldComparator;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ContactPredicateBuilder;
 
@@ -122,7 +122,7 @@ public class ModelManagerTest {
 
         // different sorted list -> returns false
         modelManager.sortDisplayedContactList(
-                new ContactComparator(ContactComparator.Field.NAME, ContactComparator.Order.DESCENDING));
+                new ContactFieldComparator(ContactFieldComparator.Field.NAME, ContactFieldComparator.Order.DESCENDING));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
