@@ -26,11 +26,14 @@ public class ContactListPanel extends UiPart<Region> {
 
     private ScrollBar scrollBar;
 
+    private final ObservableList<Contact> allContacts;
+
     /**
      * Creates a {@code ContactListPanel} with the given {@code ObservableList}.
      */
-    public ContactListPanel(ObservableList<Contact> contactList) {
+    public ContactListPanel(ObservableList<Contact> contactList, ObservableList<Contact> allContacts) {
         super(FXML);
+        this.allContacts = allContacts;
         contactListView.setItems(contactList);
         contactListView.setCellFactory(listView -> new ContactListViewCell());
 
@@ -49,7 +52,7 @@ public class ContactListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ContactCard(contact, getIndex() + 1).getRoot());
+                setGraphic(new ContactCard(contact, getIndex() + 1, allContacts).getRoot());
             }
         }
     }
