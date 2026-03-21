@@ -12,7 +12,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Parses input arguments and creates a new {@code SetCommand} object
  */
-public class SetCommandParser {
+public class SetCommandParser implements Parser<SetCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code SetCommand}
      * and returns a {@code SetCommand} object for execution.

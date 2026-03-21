@@ -38,4 +38,21 @@ public class SetAddressBookFilePathCommand extends SetCommand {
         model.saveSnapshot(feedback);
         return new CommandResult(feedback);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SetAddressBookFilePathCommand)) {
+            return false;
+        }
+
+        // state check
+        SetAddressBookFilePathCommand o = (SetAddressBookFilePathCommand) other;
+        return fileName.equals(o.fileName);
+    }
 }
