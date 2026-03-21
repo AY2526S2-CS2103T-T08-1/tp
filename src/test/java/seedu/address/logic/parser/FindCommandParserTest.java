@@ -31,7 +31,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
-import seedu.address.testutil.ContactPredicateBuilder;
+import seedu.address.model.contact.util.ContactPredicateBuilder;
 
 public class FindCommandParserTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -118,8 +118,8 @@ public class FindCommandParserTest {
     public void parse_combinedParameters_test() throws ParseException {
         FindCommand command = parser.parse(" " + PREFIX_ADDRESS + "street " + PREFIX_TAG + "friends");
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
-        Predicate<Contact> predicate =
-                new ContactPredicateBuilder().addressContainsKeywords("street").tagsHasKeywords("friends").build();
+        Predicate<Contact> predicate = new ContactPredicateBuilder().addressContainsKeywords(List.of("street"))
+                .tagsHasKeywords(List.of("friends")).build();
         expectedModel.filterDisplayedContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL), model.getDisplayedContactList());

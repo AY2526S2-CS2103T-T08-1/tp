@@ -10,12 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contact.ConjunctiveContactPredicateSet;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.util.ContactPredicateBuilder;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -42,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Checks that all search phrases are non-empty
         validateNonEmptyPhrases(argMultimap);
 
-        ConjunctiveContactPredicateSet cumulativePredicate = makeCumulativePredicate(argMultimap);
+        Predicate<Contact> cumulativePredicate = makeCumulativePredicate(argMultimap);
 
         return new FindCommand(cumulativePredicate);
     }
@@ -57,21 +58,15 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param argMultimap
      * @return the cumulative predicate
      */
-    private ConjunctiveContactPredicateSet makeCumulativePredicate(ArgumentMultimap argMultimap) {
-        ConjunctiveContactPredicateSet cumulativePredicate = new ConjunctiveContactPredicateSet();
-        splitKeywords(argMultimap.getPreamble()).forEach(
-                        keyword -> cumulativePredicate.addPredicate(contact -> contact.contains(keyword)));
-        argMultimap.getAllValues(PREFIX_NAME).forEach(
-                keyword -> cumulativePredicate.addPredicate(contact -> contact.containsInName(keyword)));
-        argMultimap.getAllValues(PREFIX_PHONE).forEach(
-                keyword -> cumulativePredicate.addPredicate(contact -> contact.containsInPhone(keyword)));
-        argMultimap.getAllValues(PREFIX_EMAIL).forEach(
-                keyword -> cumulativePredicate.addPredicate(contact -> contact.containsInEmail(keyword)));
-        argMultimap.getAllValues(PREFIX_ADDRESS).forEach(
-                keyword -> cumulativePredicate.addPredicate(contact -> contact.containsInAddress(keyword)));
-        argMultimap.getAllValues(PREFIX_TAG).forEach(
-                keyword -> cumulativePredicate.addPredicate((Contact contact) -> contact.hasTag(keyword)));
-        return cumulativePredicate;
+    private Predicate<Contact> makeCumulativePredicate(ArgumentMultimap argMultimap) {
+        return new ContactPredicateBuilder()
+                .containsKeywords(splitKeywords(argMultimap.getPreamble()))
+                .nameContainsKeywords(argMultimap.getAllValues(PREFIX_NAME))
+                .phoneContainsKeywords(argMultimap.getAllValues(PREFIX_PHONE))
+                .emailContainsKeywords(argMultimap.getAllValues(PREFIX_EMAIL))
+                .addressContainsKeywords(argMultimap.getAllValues(PREFIX_ADDRESS))
+                .tagsHasKeywords(argMultimap.getAllValues(PREFIX_TAG))
+                .build();
     }
 
     /**
