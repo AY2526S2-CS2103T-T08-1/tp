@@ -9,13 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Comparator;
 import java.util.Locale;
 import java.util.Map;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactComparator;
 import seedu.address.model.contact.ContactFieldComparator;
 import seedu.address.model.contact.ContactTagComparator;
@@ -39,13 +37,13 @@ public class SortCommandParser implements Parser<SortCommand> {
     );
 
     /**
-     * Extracts comparators from a {@code ArgumentMultimap} and combines them into a single {@code Comparator<Contact>}.
+     * Extracts comparators from a {@code ArgumentMultimap} and combines them into a single {@code ContactComparator}.
      *
      * @param argMultimap The arguments to sort by.
      * @throws ParseException If there are no valid arguments to sort by.
      */
-    private static Comparator<Contact> makeCombinedComparator(ArgumentMultimap argMultimap) throws ParseException {
-        Comparator<Contact> combinedComparator = Comparator.comparingInt(c -> 0); // Identity comparator
+    private static ContactComparator makeCombinedComparator(ArgumentMultimap argMultimap) throws ParseException {
+        ContactComparator combinedComparator = ContactComparator.identity();
 
         for (Map.Entry<Prefix, String> arg : argMultimap.getArguments()) {
             Prefix prefix = arg.getKey();
@@ -66,7 +64,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         return combinedComparator;
     }
 
-    private static Comparator<Contact> makeTagComparator(String value) throws ParseException {
+    private static ContactComparator makeTagComparator(String value) throws ParseException {
         String[] parts = value.split(":", 2);
         if (parts.length != 2 || !ORDER_KEYWORD_MAP.containsKey(parts[1].toLowerCase(Locale.ROOT))) {
             throw new ParseException(
@@ -86,10 +84,9 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Checks that argument(s) are provided
+        // Reset to default order if no arguments are provided
         if (args.isBlank()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            return new SortCommand();
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -101,7 +98,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        Comparator<Contact> combinedComparator = makeCombinedComparator(argMultimap);
+        ContactComparator combinedComparator = makeCombinedComparator(argMultimap);
 
         return new SortCommand(combinedComparator);
     }

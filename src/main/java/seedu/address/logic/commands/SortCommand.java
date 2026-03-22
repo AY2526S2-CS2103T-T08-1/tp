@@ -7,12 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Comparator;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactComparator;
+import seedu.address.model.contact.ContactFieldComparator;
 
 /**
  * Sorts and lists contacts by the given fields.
@@ -37,16 +38,32 @@ public class SortCommand extends Command {
         + PREFIX_NAME + ASCENDING_KEYWORD + " "
         + PREFIX_TAG + "friends:" + ASCENDING_KEYWORD;
 
-    private final Comparator<Contact> comparator;
+    // TODO: Use CREATED_ON field when it is implemented
+    private static final ContactComparator DEFAULT_COMPARATOR = new ContactFieldComparator(
+            ContactFieldComparator.Field.LAST_UPDATED, ContactFieldComparator.Order.ASCENDING);
 
-    public SortCommand(Comparator<Contact> comparator) {
-        this.comparator = comparator;
+    private final Optional<ContactComparator> comparator;
+
+    /**
+     * Creates a SortCommand with the default sort order.
+     */
+    public SortCommand() {
+        this.comparator = Optional.empty();
+    }
+
+    /**
+     * Creates a SortCommand with the sort order specified by the given comparator.
+     * @param comparator
+     */
+    public SortCommand(ContactComparator comparator) {
+        this.comparator = Optional.of(comparator);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortDisplayedContactList(comparator);
+
+        model.sortDisplayedContactList(comparator.orElse(DEFAULT_COMPARATOR));
 
         String feedback = String.format(Messages.MESSAGE_CONTACTS_SORTED_OVERVIEW,
                 model.getDisplayedContactList().size());

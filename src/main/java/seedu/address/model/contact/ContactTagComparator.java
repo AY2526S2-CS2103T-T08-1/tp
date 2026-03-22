@@ -2,8 +2,10 @@ package seedu.address.model.contact;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.RankedTag;
 
 /**
@@ -74,6 +76,27 @@ public final class ContactTagComparator extends ContactComparator {
 
     @Override
     public int hashCode() {
-        return ("t/" + tag).hashCode();
+        return Objects.hash(tag, order);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || !(obj instanceof ContactTagComparator other)) {
+            return false;
+        }
+
+        return this.tag.equals(other.tag) && this.order.equals(other.order);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("tag", tag)
+            .add("order", order)
+            .toString();
     }
 }

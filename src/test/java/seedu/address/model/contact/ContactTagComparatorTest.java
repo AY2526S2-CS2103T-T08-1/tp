@@ -1,6 +1,7 @@
 package seedu.address.model.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -88,9 +89,11 @@ public class ContactTagComparatorTest {
     }
 
     @Test
-    public void hashCode_sameTag_returnsSameHashCode() {
+    public void hashCode_sameTagAndOrder_returnsSameHashCode() {
         ContactTagComparator comparator1 = new ContactTagComparator("friends", ContactComparator.Order.ASCENDING);
-        ContactTagComparator comparator2 = new ContactTagComparator("friends", ContactComparator.Order.DESCENDING);
+        ContactTagComparator comparator2 = new ContactTagComparator("friends", ContactComparator.Order.ASCENDING);
+        ContactTagComparator comparator3 = new ContactTagComparator("friends", ContactComparator.Order.DESCENDING);
         assertEquals(comparator1.hashCode(), comparator2.hashCode());
+        assertNotEquals(comparator1.hashCode(), comparator3.hashCode());
     }
 }
