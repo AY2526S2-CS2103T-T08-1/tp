@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 
 import java.util.Arrays;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -81,25 +82,37 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_crossRefWithSharedTags_success() throws CommandException {
-        // BENSON (index 2) has tags "owesMoney" and "friends". ALICE and DANIEL also have "friends" tag.
-        FindCommand command = new FindCommand(INDEX_SECOND_CONTACT);
-        CommandResult result = command.execute(model);
-        assertTrue(result.getFeedbackToUser().contains("Cross-referencing"));
-        assertTrue(model.getDisplayedContactList().size() > 0);
-    }
-
-    @Test
-    public void execute_crossRefNoTags_returnsNoTagsMessage() throws CommandException {
+    public void execute_crossRefWithNoteReferences_success() throws CommandException {
+        // Create contacts where the first contact's note references the second contact's UUID
+        UUID secondId = UUID.randomUUID();
         AddressBook ab = new AddressBook();
-        Contact noTagContact = new ContactBuilder().withName("No Tag Person")
-                .withPhone("91234567").withEmail("notag@example.com").build();
-        ab.addContact(noTagContact);
+        Contact first = new ContactBuilder().withName("Alice")
+                .withPhone("91234567").withEmail("alice@example.com")
+                .withNotes("meeting with @{" + secondId + "}").build();
+        Contact second = new ContactBuilder().withName("Bob").withId(secondId)
+                .withPhone("98765432").withEmail("bob@example.com").build();
+        ab.addContact(first);
+        ab.addContact(second);
         Model testModel = new ModelManager(ab, new UserPrefs());
 
         FindCommand command = new FindCommand(INDEX_FIRST_CONTACT);
         CommandResult result = command.execute(testModel);
-        assertTrue(result.getFeedbackToUser().contains("has no tags"));
+        assertTrue(result.getFeedbackToUser().contains("Cross-referencing"));
+        // Should show both the target (Alice) and the referenced contact (Bob)
+        assertEquals(2, testModel.getDisplayedContactList().size());
+    }
+
+    @Test
+    public void execute_crossRefNoNoteReferences_returnsNoRefsMessage() throws CommandException {
+        AddressBook ab = new AddressBook();
+        Contact noRefContact = new ContactBuilder().withName("No Ref Person")
+                .withPhone("91234567").withEmail("noref@example.com").build();
+        ab.addContact(noRefContact);
+        Model testModel = new ModelManager(ab, new UserPrefs());
+
+        FindCommand command = new FindCommand(INDEX_FIRST_CONTACT);
+        CommandResult result = command.execute(testModel);
+        assertTrue(result.getFeedbackToUser().contains("No contact references found in notes"));
     }
 
     @Test
@@ -115,22 +128,21 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_crossRefNoRelatedContacts_returnsNoRelatedMessage() throws CommandException {
-        // Create an address book with one contact that has a unique tag no one else shares
+    public void execute_crossRefWithNotesButNoNoteRefs_returnsNoRefsMessage() throws CommandException {
+        // Contact has notes but no @{UUID} references
         AddressBook ab = new AddressBook();
-        Contact uniqueTagContact = new ContactBuilder().withName("Unique Tag Person")
-                .withPhone("91234567").withEmail("unique@example.com")
-                .withTags("uniqueOnlyTag").build();
+        Contact contactWithPlainNotes = new ContactBuilder().withName("Plain Notes Person")
+                .withPhone("91234567").withEmail("plain@example.com")
+                .withNotes("just a regular note").build();
         Contact otherContact = new ContactBuilder().withName("Other Person")
-                .withPhone("98765432").withEmail("other@example.com")
-                .withTags("differentTag").build();
-        ab.addContact(uniqueTagContact);
+                .withPhone("98765432").withEmail("other@example.com").build();
+        ab.addContact(contactWithPlainNotes);
         ab.addContact(otherContact);
         Model testModel = new ModelManager(ab, new UserPrefs());
 
         FindCommand command = new FindCommand(INDEX_FIRST_CONTACT);
         CommandResult result = command.execute(testModel);
-        assertTrue(result.getFeedbackToUser().contains("No other contacts share tags"));
+        assertTrue(result.getFeedbackToUser().contains("No contact references found in notes"));
     }
 
     @Test

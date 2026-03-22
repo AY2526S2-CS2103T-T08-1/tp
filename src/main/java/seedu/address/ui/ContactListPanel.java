@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -36,6 +37,12 @@ public class ContactListPanel extends UiPart<Region> {
         this.allContacts = allContacts;
         contactListView.setItems(contactList);
         contactListView.setCellFactory(listView -> new ContactListViewCell());
+
+        // Refresh all visible cells when any contact changes (e.g. name edit)
+        // so that note references (@{UUID}) resolve to the updated name.
+        allContacts.addListener((ListChangeListener<Contact>) change -> {
+            contactListView.refresh();
+        });
 
         Platform.runLater(this::setUp);
     }
