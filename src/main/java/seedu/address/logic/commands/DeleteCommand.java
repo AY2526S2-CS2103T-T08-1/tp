@@ -29,10 +29,14 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
-    private final Index targetIndex;
+    private final Index index;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * @param index of the contact in the displayed contact list to delete
+     */
+    public DeleteCommand(Index index) {
+        requireNonNull(index);
+        this.index = index;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getDisplayedContactList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
@@ -84,13 +88,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return index.equals(otherDeleteCommand.index);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("index", index)
                 .toString();
     }
 }
