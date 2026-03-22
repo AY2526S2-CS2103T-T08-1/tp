@@ -12,9 +12,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.FindAssociationsCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindFieldsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.util.ContactPredicateBuilder;
@@ -24,6 +29,8 @@ import seedu.address.model.contact.util.ContactPredicateBuilder;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final Pattern ASSOCIATE_PATTERN = Pattern.compile("^\\s*@(\\d+)\\s*$");
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -32,7 +39,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(
+                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_LAST_CONTACTED);
 
         // Checks that all search phrases are non-empty
@@ -40,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         Predicate<Contact> cumulativePredicate = makeCumulativePredicate(argMultimap);
 
-        return new FindCommand(cumulativePredicate);
+        return new FindFieldsCommand(cumulativePredicate);
     }
 
     /**
