@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOURCE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
@@ -25,6 +26,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SetAddressBookFilePathCommand;
+import seedu.address.logic.commands.SetCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -137,6 +140,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_redo() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_set() throws Exception {
+        assertTrue(parser.parseCommand(SetCommand.COMMAND_WORD + " source/newbook") instanceof SetCommand);
+    }
+
+    @Test
+    public void parseCommand_setAddressBookFilePath() throws Exception {
+        assertTrue(parser.parseCommand(SetAddressBookFilePathCommand.COMMAND_WORD + " " + PREFIX_SOURCE + "newbook")
+                instanceof SetAddressBookFilePathCommand);
     }
 
     @Test
