@@ -96,4 +96,30 @@ public class ContactTagComparatorTest {
         assertEquals(comparator1.hashCode(), comparator2.hashCode());
         assertNotEquals(comparator1.hashCode(), comparator3.hashCode());
     }
+
+    @Test
+    public void equals() {
+        ContactTagComparator comparator1 = new ContactTagComparator("friends", ContactComparator.Order.ASCENDING);
+        ContactTagComparator comparator2 = new ContactTagComparator("friends", ContactComparator.Order.ASCENDING);
+        ContactTagComparator comparator3 = new ContactTagComparator("friends", ContactComparator.Order.DESCENDING);
+        ContactTagComparator comparator4 = new ContactTagComparator("contractor", ContactComparator.Order.ASCENDING);
+
+        // same object -> returns true
+        assertEquals(comparator1, comparator1);
+
+        // same values -> returns true
+        assertEquals(comparator1, comparator2);
+
+        // different order -> returns false
+        assertNotEquals(comparator1, comparator3);
+
+        // different tag -> returns false
+        assertNotEquals(comparator1, comparator4);
+
+        // different type -> returns false
+        assertNotEquals(comparator1, 1);
+
+        // null -> returns false
+        assertNotEquals(comparator1, null);
+    }
 }
