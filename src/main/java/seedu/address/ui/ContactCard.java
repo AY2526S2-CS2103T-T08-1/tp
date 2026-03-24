@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.RankedTag;
+import seedu.address.model.timepoint.DateTimeUtil;
 
 /**
  * A UI component that displays information of a {@code Contact}.
@@ -50,15 +51,12 @@ public class ContactCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    private final ObservableList<Contact> allContacts;
-
     /**
      * Creates a {@code ContactCode} with the given {@code Contact} and index to display.
      */
     public ContactCard(Contact contact, int displayedIndex, ObservableList<Contact> allContacts) {
         super(FXML);
         this.contact = contact;
-        this.allContacts = allContacts;
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
         name.getParent().getParent().setStyle("-fx-background-color: #3c3e3f");
@@ -98,7 +96,7 @@ public class ContactCard extends UiPart<Region> {
             this.lastContacted.setVisible(false);
             this.lastContacted.setManaged(false);
         });
-        this.lastUpdated.setText("Last Updated: " + contact.getLastUpdated());
+        this.lastUpdated.setText("Last Updated: " + DateTimeUtil.toDisplayString(contact.getLastUpdated().value));
         this.lastUpdated.setVisible(true);
         this.lastUpdated.setManaged(true);
         if (!(contact.getNotes().isEmpty())) {
