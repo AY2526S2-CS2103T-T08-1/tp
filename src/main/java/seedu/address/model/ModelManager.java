@@ -173,12 +173,14 @@ public class ModelManager implements Model {
     @SuppressWarnings("unchecked")
     @Override
     public Snapshot getSnapshot() {
-        ArrayList<Contact> copyContacts = new ArrayList<>();
-        getAddressBook().getContactList().forEach(contact -> copyContacts.add(contact.copy()));
+        ArrayList<Contact> contactListCopy = new ArrayList<>();
+        getAddressBook().getContactList().forEach(contact -> contactListCopy.add(contact.copy()));
+
+        ReadOnlyUserPrefs userPrefsCopy = new UserPrefs(userPrefs);
 
         return new Snapshot(
-                copyContacts,
-                getUserPrefs(),
+                contactListCopy,
+                userPrefsCopy,
                 (Predicate<Contact>) filteredContacts.getPredicate(),
                 (Comparator<Contact>) sortedContacts.getComparator());
     }

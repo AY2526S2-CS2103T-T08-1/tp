@@ -46,6 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ReminderWindow reminderWindow;
+    private StatusBarFooter statusBarFooter;
 
     /** Listener to keep the split pane divider at the right edge when the detail panel is hidden */
     private final ChangeListener<Number> splitPaneListener;
@@ -170,7 +171,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -331,6 +332,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.getFeedbackToUser().contains(String.format(AddCommand.MESSAGE_SUCCESS, ""))) {
                 contactListPanel.scrollToBottom();
             }
+
+            statusBarFooter.updateSaveLocation(logic.getAddressBookFilePath());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

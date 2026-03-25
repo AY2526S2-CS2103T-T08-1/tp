@@ -3,16 +3,19 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
@@ -30,7 +33,7 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final Storage storage;
+    private Storage storage;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -49,6 +52,27 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        if (model.getAddressBookFilePath() != storage.getAddressBookFilePath()) {
+            storage.setAddressBookFilePath(model.getAddressBookFilePath());
+            logger.info("Using data file: " + storage.getAddressBookFilePath());
+
+            Optional<ReadOnlyAddressBook> addressBookOptional;
+            ReadOnlyAddressBook data;
+            try {
+                addressBookOptional = storage.readAddressBook();
+                if (!addressBookOptional.isPresent()) {
+                    logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                            + " with empty AddressBook.");
+                }
+                data = addressBookOptional.orElseGet(AddressBook::new);
+            } catch (DataLoadingException e) {
+                logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                        + " Will be starting with an empty AddressBook.");
+                data = new AddressBook();
+            }
+            model.setAddressBook(data);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
