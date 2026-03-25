@@ -14,9 +14,6 @@ import seedu.address.model.UserPrefs;
  */
 public class SetAddressBookFilePathCommand extends SetCommand {
     public static final String MESSAGE_SUCCESS = "Using data file: %1$s";
-    public static final String MESSAGE_CONSTRAINTS =
-            "File names should only contain alphanumeric characters and the underscore character '_'.";
-
     private final String fileName;
 
     /**
@@ -24,7 +21,7 @@ public class SetAddressBookFilePathCommand extends SetCommand {
      */
     public SetAddressBookFilePathCommand(String fileName) {
         requireAllNonNull(fileName);
-        checkArgument(UserPrefs.isValidFileName(fileName), MESSAGE_CONSTRAINTS);
+        checkArgument(UserPrefs.isValidFileName(fileName), UserPrefs.FILENAME_CONSTRAINTS_MESSAGE);
         this.fileName = fileName;
     }
 

@@ -39,7 +39,7 @@ public class SetCommandParser implements Parser<SetCommand> {
         String fileName = argMultimap.getValue(PREFIX_FILE).get();
         if (!UserPrefs.isValidFileName(fileName)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetAddressBookFilePathCommand.MESSAGE_CONSTRAINTS));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserPrefs.FILENAME_CONSTRAINTS_MESSAGE));
         }
         return new SetAddressBookFilePathCommand(argMultimap.getValue(PREFIX_FILE).get());
     }

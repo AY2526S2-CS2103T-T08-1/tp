@@ -13,6 +13,8 @@ import seedu.address.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_]*$";
+    public static final String FILENAME_CONSTRAINTS_MESSAGE =
+            "File names should only contain alphanumeric characters and the underscore character '_'.";
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
