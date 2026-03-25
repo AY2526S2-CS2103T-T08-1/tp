@@ -158,6 +158,36 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Remove field on empty edit
+
+#### Overview
+
+The `edit` command allows users to remove optional fields (phone, email, address, last contacted) from a contact by specifying the field prefix with no argument (e.g., `edit 1 p/`). This sets a "clear" flag in the `EditContactDescriptor`, which causes the field to be set to `Optional.empty()` when the edited contact is created.
+
+#### How it works
+
+The sequence diagram below illustrates how the edit command processes a field removal, using `edit 1 p/` as an example.
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 p/` Command" />
+
+1. The user input `edit 1 p/` is parsed by `EditCommandParser`, which detects the empty value after the `p/` prefix.
+2. Instead of throwing a parse error, the parser sets `clearPhone = true` in the `EditContactDescriptor`.
+3. When `EditCommand#execute()` calls `createEditedContact()`, it checks the clear flags. Since `clearPhone` is `true`, `updatedPhone` is set to `Optional.empty()`.
+4. Before applying the edit, `EditCommand` validates that the resultant contact still has at least a phone number or email address. If both would be removed, a `CommandException` is thrown.
+5. If valid, the edit is applied via `Model#setContact()`.
+
+#### Design considerations
+
+**Aspect: How the empty prefix is represented internally:**
+
+* **Alternative 1 (current choice):** Use boolean clear flags (`clearPhone`, `clearEmail`, etc.) in `EditContactDescriptor`.
+  * Pros: Simple and explicit. The descriptor clearly distinguishes between "not editing this field" (`null`), "updating this field" (non-null value), and "removing this field" (clear flag = `true`).
+  * Cons: Adds more fields to `EditContactDescriptor`.
+
+* **Alternative 2:** Use a sentinel value (e.g., a special `Phone` object) to represent removal.
+  * Pros: No additional fields needed.
+  * Cons: Less readable and error-prone; sentinel values can be confused with real values.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
