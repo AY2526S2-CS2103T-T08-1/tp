@@ -112,10 +112,10 @@ public class ContactDetailPanel extends UiPart<Region> {
         notes.getChildren().clear();
         if (!contact.getNotes().isEmpty()) {
             contact.getNotes().forEach(note -> {
-                NoteLabel reminderLabel = new NoteLabel(note,
+                NoteLabel noteLabel = new NoteLabel(note,
                         notes.getStyleClass().toString(), allContacts);
-                reminderLabel.hideHeader();
-                notes.getChildren().add(reminderLabel); });
+                noteLabel.hideHeader();
+                notes.getChildren().add(noteLabel); });
             NodeUtil.show(notesContainer);
         } else {
             NodeUtil.hide(notesContainer);
