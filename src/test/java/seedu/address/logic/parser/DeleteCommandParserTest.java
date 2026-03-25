@@ -22,8 +22,13 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteContactCommand(INDEX_FIRST_CONTACT));
+    public void parse_validArgs_returnsDeleteContactCommand() {
+        assertParseSuccess(parser, " 1", new DeleteContactCommand(INDEX_FIRST_CONTACT));
+    }
+
+    @Test
+    public void parse_validArgs_returnsDeleteFileCommand() {
+        assertParseSuccess(parser, " file/", new DeleteContactCommand(INDEX_FIRST_CONTACT));
     }
 
     @Test
