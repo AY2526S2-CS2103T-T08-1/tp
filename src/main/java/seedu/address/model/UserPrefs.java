@@ -12,7 +12,7 @@ import seedu.address.commons.core.GuiSettings;
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_]*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_]+$";
     public static final String FILENAME_CONSTRAINTS_MESSAGE =
             "File names should only contain alphanumeric characters and the underscore character '_'.";
 

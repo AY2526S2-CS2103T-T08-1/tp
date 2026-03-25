@@ -28,7 +28,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             return new ViewContactCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE, pe));
         }
     }
 

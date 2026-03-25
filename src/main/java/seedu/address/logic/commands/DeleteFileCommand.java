@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +12,6 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.ui.DeleteFileAlert;
 
@@ -28,21 +26,19 @@ public class DeleteFileCommand extends DeleteCommand {
     public static final String MESSAGE_FAILURE_ABORT = "File deletion aborted.";
     public static final String MESSAGE_FAILURE = "Failed to delete file.";
 
-    private final String fileName;
+    private final Path filePath;
 
     /**
-     * @param fileName Name of file to be deleted, without ".json" file format name.
+     * @param filePath Path of file to be deleted, without ".json" file format name.
      */
-    public DeleteFileCommand(String fileName) {
-        requireNonNull(fileName);
-        checkArgument(UserPrefs.isValidFileName(fileName), UserPrefs.FILENAME_CONSTRAINTS_MESSAGE);
-        this.fileName = fileName;
+    public DeleteFileCommand(Path filePath) {
+        requireNonNull(filePath);
+        this.filePath = filePath;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Path filePath = UserPrefs.formatAddressBookFilePath(fileName);
         if (model.getAddressBookFilePath().equals(filePath)) {
             throw new CommandException(MESSAGE_FAILURE_IS_CURRENT_FILE);
         }
@@ -57,7 +53,8 @@ public class DeleteFileCommand extends DeleteCommand {
             }
             if (!addressBookOptional.get().getContactList().isEmpty()) {
                 DeleteFileAlert alert =
-                        new DeleteFileAlert(fileName + ".json", addressBookOptional.get().getContactList().size());
+                        new DeleteFileAlert(filePath.getFileName().toString(),
+                                addressBookOptional.get().getContactList().size());
                 alert.show();
 
                 if (!(alert.getResult() == ButtonType.YES)) {
@@ -70,7 +67,7 @@ public class DeleteFileCommand extends DeleteCommand {
 
         try {
             Files.delete(filePath);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.getFileName()));
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }

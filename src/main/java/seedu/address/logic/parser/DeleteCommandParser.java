@@ -28,7 +28,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserPrefs.FILENAME_CONSTRAINTS_MESSAGE));
             }
-            return new DeleteFileCommand(argMultimap.getValue(PREFIX_FILE).get());
+            return new DeleteFileCommand(UserPrefs.formatAddressBookFilePath(fileName));
         }
 
         try {
