@@ -89,6 +89,6 @@ public class NoteRemoveCommand extends NoteCommand {
 
         // state check
         return contactIndex.equals(e.contactIndex)
-                && noteIndex == e.noteIndex;
+                && noteIndex.equals(e.noteIndex);
     }
 }
