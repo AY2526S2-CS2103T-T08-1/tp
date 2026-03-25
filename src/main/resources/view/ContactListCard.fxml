@@ -16,7 +16,7 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
     <VBox GridPane.columnIndex="0">
-         <VBox alignment="CENTER_LEFT">
+         <VBox alignment="CENTER_LEFT" style="-fx-background-color: #3c3e3f">
             <children>
             <HBox alignment="CENTER_LEFT" spacing="0.5">
               <Label fx:id="id" styleClass="cell_big_label">
@@ -45,7 +45,7 @@
                <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
             </padding>
          </VBox>
-         <VBox fx:id="notesContainer" styleClass="cell_small_label" alignment="CENTER_LEFT" maxHeight="62.4">
+         <VBox fx:id="notesContainer" styleClass="cell_small_label" alignment="CENTER_LEFT" maxHeight="62.4" style="-fx-background-color: #000000">
             <padding>
                <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
             </padding>

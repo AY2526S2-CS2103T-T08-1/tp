@@ -8,6 +8,8 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,10 +17,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.storage.JsonAddressBookStorage;
 
 /**
  * Panel containing the list of B2B4U.
@@ -51,17 +58,18 @@ public class FileListPanel extends UiPart<Region> {
         EXECUTOR_SERVICE.submit(() -> {
             try {
                 while (!Thread.currentThread().isInterrupted()) {
-                    WatchKey key = watchService.take(); // blocks until an event occurs
+                    WatchKey key = watchService.take();
 
                     for (WatchEvent<?> event : key.pollEvents()) {
                         WatchEvent.Kind<?> kind = event.kind();
 
-                        if (kind == StandardWatchEventKinds.OVERFLOW) continue;
+                        if (kind == StandardWatchEventKinds.OVERFLOW) {
+                            continue;
+                        }
 
                         Path changed = directory.resolve((Path) event.context());
                         File changedFile = changed.toFile();
 
-                        // All ObservableList updates MUST happen on the JavaFX thread
                         Platform.runLater(() -> {
                             if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
                                 fileList.add(changedFile);
@@ -70,24 +78,29 @@ public class FileListPanel extends UiPart<Region> {
                             } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
                                 int index = fileList.indexOf(changedFile);
                                 if (index >= 0) {
-                                    fileList.set(index, changedFile); // triggers update event
+                                    fileList.set(index, changedFile);
                                 }
                             }
                         });
                     }
 
-                    if (!key.reset()) break; // directory no longer accessible
+                    // directory no longer accessible
+                    if (!key.reset()) {
+                        break;
+                    }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         });
 
-        fileListView.setItems(fileList);
+        FilteredList<File> filteredFiles = new FilteredList<>(fileList, this::isValidFile);
+        SortedList<File> sortedFiles = new SortedList<>(filteredFiles,
+                Comparator.comparing(File::lastModified, Comparator.reverseOrder()));
+        fileListView.setItems(sortedFiles);
         fileListView.setCellFactory(listView -> new FileListPanel.FileListViewCell());
 
-        // Refresh all visible cells when any contact changes (e.g. name edit)
-        // so that note references (@{UUID}) resolve to the updated name.
+        // Refresh all visible cells when any file changes
         fileList.addListener((ListChangeListener<File>) change -> {
             fileListView.refresh();
         });
@@ -107,6 +120,22 @@ public class FileListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new FileCard(file).getRoot());
             }
+        }
+    }
+
+    /**
+     * Checks if a given file is a valid B2B4U .json file.
+     */
+    public boolean isValidFile(File file) {
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Path.of(file.getPath()));
+        try {
+            Optional<ReadOnlyAddressBook> addressBookOptional = addressBookStorage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                return false;
+            }
+            return true;
+        } catch (DataLoadingException e) {
+            return false;
         }
     }
 }

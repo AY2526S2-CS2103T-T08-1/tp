@@ -14,7 +14,7 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
     <VBox GridPane.columnIndex="0">
-         <VBox alignment="CENTER_LEFT">
+         <VBox alignment="CENTER_LEFT" style="-fx-background-color: #3c3e3f">
             <children>
             <HBox alignment="CENTER_LEFT" spacing="0.5">
               <Label fx:id="name" styleClass="cell_big_label" text="\$name" />
@@ -26,7 +26,13 @@
          </VBox>
          <VBox alignment="CENTER_LEFT">
             <children>
-            <Label fx:id="details" styleClass="cell_small_label" text="\$details" />
+            <Label fx:id="lastModified" styleClass="cell_small_label" text="\$lastModified" />
+            <HBox>
+                <children>
+                    <Label fx:id="contactCountHeader" styleClass="cell_small_label, bold" text="Number of Contacts: " wrapText="true" />
+                    <Label fx:id="contactCount" styleClass="cell_small_label" text="\$contactCount" />
+                </children>
+            </HBox>
             </children>
             <padding>
                <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />

@@ -1,14 +1,19 @@
 package seedu.address.ui;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.timepoint.DateTimeUtil;
+import seedu.address.storage.JsonAddressBookStorage;
 
 /**
  * A UI component that displays information of a B2B4U file.
@@ -22,7 +27,9 @@ public class FileCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label details;
+    private Label lastModified;
+    @FXML
+    private Label contactCount;
 
     /**
      * Creates a {@code FileCard} with the given file to display.
@@ -31,7 +38,17 @@ public class FileCard extends UiPart<Region> {
         super(FXML);
         this.file = file;
         name.setText(file.getName());
-        LocalDateTime lastModified = Instant.ofEpochMilli(file.lastModified()).atZone(ZONE_ID).toLocalDateTime();
-        details.setText(DateTimeUtil.toDisplayString(lastModified));
+        LocalDateTime lastModifiedTime = Instant.ofEpochMilli(file.lastModified()).atZone(ZONE_ID).toLocalDateTime();
+        lastModified.setText("Last modified: " + DateTimeUtil.toDisplayString(lastModifiedTime));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Path.of(file.getPath()));
+        try {
+            Optional<ReadOnlyAddressBook> addressBookOptional = addressBookStorage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                contactCount.setText("0");
+            }
+            contactCount.setText(addressBookOptional.get().getContactList().size() + "");
+        } catch (DataLoadingException e) {
+            contactCount.setText("Error retrieving contact list");
+        }
     }
 }
