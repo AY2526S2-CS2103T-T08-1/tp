@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -45,6 +46,7 @@ public class DeleteFileAlert extends UiPart<Stage> {
      * Shows the alert window.
      */
     public void show() {
+        getRoot().initModality(Modality.APPLICATION_MODAL);
         getRoot().showAndWait();
         getRoot().centerOnScreen();
     }
