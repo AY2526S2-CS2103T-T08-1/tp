@@ -18,4 +18,9 @@ public class ViewFilesCommand extends ViewCommand {
 
         return new ViewFilesCommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ViewFilesCommand;
+    }
 }

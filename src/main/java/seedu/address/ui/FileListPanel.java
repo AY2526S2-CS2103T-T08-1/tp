@@ -93,7 +93,7 @@ public class FileListPanel extends UiPart<Region> {
         }
     }
 
-    public FileCardDetails getFileCardDetails(File file) throws Exception {
+    public static FileCardDetails getFileCardDetails(File file) throws Exception {
         int contactCount;
         Path filePath = file.toPath();
         try {
@@ -106,8 +106,11 @@ public class FileListPanel extends UiPart<Region> {
             throw e;
         }
 
-        LocalDateTime lastModifiedTime = Instant.ofEpochMilli(file.lastModified()).atZone(ZONE_ID).toLocalDateTime();
-        return new FileCardDetails(file.getName(), lastModifiedTime, contactCount);
+        return new FileCardDetails(file.getName(), epochToTime(file.lastModified()), contactCount);
+    }
+
+    public static LocalDateTime epochToTime(long epoch) {
+        return Instant.ofEpochMilli(epoch).atZone(ZONE_ID).toLocalDateTime();
     }
 
     private void setUpWatcher(Path directory) throws IOException {

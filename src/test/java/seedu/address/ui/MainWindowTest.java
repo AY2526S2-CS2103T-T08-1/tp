@@ -66,6 +66,16 @@ public class MainWindowTest extends GuiUnitTest {
     }
 
     @Test
+    public void executeCommand_showFileList() throws Exception {
+        runAndWait(() -> {
+            Contact contact = new ContactBuilder().withName("Test").build();
+            logic.setNextResult(new CommandResult("view files", false, false, null, false, true));
+            assertDoesNotThrow(() -> mainWindow.executeCommand("view file/"));
+            assertNull(mainWindow.getViewedContactId());
+        });
+    }
+
+    @Test
     public void executeCommand_regularCommandWithViewedContact_refreshesPanel() throws Exception {
         runAndWait(() -> {
             Contact contact = new ContactBuilder().withName("Test").build();

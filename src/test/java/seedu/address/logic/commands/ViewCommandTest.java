@@ -43,6 +43,19 @@ public class ViewCommandTest {
     }
 
     @Test
+    public void execute_viewFileList_success() {
+        ViewCommand viewCommand = new ViewFilesCommand();
+
+        String expectedMessage = ViewFilesCommand.MESSAGE_SUCCESS;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        CommandResult expectedCommandResult =
+                new CommandResult(expectedMessage, false, false, null, false, true);
+        assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getDisplayedContactList().size() + 1);
         ViewCommand viewCommand = new ViewContactCommand(outOfBoundIndex);
