@@ -8,47 +8,42 @@
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## \[Proposed\] Undo/redo feature
+## Undo/redo feature
 
-### Proposed Implementation
+The undo/redo mechanism is facilitated by `Snapshot`. It stores key information regarding a `Model`, , stored internally as an `List<Pair<String, Snapshot>>` named `snapshots` and an `int snapshotPosition` is used to move between snapshots. Additionally, `Model` implements the following methods:
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+* `saveSnapshot(String description)` — Saves the current `Model` state with a name for user reference.
+* `moveSnapshot(int offset)` — Moves the `Model` by `offset` number of snapshots in its history.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `ModelManager`, the instantiable version of `Model`, will be initialized with the initial `snapshotPosition` of `0`, and a singular `snapshot` in `snapshots` representing the `ModelManager`'s current state.
 
 <puml src="/diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `add n/John …​` command to add a new contact. The `add` command calls `Model#saveSnapshot(feedback)`, where `feedback` is the string in the `CommandResult` from executing the `AddCommand`, "New contact added: John…​", thus a `snapshot` of the `ModelManager` after the `add n/John…​` command executes to be saved in `snapshot`, and the `snapshotPosition` is incremented.
 
 <puml src="/diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `delete 7` to delete the 7th contact which happens to be the most recently added contact. The `delete` command also calls `Model#saveSnapshot(feedback)`, causing another `snapshot` to be saved into `snapshots`.
 
 <puml src="/diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#saveSnapshot(feedback)`, so no new `snapshot` will be created.
 
 </box>
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that deleting the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#moveSnapshot(-1)`, which will decrement `snapshotPosition`, and restores `ModelManager` with data given by the `snapshotPosition`th `snapshot`.
 
 <puml src="/diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note:** If `snapshotPosition` is 0, pointing to the initial `Model`'s `snapshot`, then there are no previous `snapshot` to restore to. In this case an `IndexOutOfBoundsException` will be thrown.
 
 </box>
 
@@ -66,7 +61,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="/diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#moveSnapshot(1)`. If `snapshotPosition` is less than `snapshots.size() - 1`, `snapshotPosition` is incremented, then the `snapshotPosition`th `snapshot` is retrieved to restores the `ModelManager` to the state it represents.
 
 <box type="info" seamless>
 
@@ -74,11 +69,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveSnapshot()` or `Model#moveSnapshot()`. Thus, the `snapshotPosition` remains unchanged.
 
 <puml src="/diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#saveSnapshot()`. Since the `snapshotPosition` is not equal to `snapshots.size() - 1`, all snapshots after the `snapshotPosition`th `snapshot` will be purged. Reason: It no longer makes sense to redo the `delate 7` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="/diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -90,12 +85,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves a compact copy of the model.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: May have performance issues in terms of memory usage even with reduced object size.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Save an 'undo/redo' version of each command.
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
