@@ -54,7 +54,7 @@ class JsonAdaptedContact {
         @JsonProperty("lastContacted") Optional<String> lastContacted,
         @JsonProperty("lastUpdated") Optional<String> lastUpdated,
         @JsonProperty("notes") Object notes,
-        @JsonProperty("tags") List<JsonAdaptedTag> tags
+        @JsonProperty("tags") Object tags
     ) {
         this.id = id;
         this.name = name;
@@ -64,10 +64,7 @@ class JsonAdaptedContact {
         this.lastUpdated = lastUpdated == null ? Optional.empty() : lastUpdated;
         this.notes.addAll(parseNotes(notes));
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
-        // this.tags.addAll(parseTags(tags));
+        this.tags.addAll(parseTags(tags));
     }
 
     /**
