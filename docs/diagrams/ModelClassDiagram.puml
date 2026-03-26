@@ -13,12 +13,17 @@ Class ModelManager
 Class UserPrefs
 
 Class UniqueContactList
-Class Contact
+Class Contact {
+    id: UUID
+}
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class LastContacted
+Class LastUpdated
+Class Note
 
 Class I #FFFFFF
 }
@@ -38,10 +43,13 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniqueContactList
 UniqueContactList --> "~* all" Contact
 Contact *--> Name
-Contact *--> Phone
-Contact *--> Email
-Contact *--> Address
+Contact *--> "0..1" Phone
+Contact *--> "0..1" Email
+Contact *--> "0..1" Address
+Contact *--> "0..1" LastContacted
+Contact *--> LastUpdated
 Contact *--> "*" Tag
+Contact *--> "*" Note
 
 Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
