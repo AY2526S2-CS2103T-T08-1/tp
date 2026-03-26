@@ -54,16 +54,16 @@ public class Messages {
     }
 
     /**
-     * Returns a range message for 1-indexed contact list indices.
+     * Formats a range message for 1-indexed contact list indices.
      */
-    public static String getIndexOutOfRangeMessage(int maxIndex) {
+    public static String formatIndexOutOfRange(int maxIndex) {
         return String.format("INDEX should be between 1 and %d", maxIndex);
     }
 
     /**
      * Formats a command parse failure that includes the command usage text.
      */
-    public static String getCommandErrorWithUsage(String failureMessage, String commandUsage) {
+    public static String formatInvalidCommandFormat(String failureMessage, String commandUsage) {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, failureMessage + "\n" + commandUsage);
     }
 
