@@ -63,7 +63,7 @@ public class Messages {
     /**
      * Formats a command parse failure that includes the command usage text.
      */
-    public static String getCommandErrorWithUsage(String failureMessage, String commandUsage) {
+    public static String formatInvalidCommandFormat(String failureMessage, String commandUsage) {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, failureMessage + "\n" + commandUsage);
     }
 
