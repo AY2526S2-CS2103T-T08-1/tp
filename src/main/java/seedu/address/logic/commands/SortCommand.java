@@ -26,6 +26,7 @@ public class SortCommand extends Command {
 
     public static final String ASCENDING_KEYWORD = "asc";
     public static final String DESCENDING_KEYWORD = "desc";
+    public static final String MESSAGE_SUCCESS = "Sorted %d contacts.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts contacts by the given fields "
         + "and displays them as a list with index numbers.\n"
@@ -68,7 +69,7 @@ public class SortCommand extends Command {
 
         model.sortDisplayedContactList(comparator.orElse(DEFAULT_COMPARATOR));
 
-        String feedback = String.format("Sorted %d contacts.", model.getDisplayedContactList().size());
+        String feedback = String.format(MESSAGE_SUCCESS, model.getDisplayedContactList().size());
         model.saveSnapshot(feedback);
         return new CommandResult(feedback);
     }

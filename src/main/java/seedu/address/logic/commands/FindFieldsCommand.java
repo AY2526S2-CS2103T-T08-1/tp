@@ -16,6 +16,7 @@ import seedu.address.model.contact.Contact;
  */
 public class FindFieldsCommand extends FindCommand {
 
+    private static final String MESSAGE_SUCCESS = "Found %d contacts matching '%s'";
     private final Predicate<Contact> predicate;
     private final String searchPhrase;
 
@@ -43,7 +44,7 @@ public class FindFieldsCommand extends FindCommand {
 
         String feedback = searchPhrase.isBlank()
                 ? String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getDisplayedContactList().size())
-                : String.format("Found %d contacts matching '%s'",
+                : String.format(MESSAGE_SUCCESS,
                         model.getDisplayedContactList().size(), searchPhrase);
         model.saveSnapshot(feedback);
         return new CommandResult(feedback);
