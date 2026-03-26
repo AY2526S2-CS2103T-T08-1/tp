@@ -334,20 +334,21 @@ public class Contact {
         if (this.getActiveReminders().isEmpty()) {
             return 1;
         }
-        TimePoint<?> thisClosestReminder = this.getActiveReminders().stream().map(
-                note -> note.timePoint).min(
-                        TimePointComparator.stringTimePointLast(
-                                TimePointComparator.ifSameDayDateTimePointFirst(
-                                        TimePoint::compareTo))).orElse(null);
-        TimePoint<?> otherClosestReminder = other.getActiveReminders().stream().map(
-                note -> note.timePoint).min(
-                TimePointComparator.stringTimePointLast(
-                        TimePointComparator.ifSameDayDateTimePointFirst(
-                                TimePoint::compareTo))).orElse(null);
+        TimePoint<?> thisClosestReminder = this.getClosestReminder();
+        TimePoint<?> otherClosestReminder = other.getClosestReminder();
         return TimePointComparator.stringTimePointLast(
                 TimePointComparator.ifSameDayDateTimePointFirst(
                         Comparator.naturalOrder())).compare(thisClosestReminder, otherClosestReminder);
     }
+
+    private TimePoint<?> getClosestReminder() {
+        return this.getActiveReminders().stream().map(
+                note -> note.timePoint).min(
+                TimePointComparator.stringTimePointLast(
+                        TimePointComparator.ifSameDayDateTimePointFirst(
+                                TimePoint::compareTo))).orElse(null);
+    }
+
     /**
      * Returns true if both contacts have the same name, phone number, and email,
      * given that they are non-empty.
