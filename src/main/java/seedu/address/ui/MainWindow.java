@@ -21,6 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -244,10 +245,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Executes a "help" command.
+     */
+    @FXML
+    private void handleHelp() throws CommandException, ParseException {
+        executeCommand("help");
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    public void showHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -269,6 +278,38 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Executes an "undo" command.
+     */
+    @FXML
+    public void handleUndo() throws CommandException, ParseException {
+        executeCommand("undo");
+    }
+
+    /**
+     * Executes a "redo" command.
+     */
+    @FXML
+    public void handleRedo() throws CommandException, ParseException {
+        executeCommand("redo");
+    }
+
+    /**
+     * Executes a "view file/" command.
+     */
+    @FXML
+    public void handleViewFiles() throws CommandException, ParseException {
+        executeCommand("view file/");
+    }
+
+    /**
+     * Executes a "close view" command.
+     */
+    @FXML
+    public void handleCloseView() throws CommandException, ParseException {
+        executeCommand("close view");
     }
 
     public ContactListPanel getContactListPanel() {
@@ -301,7 +342,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                showHelpWindow();
             }
 
             if (commandResult.isExit()) {
