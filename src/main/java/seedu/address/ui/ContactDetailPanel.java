@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.timepoint.DateTimeUtil;
 
 /**
  * A UI component that displays detailed information of a {@code Contact}.
@@ -105,7 +106,7 @@ public class ContactDetailPanel extends UiPart<Region> {
         }
 
         // Last Updated
-        lastUpdated.setText(contact.getLastUpdated().toString());
+        lastUpdated.setText(DateTimeUtil.toDisplayString(contact.getLastUpdated().value));
         NodeUtil.show(lastUpdatedContainer);
 
         // Notes
