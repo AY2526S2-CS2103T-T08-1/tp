@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteClearAllCommand;
 import seedu.address.logic.commands.NoteClearCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.NoteEditCommand;
 import seedu.address.logic.commands.NoteRemoveCommand;
 import seedu.address.model.contact.Note;
 
@@ -104,6 +106,34 @@ public class NoteCommandParserTest {
                 parser,
                 "1 " + PREFIX_REMOVE + "1",
                 expectedNoteRemoveCommand);
+    }
+
+    @Test
+    public void parse_noteEditCommand_success() {
+        NoteEditCommand expectedNoteEditCommand =
+                new NoteEditCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_NOTE, new Note(NOTES_STRING));
+        assertParseSuccess(
+                parser,
+                "1 " + PREFIX_EDIT_NOTE + "1 " + NOTES_STRING,
+                expectedNoteEditCommand);
+    }
+
+    @Test
+    public void parse_noteEditCommandWithReminder_success() {
+        NoteEditCommand expectedNoteEditCommand =
+                new NoteEditCommand(INDEX_FIRST_CONTACT, INDEX_FIRST_NOTE, new Note(NOTES_STRING));
+        assertParseSuccess(
+                parser,
+                "1 " + PREFIX_EDIT_NOTE + "1 " + NOTES_STRING + " " + PREFIX_ON + "timeString",
+                expectedNoteEditCommand);
+    }
+
+    @Test
+    public void parse_noteEditCommandMissingText_failure() {
+        // edit command with note index but no new text
+        String expectedMessage = Messages.getCommandErrorWithUsage(
+                Messages.MESSAGE_MISSING_KEYWORD, NoteCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1 " + PREFIX_EDIT_NOTE + "1", expectedMessage);
     }
 
     @Test

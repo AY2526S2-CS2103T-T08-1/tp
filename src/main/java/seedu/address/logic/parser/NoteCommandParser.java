@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLEAR_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE;
 
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.NoteClearAllCommand;
 import seedu.address.logic.commands.NoteClearCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.NoteEditCommand;
 import seedu.address.logic.commands.NoteRemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Note;
@@ -31,11 +33,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ON, PREFIX_CLEAR, PREFIX_CLEAR_ALL, PREFIX_REMOVE);
+                ArgumentTokenizer.tokenize(args, PREFIX_ON, PREFIX_CLEAR, PREFIX_CLEAR_ALL, PREFIX_REMOVE,
+                        PREFIX_EDIT_NOTE);
 
         boolean isClearPrefixPresent = argMultimap.getValue(PREFIX_CLEAR).isPresent();
         boolean isClearAllPrefixPresent = argMultimap.getValue(PREFIX_CLEAR_ALL).isPresent();
         boolean isRemovePrefixPresent = argMultimap.getValue(PREFIX_REMOVE).isPresent();
+        boolean isEditPrefixPresent = argMultimap.getValue(PREFIX_EDIT_NOTE).isPresent();
         boolean isPreamblePresent = !argMultimap.getPreamble().isEmpty();
 
         if (!isPreamblePresent) {
@@ -44,7 +48,12 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         }
 
         if (argMultimap.getArguments().size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE));
+            // Allow edit + on/ combination (e.g. note 1 e/1 New text on/March 11)
+            boolean isEditWithOn = isEditPrefixPresent && argMultimap.getValue(PREFIX_ON).isPresent()
+                    && argMultimap.getArguments().size() == 2;
+            if (!isEditWithOn) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE));
+            }
         }
 
         if (isClearPrefixPresent) {
@@ -57,6 +66,10 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         if (isRemovePrefixPresent) {
             return parseNoteRemoveCommand(argMultimap);
+        }
+
+        if (isEditPrefixPresent) {
+            return parseNoteEditCommand(argMultimap);
         }
 
         return parseNoteAddCommand(argMultimap);
@@ -100,6 +113,36 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Index contactIndex = parseIndex(argMultimap.getPreamble());
         Index noteIndex = parseIndex(argMultimap.getValue(PREFIX_REMOVE).get());
         return new NoteRemoveCommand(contactIndex, noteIndex);
+    }
+
+    /**
+     * Parses the given {@code ArgumentMultimap} in the context of the {@code NoteEditCommand}
+     * and returns a {@code NoteEditCommand} object for execution.
+     *
+     * @param argMultimap The ArgumentMultimap containing an {@code Index} preamble,
+     *                    a prefixed note {@code Index}, and the new note text.
+     * @return A {@code NoteEditCommand} object with the specified contact index, note index, and new note.
+     */
+    private NoteEditCommand parseNoteEditCommand(ArgumentMultimap argMultimap) throws ParseException {
+        Index contactIndex = parseIndex(argMultimap.getPreamble());
+        String editValue = argMultimap.getValue(PREFIX_EDIT_NOTE).get().trim();
+        String[] editArgs = editValue.split(" ", 2);
+
+        if (editArgs.length < 2 || editArgs[1].isBlank()) {
+            throw new ParseException(Messages.getCommandErrorWithUsage(
+                    Messages.MESSAGE_MISSING_KEYWORD, NoteCommand.MESSAGE_USAGE),
+                    new ArrayIndexOutOfBoundsException());
+        }
+
+        Index noteIndex = parseIndex(editArgs[0]);
+        String newNoteText = editArgs[1];
+
+        if (argMultimap.getValue(PREFIX_ON).isPresent()) {
+            return new NoteEditCommand(contactIndex, noteIndex,
+                    new Note(newNoteText, TimePointParser.toTimePoint(argMultimap.getValue(PREFIX_ON).get())));
+        }
+
+        return new NoteEditCommand(contactIndex, noteIndex, new Note(newNoteText));
     }
 
     /**
