@@ -89,7 +89,9 @@ public class ContactCard extends UiPart<Region> {
         } else {
             NodeUtil.hide(notesContainer);
         }
-        if (!(contact.getTags().isEmpty() && contact.getReminders().isEmpty() && contact.getLastContacted().isEmpty())) {
+        if (!(contact.getTags().isEmpty()
+                && contact.getReminders().isEmpty()
+                && contact.getLastContacted().isEmpty())) {
             contact.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.name))
                     .forEach(tag -> tags.getChildren().add(

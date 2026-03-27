@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(undoMenuItem, new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN));
-        setAccelerator(redoMenuItem, new KeyCodeCombination(KeyCode.Z, KeyCombination.SHIFT_DOWN, KeyCombination.SHORTCUT_DOWN));
+        setAccelerator(redoMenuItem, new KeyCodeCombination(KeyCode.Y, KeyCombination.SHORTCUT_DOWN));
     }
 
     /**
