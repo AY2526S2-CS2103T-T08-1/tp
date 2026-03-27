@@ -297,7 +297,7 @@ public class MainWindow extends UiPart<Stage> {
      * Executes an "undo" command.
      */
     @FXML
-    public void handleUndo() throws CommandException, ParseException {
+    private void handleUndo() throws CommandException, ParseException {
         executeCommand("undo");
     }
 
@@ -305,7 +305,7 @@ public class MainWindow extends UiPart<Stage> {
      * Executes a "redo" command.
      */
     @FXML
-    public void handleRedo() throws CommandException, ParseException {
+    private void handleRedo() throws CommandException, ParseException {
         executeCommand("redo");
     }
 
@@ -313,7 +313,7 @@ public class MainWindow extends UiPart<Stage> {
      * Executes a "view file/" command.
      */
     @FXML
-    public void handleViewFiles() throws CommandException, ParseException {
+    private void handleViewFiles() throws CommandException, ParseException {
         executeCommand("view file/");
     }
 
@@ -321,7 +321,7 @@ public class MainWindow extends UiPart<Stage> {
      * Executes a "close view" command.
      */
     @FXML
-    public void handleCloseView() throws CommandException, ParseException {
+    private void handleCloseView() throws CommandException, ParseException {
         executeCommand("close view");
     }
 
