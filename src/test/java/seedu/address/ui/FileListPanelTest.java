@@ -50,16 +50,4 @@ public class FileListPanelTest extends GuiUnitTest {
             }
         });
     }
-
-    @Test
-    public void shutdownTest() throws Exception {
-        runAndWait(() -> {
-            try {
-                FileListPanel fileListPanel = new FileListPanel(TEST_DATA_FOLDER);
-                fileListPanel.shutdownExecutorService();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
 }

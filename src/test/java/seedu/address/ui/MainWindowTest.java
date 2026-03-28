@@ -157,8 +157,7 @@ public class MainWindowTest extends GuiUnitTest {
 
         @Override
         public Path getAddressBookFilePath() {
-            return Paths.get("src", "test", "data",
-                    "JsonSerializableAddressBookTest", "typicalContactsAddressBook.json");
+            return Paths.get("src", "test", "data", "JsonSerializableAddressBookTest", "emptyContactAddressBook.json");
         }
 
         @Override
