@@ -268,7 +268,9 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
+        fileListPanel.shutdownExecutorService();
     }
 
     public ContactListPanel getContactListPanel() {
