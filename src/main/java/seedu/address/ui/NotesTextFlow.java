@@ -17,7 +17,7 @@ import seedu.address.model.contact.Note;
  * Contact references ({@code @{UUID}}) are rendered as bold, underlined contact names.
  */
 public class NotesTextFlow extends TextFlow {
-    private double maxHeight;
+    private double maxHeight = Double.MAX_VALUE;
 
     /**
      * Creates a {@code NotesTextFlow} with contact reference resolution.
@@ -79,7 +79,9 @@ public class NotesTextFlow extends TextFlow {
             }
             getChildren().add(new Text("\n"));
         }
-        getChildren().remove(getChildren().size() - 1);
+        if (!getChildren().isEmpty()) {
+            getChildren().remove(getChildren().size() - 1);
+        }
     }
 
     /**

@@ -113,7 +113,6 @@ public class ContactDetailPanel extends UiPart<Region> {
         // Notes
         if (!contact.getNotes().isEmpty()) {
             NotesTextFlow notesTextFlow = new NotesTextFlow(contact.getNotes(), allContacts);
-            notesTextFlow.setNewMaxHeight(Double.MAX_VALUE);
             notesTextFlow.addStyleClass("detail-text-flow");
             notesScrollPane.setContent(notesTextFlow);
             NodeUtil.show(notesContainer);
