@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -21,6 +22,9 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    private Stage primaryStage;
+    private String[] stylesheets;
+
     @FXML
     private Button copyButton;
 
@@ -34,6 +38,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        primaryStage = root;
+
+        List<String> essentialStylesheets = primaryStage.getScene().getStylesheets();
+        stylesheets = new String[essentialStylesheets.size() + 1];
+        essentialStylesheets.toArray(stylesheets);
+
         helpMessage.setText(HELP_MESSAGE);
     }
 
@@ -98,5 +108,10 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USER_GUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    public void setTheme(String themeFileName) {
+        stylesheets[stylesheets.length - 1] = UiUtil.getUrl(themeFileName).toString();
+        primaryStage.getScene().getStylesheets().setAll(stylesheets);
     }
 }
