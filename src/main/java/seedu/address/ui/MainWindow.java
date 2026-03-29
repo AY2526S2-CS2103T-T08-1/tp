@@ -410,6 +410,9 @@ public class MainWindow extends UiPart<Stage> {
                 contactListPanel.scrollToBottom();
             }
 
+            if (!logic.getThemeUrl().equals(stylesheets[stylesheets.length - 1])) {
+                setTheme(logic.getThemeUrl());
+            }
             statusBarFooter.updateSaveLocation(logic.getAddressBookFilePath());
             undoMenuItem.setDisable(!logic.modelCanUndo());
             redoMenuItem.setDisable(!logic.modelCanRedo());

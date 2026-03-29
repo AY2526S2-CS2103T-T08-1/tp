@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.ui.UiUtil;
 
 /**
@@ -54,6 +55,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public String getThemeUrl() {
         return themeUrl;
+    }
+
+    public void setThemeUrl(String themeUrl) {
+        this.themeUrl = themeUrl;
     }
 
     public Path getAddressBookFilePath() {

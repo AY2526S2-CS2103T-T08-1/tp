@@ -21,5 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ON = new Prefix("on/");
     public static final Prefix PREFIX_BEFORE = new Prefix("before/");
     public static final Prefix PREFIX_AFTER = new Prefix("after/");
+    public static final Prefix PREFIX_THEME = new Prefix("theme/");
 
 }

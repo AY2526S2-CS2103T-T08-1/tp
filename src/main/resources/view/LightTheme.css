@@ -1,0 +1,15 @@
+.root {
+    -main-background-color: #E8E8E8;
+    -secondary-background-color: #383838;
+    -main-font-color: black;
+    -detail-font-color: #888888;
+    -contact-reference-fill: #6ec6ff;
+    -card-title-fill: #3c3e3f;
+    -card-fill: #515658;
+    -card-selected: #424d5f;
+    -note-cell-fill: black;
+    -button-fill: gray;
+    -highlight: #3e7b91;
+    -warning: #d06651;
+    -command-text-underline: white;
+}
