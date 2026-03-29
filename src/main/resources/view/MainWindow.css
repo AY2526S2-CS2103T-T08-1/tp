@@ -303,7 +303,7 @@
 #commandTextField {
     -fx-background-color: transparent -secondary-background-color transparent -secondary-background-color;
     -fx-background-insets: 0;
-    -fx-border-color: -secondary-background-color -secondary-background-color -command-text-underline -secondary-background-color;
+    -fx-border-color: -secondary-background-color -secondary-background-color -main-font-color -secondary-background-color;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
