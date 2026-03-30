@@ -373,7 +373,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the theme to sakura mode.
+     * Sets the theme to sakura.
      */
     @FXML
     private void toggleSakuraTheme() throws CommandException, ParseException {
