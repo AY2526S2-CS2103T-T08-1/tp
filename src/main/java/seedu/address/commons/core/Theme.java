@@ -1,9 +1,12 @@
 package seedu.address.commons.core;
 
-import seedu.address.ui.UiUtil;
-
 import java.util.Map;
 
+import seedu.address.ui.UiUtil;
+
+/**
+ * Contains a map of every theme URL and its respective command word.
+ */
 public abstract class Theme {
     public static final Map<String, String> AVAILABLE_THEMES = Map.of(
             "dark", UiUtil.getUrl("DarkTheme.css").toString(),

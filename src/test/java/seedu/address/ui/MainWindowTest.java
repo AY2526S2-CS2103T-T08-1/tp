@@ -180,7 +180,7 @@ public class MainWindowTest extends GuiUnitTest {
 
         @Override
         public String getThemeUrl() {
-            throw new AssertionError("This method should not be called.");
+            return "theme";
         }
 
         @Override

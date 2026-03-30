@@ -7,8 +7,6 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.Theme;
-import seedu.address.ui.UiUtil;
 
 /**
  * Represents User's preferences.

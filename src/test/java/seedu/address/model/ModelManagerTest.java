@@ -14,6 +14,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactFieldComparator;
 import seedu.address.model.contact.util.ContactPredicateBuilder;
@@ -22,6 +23,7 @@ import seedu.address.testutil.ContactBuilder;
 import seedu.address.ui.UiUtil;
 
 public class ModelManagerTest {
+    private static final String DARK_THEME = Theme.AVAILABLE_THEMES.get("dark");
 
     private ModelManager modelManager = new ModelManager();
 
@@ -41,7 +43,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, DARK_THEME));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -58,7 +60,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, DARK_THEME);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }

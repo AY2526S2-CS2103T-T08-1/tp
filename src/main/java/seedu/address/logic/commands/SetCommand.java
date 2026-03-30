@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Theme;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
+
+import seedu.address.commons.core.Theme;
 
 /**
  * Parent class for all setting-related commands which alter {@code UserPrefs}.
