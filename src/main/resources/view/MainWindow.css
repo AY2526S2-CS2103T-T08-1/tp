@@ -20,6 +20,7 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-prompt-text-fill: -detail-font-color;
 }
 
 .split-pane:horizontal .split-pane-divider {
