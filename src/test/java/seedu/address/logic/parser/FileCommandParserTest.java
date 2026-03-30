@@ -49,8 +49,9 @@ public class FileCommandParserTest {
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
-        // clear command with no index specified
+        // invalid file name
         assertParseFailure(parser, " " + PREFIX_OPEN + "&newbook", MESSAGE_INVALID_FILENAME);
+        assertParseFailure(parser, " " + PREFIX_DELETE + "&newbook", MESSAGE_INVALID_FILENAME);
 
         assertThrows(ParseException.class, () -> parser.parse(PREFIX_ON + "&newbook"));
     }
