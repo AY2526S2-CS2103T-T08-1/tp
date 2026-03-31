@@ -14,9 +14,9 @@ public class ThemeCommand extends Command {
 
     public static final String COMMAND_WORD = "theme";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme currently used"
-            + Themes.AVAILABLE_THEMES_MESSAGE
-            + "Example: " + COMMAND_WORD + "sakura";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme currently used\n"
+            + Themes.AVAILABLE_THEMES_MESSAGE + "\n"
+            + "Example: " + COMMAND_WORD + " sakura";
 
     private final String key;
 
