@@ -39,7 +39,7 @@ public class JsonAdaptedContactTest {
     private static final Optional<String> VALID_LAST_CONTACTED = BENSON.getLastContacted().map(Object::toString);
     private static final LocalDateTime VALID_LAST_UPDATED = BENSON.getLastUpdated().value;
     private static final List<String> VALID_NOTES = BENSON.getNotes().stream()
-            .map(note -> note.value)
+            .map(note -> note.toJsonString())
             .collect(Collectors.toList());
     private static final String VALID_TAG_NAME = "friends";
     private static final String VALID_TAG_RANK = "best";
