@@ -70,7 +70,8 @@ public class JsonAdaptedContactTest {
                         VALID_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_LAST_CONTACTED, VALID_LAST_UPDATED,
                         "", VALID_TAGS);
-        assertEquals(BENSON, contact.toModelType());
+        Contact expectedContact = new ContactBuilder(BENSON).withNotes().build();
+        assertEquals(expectedContact, contact.toModelType());
     }
 
     @Test

@@ -273,6 +273,10 @@ public class ContactTest {
         // different tags -> returns false
         editedAlice = new ContactBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different notes -> returns false
+        editedAlice = new ContactBuilder(ALICE).withNotes("some different note").build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test

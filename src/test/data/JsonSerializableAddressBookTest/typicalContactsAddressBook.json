@@ -18,7 +18,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "lastUpdated": "2026-02-21T09:00",
-    "notes": [ ],
+    "notes": [ "to meet on/2020 1 may 15:00" ],
     "tags" : [ {
       "type" : "JsonAdaptedTag",
       "name" : "owesMoney"
