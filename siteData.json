@@ -201,9 +201,7 @@
     },
     {
       "src": "user-guide/commands/index.md",
-      "headings": {
-        "command-summary": "Command summary"
-      },
+      "headings": {},
       "headingKeywords": {}
     },
     {
