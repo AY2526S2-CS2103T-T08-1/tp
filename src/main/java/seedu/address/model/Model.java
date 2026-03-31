@@ -38,6 +38,11 @@ public interface Model {
     String getThemeUrl();
 
     /**
+     * Sets the current user prefs' theme URL.
+     */
+    void setThemeUrl(String themeUrl);
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();

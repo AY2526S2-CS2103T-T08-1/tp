@@ -116,6 +116,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setThemeUrl(String themeUrl) {
+            //no-op for testing
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }

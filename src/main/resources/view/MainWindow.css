@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(-main-background-color, 20%);
-    background-color: -secondary-background-color; /* Used in the default.html file */
+    -fx-background-color: -main-background-color;
+    background-color: -main-background-color; /* Used in the default.html file */
 }
 
 .label {
@@ -17,87 +17,27 @@
     -fx-font-style: italic;
 }
 
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: -main-font-color;
-    -fx-opacity: 1;
-}
-
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: -main-font-color;
-    -fx-opacity: 1;
-}
-
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-}
-
-.tab-pane {
-    -fx-padding: 0 0 0 1;
-}
-
-.tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
-    -fx-min-height: 0;
-    -fx-max-height: 0;
-}
-
-.table-view {
-    -fx-base: -main-background-color;
-    -fx-control-inner-background: -main-background-color;
-    -fx-background-color: -main-background-color;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-            transparent
-            transparent
-            derive(-fx-base, 80%)
-            transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: -main-font-color;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
+    -fx-prompt-text-fill: -detail-font-color;
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(-main-background-color, 20%);
-    -fx-border-color: transparent transparent transparent derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
+    -fx-border-color: transparent transparent transparent -main-background-color;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .list-cell {
@@ -151,17 +91,17 @@
 }
 
 .stack-pane {
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .pane-with-border {
-    -fx-background-color: derive(-main-background-color, 20%);
-    -fx-border-color: derive(-main-background-color, 10%);
+    -fx-background-color: -main-background-color;
+    -fx-border-color: -border-color;
     -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(-main-background-color, 30%);
+    -fx-background-color: -status-bar-fill;
 }
 
 .result-display {
@@ -178,28 +118,8 @@
     -fx-pref-height: 30px;
 }
 
-.status-bar-with-border {
-    -fx-background-color: derive(-main-background-color, 30%);
-    -fx-border-color: derive(-main-background-color, 25%);
-    -fx-border-width: 1px;
-}
-
-.status-bar-with-border .label {
-    -fx-text-fill: -main-font-color;
-}
-
-.grid-pane {
-    -fx-background-color: derive(-main-background-color, 30%);
-    -fx-border-color: derive(-main-background-color, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-    -fx-background-color: derive(-main-background-color, 30%);
-}
-
 .context-menu {
-    -fx-background-color: derive(-main-background-color, 50%);
+    -fx-background-color: -secondary-background-color;
 }
 
 .context-menu .label {
@@ -207,7 +127,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .menu-bar .label {
@@ -217,64 +137,24 @@
     -fx-opacity: 0.9;
 }
 
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-.button {
-    -fx-padding: 5 22 5 22;
-    -fx-background-radius: 0;
-    -fx-background-color: -main-background-color;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: -main-font-color;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+.menu:hover {
+    -fx-background-color: -highlight;
 }
 
-.button:hover {
-    -fx-background-color: derive(-main-background-color, 15%);
+.menu:showing {
+    -fx-background-color: -highlight;
 }
 
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: -main-background-color;
-    -fx-text-fill: -main-font-color;
-}
-
-.button:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: -main-font-color;
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
-}
-
-.dialog-pane {
-    -fx-background-color: -main-background-color;
-}
-
-.dialog-pane > *.button-bar > *.container {
-    -fx-background-color: -main-background-color;
-}
-
-.dialog-pane > *.label.content {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: -main-font-color;
-}
-
-.dialog-pane:header *.header-panel {
-    -fx-background-color: derive(-main-background-color, 25%);
+.menu-item:focused {
+    -fx-background-color: -highlight;
 }
 
 .scroll-bar {
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(-main-background-color, 50%);
+    -fx-background-color: -secondary-background-color;
     -fx-background-insets: 3;
 }
 
@@ -301,9 +181,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent -secondary-background-color transparent -secondary-background-color;
+    -fx-background-color: transparent -main-background-color transparent -main-background-color;
     -fx-background-insets: 0;
-    -fx-border-color: -secondary-background-color -secondary-background-color -command-text-underline -secondary-background-color;
+    -fx-border-color: -main-background-color -main-background-color -main-font-color -main-background-color;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
@@ -316,7 +196,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, -secondary-background-color, transparent, -secondary-background-color;
+    -fx-background-color: transparent, -main-background-color, transparent, -main-background-color;
     -fx-background-radius: 0;
 }
 
@@ -340,11 +220,11 @@
 
 /* Contact Detail Panel Styles */
 .contact-detail-panel {
-    -fx-background-color: derive(-main-background-color, 20%);
+    -fx-background-color: -main-background-color;
 }
 
 .contact-detail-panel .detail-header {
-    -fx-border-color: derive(-main-background-color, 50%);
+    -fx-border-color: -secondary-background-color;
     -fx-border-width: 0 0 1 0;
 }
 
@@ -383,7 +263,7 @@
 
 .contact-detail-panel #tags .label {
     -fx-text-fill: -main-font-color;
-    -fx-background-color: -tag-fill;
+    -fx-background-color: -highlight;
     -fx-padding: 3 8 3 8;
     -fx-border-radius: 3;
     -fx-background-radius: 3;
@@ -414,5 +294,5 @@
 
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
-    -fx-background: -secondary-background-color;
+    -fx-background: transparent;
 }

@@ -30,6 +30,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteAddCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewContactCommand;
@@ -149,6 +150,11 @@ public class AddressBookParserTest {
     public void parseCommand_fileOpen() throws Exception {
         assertTrue(parser.parseCommand(
                 FileCommand.COMMAND_WORD + " " + PREFIX_OPEN + "newbook") instanceof FileOpenCommand);
+    }
+
+    @Test
+    public void parseCommand_theme() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " dark") instanceof ThemeCommand);
     }
 
     @Test

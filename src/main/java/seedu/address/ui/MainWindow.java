@@ -309,7 +309,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getThemeUrl());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -351,6 +351,38 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleCloseView() throws CommandException, ParseException {
         executeCommand("close view");
+    }
+
+    /**
+     * Sets the theme to dark mode.
+     */
+    @FXML
+    private void toggleDarkTheme() throws CommandException, ParseException {
+        executeCommand("theme dark");
+    }
+
+    /**
+     * Sets the theme to light mode.
+     */
+    @FXML
+    private void toggleLightTheme() throws CommandException, ParseException {
+        executeCommand("theme light");
+    }
+
+    /**
+     * Sets the theme to reading mode.
+     */
+    @FXML
+    private void toggleBookTheme() throws CommandException, ParseException {
+        executeCommand("theme book");
+    }
+
+    /**
+     * Sets the theme to sakura.
+     */
+    @FXML
+    private void toggleSakuraTheme() throws CommandException, ParseException {
+        executeCommand("theme sakura");
     }
 
     public ContactListPanel getContactListPanel() {
@@ -415,6 +447,9 @@ public class MainWindow extends UiPart<Stage> {
                 contactListPanel.scrollToBottom();
             }
 
+            if (!logic.getThemeUrl().equals(stylesheets[stylesheets.length - 1])) {
+                setTheme(logic.getThemeUrl());
+            }
             statusBarFooter.updateSaveLocation(logic.getAddressBookFilePath());
             undoMenuItem.setDisable(!logic.modelCanUndo());
             redoMenuItem.setDisable(!logic.modelCanRedo());
