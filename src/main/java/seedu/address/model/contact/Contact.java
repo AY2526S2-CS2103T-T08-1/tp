@@ -407,13 +407,14 @@ public class Contact {
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
                 && lastContacted.equals(otherContact.lastContacted)
+                && notes.equals(otherContact.notes)
                 && tags.equals(otherContact.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, lastContacted, tags);
+        return Objects.hash(name, phone, email, address, lastContacted, notes, tags);
     }
 
     @Override
