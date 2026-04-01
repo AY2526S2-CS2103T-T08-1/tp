@@ -11,6 +11,7 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class Snapshot
 
 Class UniqueContactList
 Class Contact
@@ -51,9 +52,14 @@ Contact *--> "*" Note
 Contact *--> LastContacted
 Contact *--> LastUpdated
 
+ModelManager o--> "*" Snapshot
+Snapshot --> "1" UniqueContactList
+Snapshot --> "1" UserPrefs
+
 Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
 
+UUID -[hidden]right-> Name
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
