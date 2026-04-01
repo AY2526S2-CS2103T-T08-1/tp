@@ -118,7 +118,10 @@ public class Note {
 
     @Override
     public String toString() {
-        return value;
+        return new ToStringBuilder(this)
+                .add("value", value)
+                .add("timePoint", timePoint)
+                .toString();
     }
 
     @Override
