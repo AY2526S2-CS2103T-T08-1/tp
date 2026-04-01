@@ -8,6 +8,7 @@
 
 Business to Business for You (B2B4U) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, B2B4U can get your contact management tasks done faster than traditional GUI apps.
 
+--------------------------------------------------------------------------------------------------------------------
 
 # Quick start
 
@@ -41,6 +42,8 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
     * `exit` : Exits the app.
 
 1. Refer to [Features]({{ baseUrl }}/user-guide/features.html) for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
 
 # Features
 
@@ -91,6 +94,8 @@ Furthermore, certain edits can cause the B2B4U application to behave in unexpect
 
 _Details coming soon ..._
 
+--------------------------------------------------------------------------------------------------------------------
+
 # FAQ & Known Issues
 
 ## FAQ
@@ -104,3 +109,34 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Command summary
+
+| Action                            | Format         | Parameters                                                                                                                    | Examples                                                                                           |
+|-----------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| **Help**                          | `help`         | `[COMMAND]`                                                                                                                   | `help add`                                                                                         |
+| **Add contact**                   | `add`          | `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`                                                 | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Edit contact**                  | `edit`         | `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`                                         | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Delete contact**                | `delete`       | `INDEX`                                                                                                                       | `delete 3`                                                                                         |
+| **Clear contacts**                | `clear`        |                                                                                                                               |                                                                                                    |
+| **Note (add)**                    | `note`         | `INDEX NOTE [on/TIME]`                                                                                                        | `note 1 To meet in February on/15 Apr`                                                             |
+| **Note (edit)**                   | `note`         | `INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]`                                                                                      | `note 1 el/1 Updated note text.`                                                                   |
+| **Note (remove specific)**        | `note`         | `INDEX cl/NOTE_INDEX`                                                                                                         | `note 1 cl/2`                                                                                      |
+| **Note (remove)**                 | `note`         | `INDEX c/LINES_TO_REMOVE`                                                                                                     | `note 1 c/2`                                                                                       |
+| **Note (clear)**                  | `note`         | `INDEX ca/`                                                                                                                   | `note 1 ca/`                                                                                       |
+| **List contacts**                 | `list`         |                                                                                                                               |                                                                                                    |
+| **Find contacts**                 | `find`         | `[KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                                                                | `find n/James t/friends`                                                                           |
+| **Find contacts(by association)** | `find`         | `@INDEX`                                                                                                                      | `find @1`                                                                                          |
+| **Remove filters**                | `find`         |                                                                                                                               |                                                                                                    |
+| **Sort contacts**                 | `sort`         | `[n/asc \| desc] [p/asc \| desc] [e/asc \| desc] [a/asc \| desc] [lu/asc \| desc] [lc/asc \| desc] [t/TAG_NAME:asc \| desc]…` | `sort n/asc t/friends:desc`                                                                        |
+| **Sort by last updated**          | `sort`         |                                                                                                                               |                                                                                                    |
+| **Undo**                          | `undo`         |                                                                                                                               |                                                                                                    |
+| **Redo**                          | `redo`         |                                                                                                                               |                                                                                                    |
+| **View contact**                  | `view`         | `INDEX`                                                                                                                       | `view 1`                                                                                           |
+| **Close view**                    | `close view`   |                                                                                                                               |                                                                                                    |
+| **Open file**                     | `file open/`   | `FILE_NAME`                                                                                                                   | `file open/newContactList`                                                                         |
+| **Delete file**                   | `file delete/` | `FILE_NAME`                                                                                                                   | `file delete/OldContactList`                                                                       |
+| **View list of available files**  | `view files`   |                                                                                                                               |                                                                                                    |
+| **Change theme**                  | `theme`        | `THEME_NAME`                                                                                                                  | `theme sakura`                                                                                     |
