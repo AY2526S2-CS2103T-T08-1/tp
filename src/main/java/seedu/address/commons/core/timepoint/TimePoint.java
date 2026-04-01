@@ -120,4 +120,9 @@ public abstract class TimePoint<T> implements Comparable<TimePoint<T>> {
         // Fallback when both values are non-chronological string timepoints.
         return value.toString().compareTo(other.value.toString());
     }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 }

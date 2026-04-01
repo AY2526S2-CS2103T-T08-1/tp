@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -138,7 +139,7 @@ public class NoteTest {
         Note note = new Note("worked with @{" + id + "}", tp);
         Note result = note.dereferenceContact(id, "Bob");
         assertEquals("worked with Bob", result.value);
-        assertEquals(tp, result.timePoint);
+        assertEquals(Optional.of(tp), result.timePoint);
     }
 
     @Test
@@ -148,5 +149,13 @@ public class NoteTest {
         Note note = new Note("worked with @{" + id1 + "}");
         Note result = note.dereferenceContact(id2, "Alice");
         assertEquals(note.value, result.value);
+    }
+
+    @Test
+    public void toString_test() {
+        Note note = new Note("Meeting notes", TimePoint.of(LocalDateTime.of(2025, 12, 25, 10, 30)));
+        String expected = "seedu.address.model.contact.Note{" + "value=Meeting notes, "
+                + "timePoint=Optional[10:30, Dec 25, 2025]}";
+        assertEquals(expected, note.toString());
     }
 }
