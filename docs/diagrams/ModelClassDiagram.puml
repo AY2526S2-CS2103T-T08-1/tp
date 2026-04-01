@@ -16,9 +16,13 @@ Class UniqueContactList
 Class Contact
 Class Address
 Class Email
+Class LastContacted
+Class LastUpdated
 Class Name
+Class Note
 Class Phone
 Class Tag
+Class UUID
 
 Class I #FFFFFF
 }
@@ -37,11 +41,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueContactList
 UniqueContactList --> "~* all" Contact
+Contact *--> UUID
 Contact *--> Name
 Contact *--> Phone
 Contact *--> Email
 Contact *--> Address
 Contact *--> "*" Tag
+Contact *--> "*" Note
+Contact *--> LastContacted
+Contact *--> LastUpdated
 
 Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
