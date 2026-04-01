@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CloseViewCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
@@ -101,7 +102,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_note() throws Exception {
-        NoteAddCommand command = (NoteAddCommand) parser.parseCommand(NoteAddCommand.COMMAND_WORD + " 1 information");
+        Command command = parser.parseCommand(NoteAddCommand.COMMAND_WORD + " 1 information");
         assertTrue(command instanceof NoteAddCommand);
         assertEquals(new NoteAddCommand(INDEX_FIRST_CONTACT, new Note("information")), command);
     }
