@@ -343,7 +343,7 @@ public class Contact {
 
     private TimePoint<?> getClosestReminder() {
         return this.getActiveReminders().stream().map(
-                note -> note.timePoint).min(
+                note -> note.timePoint.orElse(null)).min(
                 TimePointComparator.stringTimePointLast(
                         TimePointComparator.ifSameDayDateTimePointFirst(
                                 TimePoint::compareTo))).orElse(null);

@@ -76,7 +76,7 @@ public class NoteAddCommand extends NoteCommand {
             }
         }
         matcher.appendTail(sb);
-        return new Note(sb.toString(), note.timePoint);
+        return new Note(sb.toString(), note.timePoint.orElse(null));
     }
 
     /**
