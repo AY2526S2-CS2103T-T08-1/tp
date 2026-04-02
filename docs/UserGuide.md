@@ -102,7 +102,8 @@ All data files must be placed in the data folder: `[JAR file location]/data/`.
 - To open a specific data file, use the `file open/FILE_NAME` command.
 - To delete a specific data file, use the `file delete/FILE_NAME` command.
 
-For more information, refer to the [Command summary](#command-summary) at the end of this document.
+For more information, refer to the [Command summary](#command-summary) at the end of this document,
+or the specific pages for [viewing]({{ baseUrl }}/user-guide/view.html) and [managing]({{ baseUrl }}/user-guide/file.html) files.
 
 --------------------------------------------------------------------------------------------------------------------
 
