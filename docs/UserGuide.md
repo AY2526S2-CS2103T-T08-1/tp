@@ -51,7 +51,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `SCREAMING_SNAKE_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -75,13 +75,15 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 ## Commands
 <!-- TODO: Add high-level overview of functionality brought by commands -->
 
-## Saving the data
+## Saving data
 
-B2B4U data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+B2B4U data is saved to the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ## Editing the data file
 
-B2B4U data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+B2B4U data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -90,9 +92,17 @@ If your changes to the data file makes its format invalid, B2B4U will discard al
 Furthermore, certain edits can cause the B2B4U application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-## Archiving data files `[coming in v2.0]`
+## Separate data files
 
-_Details coming soon ..._
+B2B4U allows you to maintain multiple separate data files.
+This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
+All data files must be placed in the data folder: `[JAR file location]/data/`.
+
+- To view a list of all available data files, use the `view files` command.
+- To open a specific data file, use the `file open/FILE_NAME` command.
+- To delete a specific data file, use the `file delete/FILE_NAME` command.
+
+For more information, refer to the [Command summary](#command-summary) at the end of this document.
 
 --------------------------------------------------------------------------------------------------------------------
 
