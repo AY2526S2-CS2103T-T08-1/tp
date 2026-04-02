@@ -6,7 +6,7 @@
   <navbar type="dark">
     <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">B2B4U</a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
-    <li><a href="{{baseUrl}}/user-guide.html" class="nav-link">User Guide</a></li>
+    <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/developer-guide/index.html" class="nav-link">Developer Guide</a></li>
     <li><a href="{{baseUrl}}/AboutUs.html" class="nav-link">About Us</a></li>
     <li><a href="https://github.com/AY2526S2-CS2103T-T08-1/tp" target="_blank" class="nav-link"><md>:fab-github:</md></a>
