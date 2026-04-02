@@ -11,5 +11,5 @@ This includes the logging level (`logLevel`) and the user preferences file locat
 
 The user preferences file (default: `preferences.json`) contains the user's preferences, including:
 
-- GUI settings (window dimensions and coordinates), and
+- GUI settings (window dimensions, coordinates and theme), and
 - the data file location (`addressBookFilePath`).
