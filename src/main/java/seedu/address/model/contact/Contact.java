@@ -128,7 +128,9 @@ public class Contact {
      * Returns the notes formatted as a string, with every note separated by line break.
      */
     public String getNotesString() {
-        return notes.stream().map(note -> note.value).collect(Collectors.joining("\n"));
+        return notes.stream()
+                .map(note -> note.value + note.timePoint.map(tp -> " on " + tp).orElse(""))
+                .collect(Collectors.joining("\n"));
     }
 
     /**
@@ -343,7 +345,7 @@ public class Contact {
 
     private TimePoint<?> getClosestReminder() {
         return this.getActiveReminders().stream().map(
-                note -> note.timePoint).min(
+                note -> note.timePoint.orElse(null)).min(
                 TimePointComparator.stringTimePointLast(
                         TimePointComparator.ifSameDayDateTimePointFirst(
                                 TimePoint::compareTo))).orElse(null);

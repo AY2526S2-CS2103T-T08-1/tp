@@ -6,11 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ON;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.timepoint.TimePoint;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.TimePointParser;
@@ -35,7 +37,7 @@ public class Note {
             Pattern.compile("@(\\d+)");
 
     public final String value;
-    public final TimePoint timePoint;
+    public final Optional<TimePoint> timePoint;
 
     /**
      * Constructs a {@code Note}.
@@ -45,7 +47,7 @@ public class Note {
     public Note(String note) {
         requireNonNull(note);
         value = note;
-        this.timePoint = null;
+        this.timePoint = Optional.empty();
     }
 
     /**
@@ -56,14 +58,14 @@ public class Note {
     public Note(String note, TimePoint timePoint) {
         requireNonNull(note);
         value = note;
-        this.timePoint = timePoint;
+        this.timePoint = Optional.ofNullable(timePoint);
     }
 
     /**
      * Outputs a {@code JSON} formatted string to represent this note.
      */
     public String toJsonString() {
-        return value + ((timePoint == null) ? "" : " on/" + timePoint.toString());
+        return value + timePoint.map(tp -> " on/" + timePoint.get().toString()).orElse("");
     }
 
     /**
@@ -82,28 +84,22 @@ public class Note {
     }
 
     public boolean isReminder() {
-        return timePoint != null;
+        return timePoint.isPresent();
     }
 
     /**
      * Checks if this note is a reminder that is due in {@code DUE_PERIOD_DAYS} number of days.
      */
     public boolean hasDueReminder() {
-        if (timePoint == null) {
-            return false;
-        }
         TimePoint cutOffTime = TimePoint.of(LocalDateTime.now().plusDays(DUE_PERIOD_DAYS));
-        return timePoint.isBefore(cutOffTime) && timePoint.isAfter(TimePoint.now());
+        return timePoint.map(tp -> tp.isBefore(cutOffTime) && tp.isAfter(TimePoint.now())).orElse(false);
     }
 
     /**
      * Checks if this note is a reminder that is due in {@code DUE_PERIOD_DAYS} number of days.
      */
     public boolean hasActiveReminder() {
-        if (timePoint == null) {
-            return false;
-        }
-        return timePoint.isAfter(TimePoint.now());
+        return timePoint.map(tp -> tp.isAfter(TimePoint.now())).orElse(false);
     }
 
     /**
@@ -119,7 +115,7 @@ public class Note {
      */
     public Note dereferenceContact(UUID contactId, String contactName) {
         String newValue = value.replace("@{" + contactId.toString() + "}", contactName);
-        return new Note(newValue, timePoint);
+        return timePoint.map(tp -> new Note(newValue, tp)).orElse(new Note(newValue));
     }
 
     /**
@@ -166,7 +162,10 @@ public class Note {
 
     @Override
     public String toString() {
-        return value;
+        return new ToStringBuilder(this)
+                .add("value", value)
+                .add("timePoint", timePoint)
+                .toString();
     }
 
     @Override
@@ -179,13 +178,11 @@ public class Note {
         }
         Note otherNote = (Note) other;
         return value.equals(otherNote.value)
-                && Objects.equals(
-                        timePoint == null ? null : timePoint.toString(),
-                        otherNote.timePoint == null ? null : otherNote.timePoint.toString());
+                && Objects.equals(timePoint, otherNote.timePoint);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, timePoint == null ? null : timePoint.toString());
+        return Objects.hash(value, timePoint);
     }
 }
