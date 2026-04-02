@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Design"
-    pageNav: 3
+  title: "Design"
+  pageNav: 3
 ---
 
 # **Design**
