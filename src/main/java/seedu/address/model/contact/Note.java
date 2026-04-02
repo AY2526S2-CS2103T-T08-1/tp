@@ -35,7 +35,7 @@ public class Note {
             Pattern.compile("@(\\d+)");
 
     public final String value;
-    public final Optional<TimePoint> timePoint;
+    public final Optional<TimePoint<?>> timePoint;
 
     /**
      * Constructs a {@code Note}.
@@ -53,7 +53,7 @@ public class Note {
      *
      * @param note A valid note.
      */
-    public Note(String note, TimePoint timePoint) {
+    public Note(String note, TimePoint<?> timePoint) {
         requireNonNull(note);
         value = note;
         this.timePoint = Optional.ofNullable(timePoint);
@@ -89,7 +89,7 @@ public class Note {
      * Checks if this note is a reminder that is due in {@code DUE_PERIOD_DAYS} number of days.
      */
     public boolean hasDueReminder() {
-        TimePoint cutOffTime = TimePoint.of(LocalDateTime.now().plusDays(DUE_PERIOD_DAYS));
+        TimePoint<?> cutOffTime = TimePoint.of(LocalDateTime.now().plusDays(DUE_PERIOD_DAYS));
         return timePoint.map(tp -> tp.isBefore(cutOffTime) && tp.isAfter(TimePoint.now())).orElse(false);
     }
 
