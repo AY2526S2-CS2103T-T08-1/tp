@@ -67,7 +67,6 @@
     },
     {
       "src": "developer-guide/design.md",
-      "title": "Design",
       "headings": {
         "design": "Design",
         "architecture": "Architecture",
