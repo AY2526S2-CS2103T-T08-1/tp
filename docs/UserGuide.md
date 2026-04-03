@@ -75,12 +75,44 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
   ![unknown command]({{ baseUrl }}/images/unknownCommand.png)
   </box>
 
+
+### Adding contacts
+
+### Editing contacts
+
+### Deleting contacts
+
+- To delete a specific displayed contact, use the [`delete INDEX`]({{ baseUrl }}/user-guide/delete-contact.html) command.
+- To delete all contacts at once, use the [`clear`]({{ baseUrl }}/user-guide/clear-contacts.html) command.
+
+### Filtering and sorting the context list
+
+### Adding notes to contacts
+
+### Undo and redo
+
+### Setting the theme
+
+### Separate data files
+
+B2B4U allows you to maintain multiple separate data files.
+This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
+All data files must be placed in the data folder: `[JAR file location]/data/`.
+
+- To view a list of all available data files, use the [`view files`]({{ baseUrl }}/user-guide/view.html#viewing-available-files-view-files) command.
+- To open a specific data file, use the [`file open/FILE_NAME`]({{ baseUrl }}/user-guide/file.html#open-file-file-open) command.
+- To delete a specific data file, use the [`file delete/FILE_NAME`]({{ baseUrl }}/user-guide/file.html#deleting-a-file-file-delete) command.
+
+### Exiting B2B4U
+
+To exit B2B4U, use the [`exit`]({{ baseUrl }}/user-guide/exit.html) command.
+
 ### Saving data
 
 B2B4U data is saved to the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
-### Editing the data file
+### Directly editing the data file
 
 B2B4U data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
@@ -91,16 +123,6 @@ Advanced users are welcome to update data directly by editing that data file.
 If your changes to the data file makes its format invalid, B2B4U will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the B2B4U application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Separate data files
-
-B2B4U allows you to maintain multiple separate data files.
-This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
-All data files must be placed in the data folder: `[JAR file location]/data/`.
-
-- To view a list of all available data files, use the `view files` command.
-- To open a specific data file, use the `file open/FILE_NAME` command.
-- To delete a specific data file, use the `file delete/FILE_NAME` command.
 
 For more information, refer to the [Command summary](#command-summary) at the end of this document,
 or the specific pages for [viewing]({{ baseUrl }}/user-guide/view.html) and [managing]({{ baseUrl }}/user-guide/file.html) files.
