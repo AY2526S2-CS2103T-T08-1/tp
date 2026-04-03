@@ -48,7 +48,6 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 ## Features
 
 ### Commands
-<!-- TODO: Add high-level overview of functionality brought by commands -->
 
 <box type="info" seamless>
 
@@ -78,20 +77,49 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 ### Adding contacts
 
+<!-- TODO: Summarise the add command -->
+
 ### Editing contacts
+
+<!-- TODO: Summarise the edit command -->
 
 ### Deleting contacts
 
 - To delete a specific displayed contact, use the [`delete INDEX`]({{ baseUrl }}/user-guide/delete-contact.html) command.
 - To delete all contacts at once, use the [`clear`]({{ baseUrl }}/user-guide/clear-contacts.html) command.
 
+### Adding notes to contacts
+
+<!-- TODO: Summarise the note command -->
+
 ### Filtering and sorting the context list
 
-### Adding notes to contacts
+B2B4U allows you to filter and sort the contact list to quickly find contacts that fit specific criteria in a sea of other contacts.
+
+- To filter, <!-- TODO: Summarise the find command -->
+- To remove contact filters, use the `find` command without any keywords.
+- To sort, <!-- TODO: Summarise the sort command -->
+- To reset the sort order, use the `sort` command without any keywords.
+
+The effects of the `find` and `sort` commands will be maintained even when the other command is made, and will only be changed another iteration of its own command, with the exception of the following commands which can also change the filter/sort criteria:
+
+- A [`list`]({{ baseUrl }}/user-guide/list-contacts.html) command will display every contact in the default sort order.
+- A [`add`]({{ baseUrl }}/user-guide/add-contact.html#similar-contacts) command will reset the sort order, and may filter to display only similar contacts.
 
 ### Undo and redo
 
+B2B4U allows you to undo and redo commands to prevent data loss due to mistakes.
+
+- To undo the last command, use the [`undo`]({{ baseUrl }}/user-guide/undo-command.html) command.
+- To redo the last command, use the [`redo`]({{ baseUrl }}/user-guide/redo-command.html) command.
+
 ### Setting the theme
+
+B2B4U features a variety of color palettes(referred to as 'themes') to customise your experience.
+
+To change to a different theme, use the [`theme THEME_NAME`]({{ baseUrl }}/user-guide/set-theme.html) command.
+
+Available themes: [`dark`]({{ baseUrl }}/user-guide/set-theme.html#dark-mode-dark), [`light`]({{ baseUrl }}/user-guide/set-theme.html#light-mode-light), [`book`]({{ baseUrl }}/user-guide/set-theme.html#reading-mode-book), [`sakura`]({{ baseUrl }}/user-guide/set-theme.html#sarkua-mode-sakura)
 
 ### Separate data files
 
