@@ -130,7 +130,9 @@ public class CommandResult {
                 && Objects.equals(helpInfo, otherCommandResult.helpInfo)
                 && exit == otherCommandResult.exit
                 && Objects.equals(contactToView, otherCommandResult.contactToView)
-                && hideViewPanel == otherCommandResult.hideViewPanel;
+                && hideViewPanel == otherCommandResult.hideViewPanel
+                && showFileList == otherCommandResult.showFileList
+                && scrollToIndex == otherCommandResult.scrollToIndex;
     }
 
     @Override

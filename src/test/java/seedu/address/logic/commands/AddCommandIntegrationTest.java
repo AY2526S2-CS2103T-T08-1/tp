@@ -32,10 +32,11 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addContact(validContact);
-
-        assertCommandSuccess(new AddCommand(validContact), model,
+        CommandResult expectedCommandResult = new ScrollToIndexCommandResult(
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
-                expectedModel);
+                expectedModel.getDisplayedContactList().indexOf(validContact));
+
+        assertCommandSuccess(new AddCommand(validContact), model, expectedCommandResult, expectedModel);
     }
 
     @Test
