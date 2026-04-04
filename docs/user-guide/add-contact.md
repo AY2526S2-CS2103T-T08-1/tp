@@ -27,4 +27,4 @@ After a successful `add` command, the contact list will be reset to display ever
 
 A contact is similar if:
 
--
+- <!-- TODO: Explain the similar contact filter the add command uses in further detail -->

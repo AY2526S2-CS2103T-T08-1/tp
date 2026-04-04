@@ -121,7 +121,7 @@ To change to a different theme, use the [`theme THEME_NAME`]({{ baseUrl }}/user-
 
 Available themes: [`dark`]({{ baseUrl }}/user-guide/set-theme.html#dark-mode-dark), [`light`]({{ baseUrl }}/user-guide/set-theme.html#light-mode-light), [`book`]({{ baseUrl }}/user-guide/set-theme.html#reading-mode-book), [`sakura`]({{ baseUrl }}/user-guide/set-theme.html#sarkua-mode-sakura)
 
-### Separate data files
+### Maintaining separate data files
 
 B2B4U allows you to maintain multiple separate data files.
 This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
@@ -140,7 +140,7 @@ To exit B2B4U, use the [`exit`]({{ baseUrl }}/user-guide/exit.html) command.
 B2B4U data is saved to the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
-### Directly editing the data file
+### Editing the data file directly
 
 B2B4U data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
