@@ -48,7 +48,6 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 ## Features
 
 ### Commands
-<!-- TODO: Add high-level overview of functionality brought by commands -->
 
 <box type="info" seamless>
 
@@ -75,12 +74,73 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
   ![unknown command]({{ baseUrl }}/images/unknownCommand.png)
   </box>
 
+
+### Adding contacts
+
+<!-- TODO: Summarise the add command -->
+
+### Editing contacts
+
+<!-- TODO: Summarise the edit command -->
+
+### Deleting contacts
+
+- To delete a specific displayed contact, use the [`delete INDEX`]({{ baseUrl }}/user-guide/delete-contact.html) command.
+- To delete all contacts at once, use the [`clear`]({{ baseUrl }}/user-guide/clear-contacts.html) command.
+
+### Adding notes to contacts
+
+<!-- TODO: Summarise the note command -->
+
+### Filtering and sorting the context list
+
+B2B4U allows you to filter and sort the contact list to quickly find contacts that fit specific criteria in a sea of other contacts.
+
+- To filter, <!-- TODO: Summarise the find command -->
+- To remove contact filters, use the `find` command without any keywords.
+- To sort, <!-- TODO: Summarise the sort command -->
+- To reset the sort order, use the `sort` command without any keywords.
+
+The effects of the `find` and `sort` commands will be maintained even when the other command is made, and will only be changed another iteration of its own command, with the exception of the following commands which can also change the filter/sort criteria:
+
+- A [`list`]({{ baseUrl }}/user-guide/list-contacts.html) command will display every contact in the default sort order.
+- A [`add`]({{ baseUrl }}/user-guide/add-contact.html#similar-contacts) command will reset the sort order, and may filter to display only similar contacts.
+
+### Undo and redo
+
+B2B4U allows you to undo and redo commands to prevent data loss due to mistakes.
+
+- To undo the last command, use the [`undo`]({{ baseUrl }}/user-guide/undo-command.html) command.
+- To redo the last command, use the [`redo`]({{ baseUrl }}/user-guide/redo-command.html) command.
+
+### Setting the theme
+
+B2B4U features a variety of color palettes(referred to as 'themes') to customise your experience.
+
+To change to a different theme, use the [`theme THEME_NAME`]({{ baseUrl }}/user-guide/set-theme.html) command.
+
+Available themes: [`dark`]({{ baseUrl }}/user-guide/set-theme.html#dark-mode-dark), [`light`]({{ baseUrl }}/user-guide/set-theme.html#light-mode-light), [`book`]({{ baseUrl }}/user-guide/set-theme.html#reading-mode-book), [`sakura`]({{ baseUrl }}/user-guide/set-theme.html#sarkua-mode-sakura)
+
+### Maintaining separate data files
+
+B2B4U allows you to maintain multiple separate data files.
+This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
+All data files must be placed in the data folder: `[JAR file location]/data/`.
+
+- To view a list of all available data files, use the [`view files`]({{ baseUrl }}/user-guide/view.html#viewing-available-files-view-files) command.
+- To open a specific data file, use the [`file open/FILE_NAME`]({{ baseUrl }}/user-guide/file.html#open-file-file-open) command.
+- To delete a specific data file, use the [`file delete/FILE_NAME`]({{ baseUrl }}/user-guide/file.html#deleting-a-file-file-delete) command.
+
+### Exiting B2B4U
+
+To exit B2B4U, use the [`exit`]({{ baseUrl }}/user-guide/exit.html) command.
+
 ### Saving data
 
 B2B4U data is saved to the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
-### Editing the data file
+### Editing the data file directly
 
 B2B4U data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
@@ -91,16 +151,6 @@ Advanced users are welcome to update data directly by editing that data file.
 If your changes to the data file makes its format invalid, B2B4U will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the B2B4U application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Separate data files
-
-B2B4U allows you to maintain multiple separate data files.
-This is useful if you want to maintain separate contact lists for different purposes (e.g. work vs personal contacts).
-All data files must be placed in the data folder: `[JAR file location]/data/`.
-
-- To view a list of all available data files, use the `view files` command.
-- To open a specific data file, use the `file open/FILE_NAME` command.
-- To delete a specific data file, use the `file delete/FILE_NAME` command.
 
 For more information, refer to the [Command summary](#command-summary) at the end of this document,
 or the specific pages for [viewing]({{ baseUrl }}/user-guide/view.html) and [managing]({{ baseUrl }}/user-guide/file.html) files.
