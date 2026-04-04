@@ -98,7 +98,8 @@ public class EditCommand extends Command {
 
         String feedback = String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact));
         model.saveSnapshot(feedback);
-        return new CommandResult(feedback);
+        int toAddIndex = model.getDisplayedContactList().indexOf(editedContact);
+        return new ScrollToIndexCommandResult(feedback, toAddIndex);
     }
 
     /**

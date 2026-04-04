@@ -74,7 +74,8 @@ public class AddCommand extends Command {
 
         String feedback = String.format(message, Messages.format(toAdd));
         model.saveSnapshot(feedback);
-        return new CommandResult(feedback);
+        int toAddIndex = model.getDisplayedContactList().indexOf(toAdd);
+        return new ScrollToIndexCommandResult(feedback, toAddIndex);
     }
 
     @Override

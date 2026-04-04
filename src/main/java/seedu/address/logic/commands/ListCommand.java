@@ -23,7 +23,7 @@ public class ListCommand extends Command {
 
         String feedback = MESSAGE_SUCCESS;
         model.saveSnapshot(feedback);
-        return new CommandResult(feedback);
+        return new ScrollToIndexCommandResult(feedback, 0);
     }
 
     @Override

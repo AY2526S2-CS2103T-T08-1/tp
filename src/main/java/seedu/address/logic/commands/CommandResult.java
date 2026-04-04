@@ -12,6 +12,7 @@ import seedu.address.model.contact.Contact;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    protected static final int NULL_SCROLLTO_INDEX = -1;
 
     private final String feedbackToUser;
 
@@ -30,17 +31,21 @@ public class CommandResult {
     /** Whether to hide the view panel. */
     private final boolean showFileList;
 
+    /** Index of contact to scroll to. */
+    private final int scrollToIndex;
+
     /**
      * Constructs a {@code CommandResult} with all fields specified.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-            Contact contactToView, boolean hideViewPanel, boolean showFileList) {
+    public CommandResult(String feedbackToUser, HelpInfo helpInfo, boolean exit,
+            Contact contactToView, boolean hideViewPanel, boolean showFileList, int scrollToIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.helpInfo = showHelp ? HelpInfo.DEFAULT : null;
+        this.helpInfo = helpInfo;
         this.exit = exit;
         this.contactToView = contactToView;
         this.hideViewPanel = hideViewPanel;
         this.showFileList = showFileList;
+        this.scrollToIndex = scrollToIndex;
     }
 
     /**
@@ -48,20 +53,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null, false, false);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the given {@code HelpInfo}.
-     * The help window will be shown with the given help info.
-     */
-    public CommandResult(String feedbackToUser, HelpInfo helpInfo) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.helpInfo = requireNonNull(helpInfo);
-        this.exit = false;
-        this.contactToView = null;
-        this.hideViewPanel = false;
-        this.showFileList = false;
+        this(feedbackToUser, null, false, null, false, false, NULL_SCROLLTO_INDEX);
     }
 
     public String getFeedbackToUser() {
@@ -111,6 +103,17 @@ public class CommandResult {
         return showFileList;
     }
 
+    /**
+     * Returns true if the contact list should scroll to a certain contact.
+     */
+    public boolean hasScrollToIndex() {
+        return scrollToIndex != NULL_SCROLLTO_INDEX;
+    }
+
+    public int getScrollToIndex() {
+        return scrollToIndex;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -132,7 +135,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, helpInfo, exit, contactToView, hideViewPanel);
+        return Objects.hash(feedbackToUser, helpInfo, exit, contactToView, hideViewPanel, showFileList, scrollToIndex);
     }
 
     @Override
@@ -143,6 +146,8 @@ public class CommandResult {
                 .add("exit", exit)
                 .add("contactToView", contactToView)
                 .add("hideViewPanel", hideViewPanel)
+                .add("showFileList", showFileList)
+                .add("scrollToIndex", scrollToIndex)
                 .toString();
     }
 }
@@ -153,7 +158,7 @@ class HelpCommandResult extends CommandResult {
      * which will trigger the help window to open with the given info.
      */
     public HelpCommandResult(String feedbackToUser, HelpInfo helpInfo) {
-        super(feedbackToUser, helpInfo);
+        super(feedbackToUser, helpInfo, false, null, false, false, NULL_SCROLLTO_INDEX);
     }
 }
 
@@ -164,7 +169,7 @@ class ExitCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public ExitCommandResult(String feedbackToUser) {
-        super(feedbackToUser, false, true, null, false, false);
+        super(feedbackToUser, null, true, null, false, false, NULL_SCROLLTO_INDEX);
     }
 }
 
@@ -175,7 +180,7 @@ class ViewContactCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public ViewContactCommandResult(String feedbackToUser, Contact contactToView) {
-        super(feedbackToUser, false, false, contactToView, false, false);
+        super(feedbackToUser, null, false, contactToView, false, false, NULL_SCROLLTO_INDEX);
     }
 }
 
@@ -186,7 +191,7 @@ class CloseViewPanelCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public CloseViewPanelCommandResult(String feedbackToUser) {
-        super(feedbackToUser, false, false, null, true, false);
+        super(feedbackToUser, null, false, null, true, false, NULL_SCROLLTO_INDEX);
     }
 }
 
@@ -197,6 +202,16 @@ class ViewFilesCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public ViewFilesCommandResult(String feedbackToUser) {
-        super(feedbackToUser, false, false, null, false, true);
+        super(feedbackToUser, null, false, null, false, true, NULL_SCROLLTO_INDEX);
+    }
+}
+
+class ScrollToIndexCommandResult extends CommandResult {
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code scrollToIndex}
+     * and other fields set to their default value.
+     */
+    public ScrollToIndexCommandResult(String feedbackToUser, int scrollToIndex) {
+        super(feedbackToUser, null, false, null, false, false, scrollToIndex);
     }
 }

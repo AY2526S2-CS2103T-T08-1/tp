@@ -500,12 +500,8 @@ public class MainWindow extends UiPart<Stage> {
                 showFileList();
             }
 
-            if (commandResult.getFeedbackToUser().contains(ListCommand.MESSAGE_SUCCESS)) {
-                contactListPanel.scrollToTop();
-            }
-
-            if (commandResult.getFeedbackToUser().contains(String.format(AddCommand.MESSAGE_SUCCESS, ""))) {
-                contactListPanel.scrollToBottom();
+            if (commandResult.hasScrollToIndex()) {
+                contactListPanel.scrollToIndex(commandResult.getScrollToIndex());
             }
 
             if (!logic.getThemeUrl().equals(stylesheets[stylesheets.length - 1])) {
