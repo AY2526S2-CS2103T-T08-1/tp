@@ -21,7 +21,8 @@ public class FindResetCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.filterDisplayedContactList(null);
+        //An always true predicate is used to show all contacts
+        model.filterDisplayedContactList(contact -> true);
 
         String feedback = MESSAGE_SUCCESS;
         model.saveSnapshot(feedback);
