@@ -11,7 +11,7 @@ public class DeleteFileAlertTest extends GuiUnitTest {
     public void construct_success() throws Exception {
         runAndWait(() -> {
             Stage stage = new Stage();
-            alert = new DeleteFileAlert(stage, "Message", "stubTheme");
+            alert = new DeleteFileAlert(stage, "Message", "light");
         });
     }
 }

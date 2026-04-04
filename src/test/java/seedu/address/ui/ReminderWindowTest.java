@@ -21,8 +21,9 @@ public class ReminderWindowTest extends GuiUnitTest {
     @Test
     public void setThemeTest() throws Exception {
         runAndWait(() -> {
-            reminderWindow.setTheme("stubTheme");
-            assert reminderWindow.getStage().getScene().getStylesheets().contains("stubTheme");
+            reminderWindow.setTheme("light");
+            assert reminderWindow.getStage().getScene().getStylesheets()
+                    .contains(UiUtil.getUrl("LightTheme.css").toString());
         });
     }
 }
