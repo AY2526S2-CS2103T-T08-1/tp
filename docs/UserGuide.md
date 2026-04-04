@@ -77,11 +77,30 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 ### Adding contacts
 
-<!-- TODO: Summarise the add command -->
+To add a new contact, use the [`add`]({{ baseUrl }}/user-guide/add-contact.html) command.
+
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
+
+* At least one of `p/PHONE_NUMBER` or `e/EMAIL` must be provided.
+* Names are standardised to Title Case.
+* After adding, if there are similar contacts, the list will filter to display them.
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Alex Tan p/91234567`
 
 ### Editing contacts
 
-<!-- TODO: Summarise the edit command -->
+To edit an existing contact, use the [`edit`]({{ baseUrl }}/user-guide/edit-contact.html) command.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
+
+* At least one optional field must be provided.
+* When editing tags, the existing tags are replaced entirely (not cumulative).
+
+Examples:
+* `edit 1 p/91234567 e/johndoe@example.com`
+* `edit 2 n/Betsy Crower t/`
 
 ### Deleting contacts
 
@@ -90,15 +109,23 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 ### Adding notes to contacts
 
-<!-- TODO: Summarise the note command -->
+To manage notes and reminders for a contact, use the [`note`]({{ baseUrl }}/user-guide/notes.html) command.
+
+* **Add a note:** `note INDEX NOTE [on/TIME]` — appends a note to the contact. Including `on/TIME` turns it into a reminder.
+* **Edit a note:** `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]` — replaces a specific note.
+* **Remove a specific note:** `note INDEX cl/NOTE_INDEX` — removes the note at that position.
+* **Remove first N notes:** `note INDEX c/LINES_TO_REMOVE` — removes the first N notes.
+* **Clear all notes:** `note INDEX ca/` — removes all notes from the contact.
+
+Notes support **contact references** using the `@INDEX` syntax, which creates a link to another contact.
 
 ### Filtering and sorting the context list
 
 B2B4U allows you to filter and sort the contact list to quickly find contacts that fit specific criteria in a sea of other contacts.
 
-- To filter, <!-- TODO: Summarise the find command -->
+- To filter, use the [`find`]({{ baseUrl }}/user-guide/find-contacts.html) command with keywords or field-specific prefixes (e.g. `find n/Alex t/friends`). Use `find @INDEX` to find contacts associated with the contact at that index.
 - To remove contact filters, use the `find` command without any keywords.
-- To sort, <!-- TODO: Summarise the sort command -->
+- To sort, use the [`sort`]({{ baseUrl }}/user-guide/sort-contacts.html) command with field prefixes (e.g. `sort n/` to sort by name, `sort lc/` to sort by last contacted).
 - To reset the sort order, use the `sort` command without any keywords.
 
 The effects of the `find` and `sort` commands will be maintained even when the other command is made, and will only be changed another iteration of its own command, with the exception of the following commands which can also change the filter/sort criteria:
