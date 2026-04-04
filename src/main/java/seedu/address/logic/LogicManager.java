@@ -94,8 +94,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public String getThemeUrl() {
-        return model.getThemeUrl();
+    public String getTheme() {
+        return model.getTheme();
     }
 
     @Override

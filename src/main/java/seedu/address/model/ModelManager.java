@@ -93,13 +93,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getThemeUrl() {
-        return userPrefs.getThemeUrl();
+    public String getTheme() {
+        return userPrefs.getTheme();
     }
 
     @Override
-    public void setThemeUrl(String themeUrl) {
-        userPrefs.setThemeUrl(themeUrl);
+    public void setTheme(String theme) {
+        userPrefs.setTheme(theme);
     }
 
     @Override

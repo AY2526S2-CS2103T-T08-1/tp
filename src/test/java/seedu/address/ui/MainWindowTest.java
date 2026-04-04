@@ -179,7 +179,7 @@ public class MainWindowTest extends GuiUnitTest {
         }
 
         @Override
-        public String getThemeUrl() {
+        public String getTheme() {
             return "theme";
         }
 
