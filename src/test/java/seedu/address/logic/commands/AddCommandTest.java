@@ -111,12 +111,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public String getThemeUrl() {
+        public String getTheme() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setThemeUrl(String themeUrl) {
+        public void setTheme(String theme) {
             //no-op for testing
         }
 

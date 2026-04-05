@@ -110,8 +110,9 @@ public class MainWindowTest extends GuiUnitTest {
     @Test
     public void setThemeTest() throws Exception {
         runAndWait(() -> {
-            mainWindow.setTheme("stubTheme");
-            assert mainWindow.getPrimaryStage().getScene().getStylesheets().contains("stubTheme");
+            mainWindow.setTheme("light");
+            assert mainWindow.getPrimaryStage().getScene().getStylesheets()
+                    .contains(UiUtil.getUrl("LightTheme.css").toString());
         });
     }
 
@@ -179,8 +180,8 @@ public class MainWindowTest extends GuiUnitTest {
         }
 
         @Override
-        public String getThemeUrl() {
-            return "theme";
+        public String getTheme() {
+            return "dark";
         }
 
         @Override

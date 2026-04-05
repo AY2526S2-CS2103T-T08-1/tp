@@ -7,14 +7,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Themes;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ThemeCommandTest {
-    private static final String DARK_THEME = Themes.get("dark");
-    private static final String LIGHT_THEME = Themes.get("light");
 
     @Test
     public void invalidTheme_failure() {
@@ -28,7 +25,7 @@ public class ThemeCommandTest {
         String expectedMessage = String.format(ThemeCommand.MESSAGE_SUCCESS, "light");
         Model expectedModel = new ModelManager();
         UserPrefs expectedUserPrefs = new UserPrefs();
-        expectedUserPrefs.setThemeUrl(Themes.get("light"));
+        expectedUserPrefs.setTheme("light");
         assertCommandSuccess(themeCommand, model, expectedMessage, expectedModel);
     }
 

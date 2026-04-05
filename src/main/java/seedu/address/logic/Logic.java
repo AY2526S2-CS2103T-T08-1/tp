@@ -49,9 +49,9 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the current user prefs' theme URL.
+     * Returns the current user prefs' theme.
      */
-    String getThemeUrl();
+    String getTheme();
 
     /**
      * Returns true if there exists previous snapshots for the model to undo towards.

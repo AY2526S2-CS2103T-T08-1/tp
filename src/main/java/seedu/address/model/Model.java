@@ -33,14 +33,14 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the current user prefs' theme URL.
+     * Returns the current user prefs' theme.
      */
-    String getThemeUrl();
+    String getTheme();
 
     /**
-     * Sets the current user prefs' theme URL.
+     * Sets the current user prefs' theme.
      */
-    void setThemeUrl(String themeUrl);
+    void setTheme(String theme);
 
     /**
      * Returns the user prefs' address book file path.

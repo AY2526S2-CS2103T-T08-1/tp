@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Themes;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Note;
 
@@ -116,10 +117,10 @@ public class ReminderWindow extends UiPart<Stage> {
 
     /**
      * Sets the theme of the ReminderWindow.
-     * @param themeUrl URL of the desired theme.
+     * @param theme The desired theme.
      */
-    public void setTheme(String themeUrl) {
-        stylesheets[stylesheets.length - 1] = themeUrl;
+    public void setTheme(String theme) {
+        stylesheets[stylesheets.length - 1] = Themes.get(theme);
         stage.getScene().getStylesheets().setAll(stylesheets);
     }
 }

@@ -11,6 +11,7 @@ import seedu.address.ui.UiUtil;
  */
 public final class Themes {
     public static final String AVAILABLE_THEMES_MESSAGE = "Available themes: dark, light, book, sakura";
+    public static final String DEFAULT_THEME = UiUtil.getUrl("DarkTheme.css").toString();
 
     private static final Map<String, String> AVAILABLE_THEMES;
 

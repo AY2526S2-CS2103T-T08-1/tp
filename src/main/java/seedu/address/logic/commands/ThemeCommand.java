@@ -31,7 +31,7 @@ public class ThemeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.setThemeUrl(Themes.get(key));
+        model.setTheme(key);
 
         String feedback = String.format(MESSAGE_SUCCESS, key);
         model.saveSnapshot(feedback);
