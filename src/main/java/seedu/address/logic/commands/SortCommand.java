@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.contact.ContactComparator;
-import seedu.address.model.contact.ContactFieldComparator;
 
 /**
  * Sorts and lists contacts by the given fields.
@@ -39,9 +38,6 @@ public class SortCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + ASCENDING_KEYWORD + " "
         + PREFIX_TAG + "friends:" + ASCENDING_KEYWORD;
-
-    private static final ContactComparator DEFAULT_COMPARATOR = new ContactFieldComparator(
-            ContactFieldComparator.Field.LAST_UPDATED, ContactFieldComparator.Order.ASCENDING);
 
     private final ContactComparator comparator;
 
