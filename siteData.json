@@ -260,7 +260,9 @@
         "dark-mode-dark": "Dark Mode: dark",
         "light-mode-light": "Light Mode: light",
         "reading-mode-book": "Reading Mode: book",
-        "sakura-theme-sakura": "Sakura Theme: sakura"
+        "sakura-theme-sakura": "Sakura Theme: sakura",
+        "jirai-kei-theme-jirai": "Jirai Kei Theme: jirai",
+        "techcore-theme-tech": "Techcore Theme: tech"
       },
       "headingKeywords": {}
     },
