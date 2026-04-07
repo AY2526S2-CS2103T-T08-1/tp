@@ -139,6 +139,18 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/deltaminor.md",
+      "title": "deltaMinor's Project Portfolio Page",
+      "headings": {
+        "overview-b2b4u": "Overview: B2B4U",
+        "new-features": "New Features",
+        "code-contribution": "Code contribution",
+        "contribution-to-documentation": "Contribution to Documentation",
+        "contribution-to-team-based-tasks": "Contribution to Team-Based Tasks"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
