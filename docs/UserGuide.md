@@ -75,6 +75,8 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ### Command Format
@@ -104,6 +106,8 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
   ![unknown command]({{ baseUrl }}/images/unknownCommand.png)
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding Contacts
 
@@ -157,6 +161,8 @@ Format: `clear`
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a Contact
 
 To view the details of a contact, use the [`view` command](#viewing-a-specific-contact-view).
@@ -175,7 +181,7 @@ Format: `close view`
 
 ### Managing Notes for a Contact
 
-To manage notes and reminders for a contact, use the [`note` command](#adding-notesreminders-to-a-contact-note).
+To manage notes and reminders for a contact, use the [`note` command](#adding-notes-reminders-to-a-contact-note).
 
 | Operation                                             | Format                                        | Description                                                                                |
 |-------------------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -184,6 +190,7 @@ To manage notes and reminders for a contact, use the [`note` command](#adding-no
 | [**Remove a specific note**](#remove-a-specific-note) | `note INDEX cl/NOTE_INDEX`                    | Removes the note at the specified position.                                                |
 | [**Remove first N notes**](#remove-the-first-n-notes) | `note INDEX c/LINES_TO_REMOVE`                | Removes the first *N* notes, where *N* = `LINES_TO_REMOVE`.                                |
 | [**Clear all notes**](#clear-all-notes)               | `note INDEX ca/`                              | Removes all notes from the contact.                                                        |
+
 
 Notes support **contact references** using the `@INDEX` syntax, which creates a bidirectional association between two contacts. Both contacts will appear when searching for either one using `find @INDEX`.
 
@@ -204,6 +211,8 @@ B2B4U also provides commands to filter and sort the contact list, which is usefu
 - Use `find @INDEX` to find all contacts associated with the contact at that index.
 - Use [`find` without any arguments](#clearing-filters) to remove all active filters.
 
+<div style="page-break-after: always;"></div>
+
 **Sorting:**
 - Use the [`sort` command](#sorting-contacts-sort) with field prefixes and `asc` or `desc` to specify the [sort direction](#sort-order-by-field) (e.g. `sort n/asc` to sort by name A–Z, `sort lc/desc` to sort by last contacted, newest first).
 - Use [`sort` without any arguments](#resetting-sort-order) to reset to the default sort order.
@@ -212,7 +221,7 @@ Active filters and sort orders are preserved independently — running `sort` wi
 
 Note that the following commands may also affect the active filter or sort order:
 - A [`list` command](#listing-all-contacts-list) displays all contacts in the default sort order.
-- An [`add` command](#similar-contacts) resets the sort order and may filter to show only similar contacts.
+- An [`add` command](#adding-a-contact-add) resets the sort order and may filter to show only [similar contacts](#similar-contacts).
 
 ### Undo and Redo
 
@@ -319,6 +328,8 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Appendix: Command Details
 
 --------------------------------------------------------------------------------------------------------------------
@@ -335,6 +346,8 @@ Format: `help [COMMAND]`
 * With a `COMMAND` argument (e.g. `help add`, `help note`), opens the help window with usage details and a direct link to the relevant section of the User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Adding a contact: `add`
 
@@ -360,6 +373,8 @@ Examples:
 
 ![add contact]({{ baseUrl }}/images/addContact.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Similar contacts
 After a successful `add` command, the contact list will be reset to display every contact in the default sort order, then if there are similar contacts in the list, the contact list will be displayed to display the similar contacts.
 
@@ -372,6 +387,8 @@ Two contacts are similar if:
 ![add contact]({{ baseUrl }}/images/addContact-similar.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Editing a contact: `edit`
 
@@ -395,6 +412,8 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Deleting a contact: `delete`
 
 Deletes the specified contact from the contact list.
@@ -413,6 +432,8 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Clearing all contacts: `clear`
 
 Clears all contacts from the contact list.
@@ -423,6 +444,8 @@ Format: `clear`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Listing all contacts: `list`
 
 Shows a list of all contacts in the contact list and resets contact order by oldest contact first.
@@ -432,6 +455,8 @@ Format: `list`
 ![list contacts]({{ baseUrl }}/images/listContacts.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Finding contacts: `find`
 
@@ -474,6 +499,8 @@ To remove the current filters and display every contact, use the `find` command 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Sorting contacts: `sort`
 
@@ -539,6 +566,8 @@ Examples:
 
 ![add note]({{ baseUrl }}/images/addNote.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit a specific note
 
 Format: `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]`
@@ -553,6 +582,8 @@ Examples:
 
 ![edit note]({{ baseUrl }}/images/editNote.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Remove a specific note
 
 Format: `note INDEX cl/NOTE_INDEX`
@@ -564,6 +595,8 @@ Example:
 * `note 1 cl/2` removes the 2nd note from the 1st contact.
 
 ![remove specific note]({{ baseUrl }}/images/removeSpecificNote.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Remove the first N notes
 
@@ -579,6 +612,8 @@ Examples:
 
 ![remove notes]({{ baseUrl }}/images/removeNotes.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Clear all notes
 
 Format: `note INDEX ca/`
@@ -589,6 +624,8 @@ Example:
 * `note 1 ca/`
 
 ![remove all notes]({{ baseUrl }}/images/removeAllNotes.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Reminders
 
@@ -605,6 +642,8 @@ Users will be notified that the reminder of a contact is due within 7 days in th
 ![Due Reminder]({{ baseUrl }}/images/notes-dueReminder.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Undoing a command: `undo`
 
@@ -624,6 +663,8 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Redoing a command: `redo`
 
 Reverses the effect of an `undo` command, effectively re-applying the previously undone action.
@@ -641,6 +682,8 @@ Examples:
 ![redo command]({{ baseUrl }}/images/redoCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Viewing a specific contact: `view`
 
@@ -670,6 +713,8 @@ Format: `view files`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Closing the view panel: `close view`
 
 Closes the currently open contact detail or file list panel and returns to the main list view.
@@ -686,6 +731,8 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Open file: `file open/`
 
 Changes the contact list file being accessed to a different one in the data subfolder.
@@ -700,6 +747,8 @@ Examples:
 * If new_file.json does not exist, `file open/new_file` will create new_file.json and allow immediate access to it.
 
 ![Open file]({{ baseUrl }}/images/file-open.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Deleting a file: `file delete/`
 
@@ -717,11 +766,15 @@ Examples:
 
 ![Delete empty file]({{ baseUrl }}/images/deleteEmptyFile.png)
 
+<div style="page-break-after: always;"></div>
+
 * If oldContactList.json contains at least one contact, `file delete/oldContactList` will trigger an alert window to appear and prompt for confirmation.
 
 ![Delete file]({{ baseUrl }}/images/deleteFile.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Set theme: `theme`
 
@@ -730,36 +783,55 @@ Changes the theme in user.
 Format: `theme THEME_NAME`
 
 ## Available themes
+
 ### Dark Mode: `dark`
 ![Dark Mode]({{ baseUrl }}/images/theme-dark.png)
 
 Command: `theme dark` <br>
 Perfect for late-night work.
+
+<div style="page-break-after: always;"></div>
+
 ### Light Mode: `light`
 ![Light Mode]({{ baseUrl }}/images/theme-light.png)
 
 Command: `theme light` <br>
 For when you're in well-lit conditions.
+
+<div style="page-break-after: always;"></div>
+
 ### Reading Mode: `book`
 ![Reading Mode]({{ baseUrl }}/images/theme-book.png)
 
 Command: `theme book` <br>
 To lessen the strain on the eyes.
+
+<div style="page-break-after: always;"></div>
+
 ### Sakura Theme: `sakura`
 ![Sakura Theme]({{ baseUrl }}/images/theme-sakura.png)
 
 Command: `theme sakura` <br>
 For fans of the kawaii and pink aesthetic.
+
+<div style="page-break-after: always;"></div>
+
 ### Grass Theme: `grass`
 ![Grass Theme]({{ baseUrl }}/images/theme-grass.png)
 
 Command: `theme grass` <br>
 An alternate colour scheme that reduces eye strain.
+
+<div style="page-break-after: always;"></div>
+
 ### Techcore: `tech`
 ![Techcore Theme]({{ baseUrl }}/images/theme-tech.png)
 
 Command: `theme tech` <br>
 For those who want to appear like they're at the forefront of technology
+
+<div style="page-break-after: always;"></div>
+
 ### Jirai Kei: `jirai`
 ![Jirai Kei Theme]({{ baseUrl }}/images/theme-jirai.png)
 
@@ -767,6 +839,8 @@ Command: `theme jirai` <br>
 For fans of the Jirai Kei aesthetic.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Exiting the program: `exit`
 
