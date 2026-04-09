@@ -23,6 +23,7 @@
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -75,6 +76,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in
@@ -98,6 +101,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -143,6 +148,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** :
@@ -182,6 +189,8 @@ phrases.
 
 `JsonAdaptedContact` persists `lastUpdated`, `lastContacted`, and `notes` alongside the other contact fields.
 
+<div style="page-break-after: always;"></div>
+
 <box type="info" seamless>
 
 **Note:** The diagram below is an **alternative** (arguably more OOP) design: a central `Tag` list on `AddressBook` that
@@ -214,6 +223,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -234,6 +245,8 @@ The following sequence diagram shows how the edit field removal mechanism works 
 2. `EditCommand#createEditedContact()` checks the clear flag — if `clearPhone` is true, `updatedPhone` is set to `Optional.empty()`.
 3. Before applying the edit, the command validates that the resulting contact retains at least a phone number or email address.
 4. The updated contact is saved to the model.
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -332,12 +345,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -413,8 +420,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | consultant              | automatically send emails to old clients                                                                    | follow up and keep contacts warm                                                                        |
 | `*`      | consultant              | save availability information for selected contacts as a calendar and filter contacts based on availability | later on, I know when they can be contacted in person rather than needing to double-check ahead of time |
 | `*`      | beginner user           | pick up advanced functionalities gradually                                                                  | utilize more of the features provided                                                                   |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -524,6 +529,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Displayed list**: A subset of contacts displayed after applying a search, filtering, or sorting operation.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for Manual Testing**
 
