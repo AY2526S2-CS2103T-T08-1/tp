@@ -107,7 +107,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 ### Adding Contacts
 
-To add a new contact, use the [`add` command]({{ baseUrl }}/user-guide/add-contact.html).
+To add a new contact, use the [`add` command](#add-contact).
 
 Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
@@ -670,14 +670,14 @@ Format: `view files`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Closing the contact detail panel: `close view`
+## Closing the view panel: `close view`
 
-Closes the currently open contact detail panel and returns to the main list view.
+Closes the currently open contact detail or file list panel and returns to the main list view.
 
 Format: `close view`
 
 * Does not require any index or additional parameters.
-* If no contact panel is currently open, the command still executes without error.
+* If no contact or file list panel is currently open, the command executes without error and does nothing.
 
 Example:
 * `close view`
