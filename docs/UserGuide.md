@@ -107,7 +107,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 
 ### Adding Contacts
 
-To add a new contact, use the [`add` command](#add-contact).
+To add a new contact, use the [`add` command](#adding-a-contact-add).
 
 Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
@@ -121,7 +121,7 @@ Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]�
 
 ### Editing Contacts
 
-To edit an existing contact, use the [`edit` command]({{ baseUrl }}/user-guide/edit-contact.html).
+To edit an existing contact, use the [`edit` command](#editing-a-contact-edit).
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
@@ -134,8 +134,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED]
 
 ### Deleting Contacts
 
-- To delete a specific contact, use the [`delete` command]({{ baseUrl }}/user-guide/delete-contact.html).
-- To delete all contacts at once, use the [`clear` command]({{ baseUrl }}/user-guide/clear-contacts.html).
+- To delete a specific contact, use the [`delete` command](#deleting-a-contact-delete).
+- To delete all contacts at once, use the [`clear` command](#clearing-all-contacts-clear).
 
 #### Delete a Specific Contact
 
@@ -159,7 +159,7 @@ Format: `clear`
 
 ### Viewing a Contact
 
-To view the details of a contact, use the [`view` command]({{ baseUrl }}/user-guide/view.html).
+To view the details of a contact, use the [`view` command](#viewing-a-specific-contact-view).
 
 Format: `view INDEX`
 
@@ -169,21 +169,21 @@ Format: `view INDEX`
 **Example:**
 - `view 1` — opens the detail panel for the 1st contact.
 
-To close the detail panel, use the [`close view` command]({{ baseUrl }}/user-guide/close-view.html).
+To close the detail panel, use the [`close view` command](#closing-the-view-panel-close-view).
 
 Format: `close view`
 
 ### Managing Notes for a Contact
 
-To manage notes and reminders for a contact, use the [`note` command]({{ baseUrl }}/user-guide/notes.html).
+To manage notes and reminders for a contact, use the [`note` command](#adding-notesreminders-to-a-contact-note).
 
-| Operation                                                                                | Format                                        | Description                                                                                |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [**Add a note**]({{ baseUrl }}/user-guide/notes.html#add-a-note)                         | `note INDEX NOTE [on/TIME]`                   | Appends a note to the contact. Including `on/TIME` turns it into a [reminder](#reminders). |
-| [**Edit a note**]({{ baseUrl }}/user-guide/notes.html#edit-a-specific-note)              | `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]` | Replaces the note at the specified position.                                               |
-| [**Remove a specific note**]({{ baseUrl }}/user-guide/notes.html#remove-a-specific-note) | `note INDEX cl/NOTE_INDEX`                    | Removes the note at the specified position.                                                |
-| [**Remove first N notes**]({{ baseUrl }}/user-guide/notes.html#remove-the-first-n-notes) | `note INDEX c/LINES_TO_REMOVE`                | Removes the first *N* notes, where *N* = `LINES_TO_REMOVE`.                                |
-| [**Clear all notes**]({{ baseUrl }}/user-guide/notes.html#clear-all-notes)               | `note INDEX ca/`                              | Removes all notes from the contact.                                                        |
+| Operation                                             | Format                                        | Description                                                                                |
+|-------------------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------------------------|
+| [**Add a note**](#add-a-note)                         | `note INDEX NOTE [on/TIME]`                   | Appends a note to the contact. Including `on/TIME` turns it into a [reminder](#reminders). |
+| [**Edit a note**](#edit-a-specific-note)              | `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]` | Replaces the note at the specified position.                                               |
+| [**Remove a specific note**](#remove-a-specific-note) | `note INDEX cl/NOTE_INDEX`                    | Removes the note at the specified position.                                                |
+| [**Remove first N notes**](#remove-the-first-n-notes) | `note INDEX c/LINES_TO_REMOVE`                | Removes the first *N* notes, where *N* = `LINES_TO_REMOVE`.                                |
+| [**Clear all notes**](#clear-all-notes)               | `note INDEX ca/`                              | Removes all notes from the contact.                                                        |
 
 Notes support **contact references** using the `@INDEX` syntax, which creates a bidirectional association between two contacts. Both contacts will appear when searching for either one using `find @INDEX`.
 
@@ -200,44 +200,44 @@ By default, B2B4U displays all contacts sorted by **most urgent reminder** first
 B2B4U also provides commands to filter and sort the contact list, which is useful when managing a large number of contacts.
 
 **Filtering:**
-- Use the [`find` command]({{ baseUrl }}/user-guide/find-contacts.html) with keywords or field-specific prefixes to filter contacts (e.g. `find n/Alex t/friends`).
+- Use the [`find` command](#finding-contacts-find) with keywords or field-specific prefixes to filter contacts (e.g. `find n/Alex t/friends`).
 - Use `find @INDEX` to find all contacts associated with the contact at that index.
-- Use [`find` without any arguments]({{ baseUrl }}/user-guide/find-contacts.html#clearing-filters) to remove all active filters.
+- Use [`find` without any arguments](#clearing-filters) to remove all active filters.
 
 **Sorting:**
-- Use the [`sort` command]({{ baseUrl }}/user-guide/sort-contacts.html) with field prefixes and `asc` or `desc` to specify the [sort direction]({{ baseUrl }}/user-guide/sort-contacts.html#sort-order-by-field) (e.g. `sort n/asc` to sort by name A–Z, `sort lc/desc` to sort by last contacted, newest first).
-- Use [`sort` without any arguments]({{ baseUrl }}/user-guide/sort-contacts.html#resetting-sort-order) to reset to the default sort order.
+- Use the [`sort` command](#sorting-contacts-sort) with field prefixes and `asc` or `desc` to specify the [sort direction](#sort-order-by-field) (e.g. `sort n/asc` to sort by name A–Z, `sort lc/desc` to sort by last contacted, newest first).
+- Use [`sort` without any arguments](#resetting-sort-order) to reset to the default sort order.
 
 Active filters and sort orders are preserved independently — running `sort` will not clear your current filter, and vice versa.
 
 Note that the following commands may also affect the active filter or sort order:
-- A [`list` command]({{ baseUrl }}/user-guide/list-contacts.html) displays all contacts in the default sort order.
-- An [`add` command]({{ baseUrl }}/user-guide/add-contact.html#similar-contacts) resets the sort order and may filter to show only similar contacts.
+- A [`list` command](#listing-all-contacts-list) displays all contacts in the default sort order.
+- An [`add` command](#similar-contacts) resets the sort order and may filter to show only similar contacts.
 
 ### Undo and Redo
 
 B2B4U supports undoing and redoing commands to help recover from mistakes.
 
-- To undo the last command, use the [`undo` command]({{ baseUrl }}/user-guide/undo-command.html).
-- To redo the last undone command, use the [`redo` command]({{ baseUrl }}/user-guide/redo-command.html).
+- To undo the last command, use the [`undo` command](#undoing-a-command-undo).
+- To redo the last undone command, use the [`redo` command](#redoing-a-command-redo).
 
 ### Setting the Theme
 
 B2B4U includes several color palettes (called "themes") to customize the look of the app.
 
-To switch themes, use the [`theme THEME_NAME` command]({{ baseUrl }}/user-guide/set-theme.html).
+To switch themes, use the [`theme THEME_NAME` command](#set-theme-theme).
 
 Available themes:
 
 | Theme                                                                     | Command        |
 | ------------------------------------------------------------------------- | -------------- |
-| [Dark mode]({{ baseUrl }}/user-guide/set-theme.html#dark-mode-dark)       | `theme dark`   |
-| [Light mode]({{ baseUrl }}/user-guide/set-theme.html#light-mode-light)    | `theme light`  |
-| [Reading mode]({{ baseUrl }}/user-guide/set-theme.html#reading-mode-book) | `theme book`   |
-| [Sakura]({{ baseUrl }}/user-guide/set-theme.html#sakura-theme-sakura)     | `theme sakura` |
-| [Grass]({{ baseUrl }}/user-guide/set-theme.html#grass-theme-grass)        | `theme grass`  |
-| [Techcore]({{ baseUrl }}/user-guide/set-theme.html#techcore-tech)         | `theme tech`   |
-| [Jirai Kei]({{ baseUrl }}/user-guide/set-theme.html#jirai-kei-jirai)      | `theme jirai`  |
+| [Dark mode](#dark-mode-dark)       | `theme dark`   |
+| [Light mode](#light-mode-light)    | `theme light`  |
+| [Reading mode](#reading-mode-book) | `theme book`   |
+| [Sakura](#sakura-theme-sakura)     | `theme sakura` |
+| [Grass](#grass-theme-grass)        | `theme grass`  |
+| [Techcore](#techcore-tech)         | `theme tech`   |
+| [Jirai Kei](#jirai-kei-jirai)      | `theme jirai`  |
 
 ### Saving Data
 
@@ -247,10 +247,10 @@ B2B4U automatically saves your data to disk after any command that modifies it. 
 
 B2B4U supports multiple data files, which is useful for keeping separate contact lists (e.g. work vs. personal contacts). All data files must be stored in the data folder: `[JAR file location]/data/`.
 
-- To view all available data files, use the [`view files` command]({{ baseUrl }}/user-guide/view.html#viewing-available-files-view-files).
-- To open a data file, use the [`file open/FILE_NAME` command]({{ baseUrl }}/user-guide/file.html#open-file-file-open).
-- To delete a data file, use the [`file delete/FILE_NAME` command]({{ baseUrl }}/user-guide/file.html#deleting-a-file-file-delete).
-- To close the file list panel, use the [`close view` command]({{ baseUrl }}/user-guide/close-view.html). The file list shares the same panel used to view contact details.
+- To view all available data files, use the [`view files` command](#viewing-available-files-view-files).
+- To open a data file, use the [`file open/FILE_NAME` command](#open-file-file-open).
+- To delete a data file, use the [`file delete/FILE_NAME` command](#deleting-a-file-file-delete).
+- To close the file list panel, use the [`close view` command](#closing-the-view-panel-close-view). The file list shares the same panel used to view contact details.
 
 ### Editing the Data File Directly
 
@@ -264,7 +264,7 @@ B2B4U data is saved as JSON files in `[JAR file location]/data/`. Advanced users
 
 ### Exiting B2B4U
 
-To exit B2B4U, use the [`exit` command]({{ baseUrl }}/user-guide/exit-program.html).
+To exit B2B4U, use the [`exit` command](#exiting-the-program-exit).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -470,7 +470,7 @@ Examples:
 To remove the current filters and display every contact, use the `find` command without any additional keywords.
 
 <box type="info" seamless>
-<b>Note:</b> Changing or resetting the <code>find</code> filters has no impact on the current sort order. To reset both the applied filters and sort order at the same time, use the <a href="{{ baseUrl }}/user-guide/list-contacts.html"><code>list</code> command</a> instead.
+<b>Note:</b> Changing or resetting the <code>find</code> filters has no impact on the current sort order. To reset both the applied filters and sort order at the same time, use the <a href="#listing-all-contacts-list"><code>list</code> command</a> instead.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -511,7 +511,7 @@ Examples:
 To reset the current sort order, use the `sort` command without any additional keywords.
 
 <box type="info" seamless>
-<b>Note:</b> Changing or resetting the sort order has no impact on the current <code>find</code> filters. To reset both the applied filters and sort order at the same time, use the <a href="{{ baseUrl }}/user-guide/list-contacts.html"><code>list</code> command</a> instead. 
+<b>Note:</b> Changing or resetting the sort order has no impact on the current <code>find</code> filters. To reset both the applied filters and sort order at the same time, use the <a href="#listing-all-contacts-list"><code>list</code> command</a> instead. 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
