@@ -497,8 +497,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -513,8 +511,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. GUI should work well for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
 11. GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
 12. Should be packaged in a single JAR file of 100MB or less in size.
-
-*{More to be added}*
 
 ### Glossary
 
