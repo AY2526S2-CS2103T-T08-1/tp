@@ -27,6 +27,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
+6. [Appendix: Command Details](#appendix-command-details)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,6 +265,8 @@ or the specific pages for [viewing]({{ baseUrl }}/user-guide/view.html) and [man
 --------------------------------------------------------------------------------------------------------------------
 
 # Appendix: Command Details
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Viewing help: `help`
 
