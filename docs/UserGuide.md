@@ -181,7 +181,7 @@ Format: `close view`
 
 ### Managing Notes for a Contact
 
-To manage notes and reminders for a contact, use the [`note` command](#adding-notes-reminders-to-a-contact-note).
+To manage notes and reminders for a contact, use the [`note` command](#managing-notes-reminders-for-a-contact-note).
 
 | Operation                                             | Format                                        | Description                                                                                |
 |-------------------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -543,7 +543,7 @@ To reset the current sort order, use the `sort` command without any additional k
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Adding notes/reminders to a contact: `note`
+## Managing notes/reminders for a contact: `note`
 
 Manages notes and reminders for an existing contact in the contact list.
 
