@@ -22,6 +22,16 @@ Examples:
 
 ![add contact]({{ baseUrl }}/images/addContact.png)
 
+### Duplicate contacts
+
+A contact is considered a **duplicate** of an existing contact if all of the following match:
+
+- Same name
+- Same phone number
+- Same email address
+
+If you try to add a duplicate contact, B2B4U will reject the command with the message: "This contact already exists in the address book".
+
 ### Similar contacts
 After a successful `add` command, the contact list will be reset to display every contact in the default sort order, then if there are similar contacts in the list, the contact list will be displayed to display the similar contacts.
 
