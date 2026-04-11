@@ -441,8 +441,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The new contact is invalid
-  * 1a1. B2B4U shows an error message
+* 2a. The new contact is invalid
+  * 2a1. B2B4U shows an error message
 
     Use case ends.
 
