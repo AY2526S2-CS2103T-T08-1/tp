@@ -189,7 +189,7 @@ Notes support **contact references** using the `@INDEX` syntax, which creates a 
 
 #### Reminders
 
-Any note with a scheduled time (set using `on/TIME`) becomes a reminder. Contacts with active reminders gain a `Reminder` tag, which turns red when the reminder is due within **7 days**. During this window, a pop-up notification will also appear each time you launch B2B4U.
+Any note with a scheduled time (set using `on/TIME`) becomes a reminder. Contacts with active reminders gain a `Reminder` tag, which turns red when the reminder is due within **7 days**. A reminder is considered "due" when its scheduled date has not yet passed and falls within the next 7 days from today. During this window, a pop-up notification will also appear each time you launch B2B4U.
 
 ![reminder]({{ baseUrl }}/images/reminder.png)
 

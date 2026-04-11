@@ -79,7 +79,8 @@ Contacts with a reminder will gain a special `Reminder` tag and automatically be
 
 ![Reminder]({{ baseUrl }}/images/notes-reminder.png)
 
-Users will be notified that the reminder of a contact is due within 7 days in the following ways:
+Users will be notified that the reminder of a contact is due within 7 days in the following ways.
+A reminder is considered "due" when its scheduled date has not yet passed and falls within the next 7 days from today:
 - The `Reminder` tag of the contact will turn reddish
 - The contact will be placed at the very top of the contact list, above other contacts without a due reminder
 - A reminder window will pop-up during startup
