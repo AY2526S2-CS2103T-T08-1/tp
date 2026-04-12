@@ -534,7 +534,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file <br>
+   2. Double-click the jar file, or open a terminal in the folder and run `java -jar B2B4U.jar`. <br>
      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
