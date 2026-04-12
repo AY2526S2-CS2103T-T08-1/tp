@@ -24,11 +24,11 @@ Examples:
 
 ### Duplicate contacts
 
-A contact is considered a **duplicate** of an existing contact if all of the following match:
+A contact is considered a **duplicate** of an existing contact if all of the following criteria hold:
 
-- Same name
-- Same phone number
-- Same email address
+- Both contacts have the exact same name
+- Both contacts have the exact same phone number
+- Both contacts have the exact same email address
 
 If you try to add a duplicate contact, B2B4U will reject the command with the message: "This contact already exists in the address book".
 
