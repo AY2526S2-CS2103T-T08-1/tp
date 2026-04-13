@@ -226,14 +226,13 @@ The edit command supports removing optional fields (phone, email, address, last 
 
 #### Implementation
 
-The following sequence diagram shows how the edit field removal mechanism works when the user executes `edit 1 p/`:
+The following sequence diagram shows the execution of `EditCommand` when the user runs `edit 1 p/`:
 
 <puml src="{{ baseUrl }}/diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 
-1. `EditCommandParser` detects the empty value for the `p/` prefix and sets `clearPhone = true` in the `EditContactDescriptor`.
-2. `EditCommand#createEditedContact()` checks the clear flag — if `clearPhone` is true, `updatedPhone` is set to `Optional.empty()`.
-3. Before applying the edit, the command validates that the resulting contact retains at least a phone number or email address.
-4. The updated contact is saved to the model.
+1. `EditCommand#createEditedContact()` applies changes from the `EditContactDescriptor` to the target contact. Clear flags (e.g. `clearPhone`) cause the corresponding optional field to be removed.
+2. `EditCommand#validate()` checks that the edited contact retains at least a phone number or email address.
+3. The updated contact is saved to the model via `setContact()` and a snapshot is saved for undo support.
 
 #### Design considerations
 
