@@ -62,7 +62,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
    Here are some commands to try:
 
    | Command                                                                          | Description                                  |
-   | -------------------------------------------------------------------------------- | -------------------------------------------- |
+   |----------------------------------------------------------------------------------|----------------------------------------------|
    | `list`                                                                           | Lists all contacts.                          |
    | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` | Adds a contact named `John Doe`.             |
    | `view 1`                                                                         | Opens the detail panel for the 1st contact.  |
@@ -332,9 +332,13 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 
 ## Appendix: Command Details
 
+This appendix serves as a comprehensive reference for all commands available in B2B4U.
+Each command is explained in detail with its format, parameters, and examples of usage.
+The commands are intended to be viewed from the feature list above, where you can click on each command to jump to its detailed explanation below.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Viewing help: `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -349,7 +353,7 @@ Format: `help [COMMAND]`
 
 <div style="page-break-after: always;"></div>
 
-## Adding a contact: `add`
+### Adding a contact: `add`
 
 Adds a contact to the contact list.
 
@@ -390,7 +394,7 @@ Two contacts are similar if:
 
 <div style="page-break-after: always;"></div>
 
-## Editing a contact: `edit`
+### Editing a contact: `edit`
 
 Edits an existing contact in the contact list.
 
@@ -414,7 +418,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Deleting a contact: `delete`
+### Deleting a contact: `delete`
 
 Deletes the specified contact from the contact list.
 
@@ -434,7 +438,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Clearing all contacts: `clear`
+### Clearing all contacts: `clear`
 
 Clears all contacts from the contact list.
 
@@ -446,7 +450,7 @@ Format: `clear`
 
 <div style="page-break-after: always;"></div>
 
-## Listing all contacts: `list`
+### Listing all contacts: `list`
 
 Shows a list of all contacts in the contact list and resets contact order by oldest contact first.
 
@@ -458,7 +462,7 @@ Format: `list`
 
 <div style="page-break-after: always;"></div>
 
-## Finding contacts: `find`
+### Finding contacts: `find`
 
 Finds contacts whose fields match the specified search criteria.
 
@@ -502,7 +506,7 @@ To remove the current filters and display every contact, use the `find` command 
 
 <div style="page-break-after: always;"></div>
 
-## Sorting contacts: `sort`
+### Sorting contacts: `sort`
 
 Sorts the currently displayed contacts by the specified field(s).
 
@@ -543,7 +547,7 @@ To reset the current sort order, use the `sort` command without any additional k
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Managing notes/reminders for a contact: `note`
+### Managing notes/reminders for a contact: `note`
 
 Manages notes and reminders for an existing contact in the contact list.
 
@@ -645,7 +649,7 @@ Users will be notified that the reminder of a contact is due within 7 days in th
 
 <div style="page-break-after: always;"></div>
 
-## Undoing a command: `undo`
+### Undoing a command: `undo`
 
 Reverts the last executed command that modified data.
 
@@ -665,7 +669,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Redoing a command: `redo`
+### Redoing a command: `redo`
 
 Reverses the effect of an `undo` command, effectively re-applying the previously undone action.
 
@@ -685,7 +689,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Viewing a specific contact: `view`
+### Viewing a specific contact: `view`
 
 Displays a specific contact's full details in a side panel.
 
@@ -703,7 +707,7 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Viewing available files: `view files`
+### Viewing available files: `view files`
 
 Displays all the B2B4U contact list files in the data subfolder in a side panel, each with the number of contacts they contain.
 
@@ -715,7 +719,7 @@ Format: `view files`
 
 <div style="page-break-after: always;"></div>
 
-## Closing the view panel: `close view`
+### Closing the view panel: `close view`
 
 Closes the currently open contact detail or file list panel and returns to the main list view.
 
@@ -733,7 +737,7 @@ Example:
 
 <div style="page-break-after: always;"></div>
 
-## Open file: `file open/`
+### Open file: `file open/`
 
 Changes the contact list file being accessed to a different one in the data subfolder.
 
@@ -750,7 +754,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Deleting a file: `file delete/`
+### Deleting a file: `file delete/`
 
 Deletes the specified file from the data subfolder.
 
@@ -776,13 +780,13 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Set theme: `theme`
+### Set theme: `theme`
 
 Changes the theme in user.
 
 Format: `theme THEME_NAME`
 
-## Available themes
+### Available themes
 
 ### Dark Mode: `dark`
 ![Dark Mode]({{ baseUrl }}/images/theme-dark.png)
@@ -842,7 +846,7 @@ For fans of the Jirai Kei aesthetic.
 
 <div style="page-break-after: always;"></div>
 
-## Exiting the program: `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
