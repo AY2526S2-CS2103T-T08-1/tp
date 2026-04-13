@@ -82,8 +82,6 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Features
 
 ### Command Format
@@ -210,7 +208,7 @@ The date/time input should fall into at least one of the following patterns, rat
 
 The keyword input is case-insensitive. <br>
 Only one of such keywords may be used in a singular input regarding time, and if used, it can replace the above "month" and "day" input requirements entirely. <br>
-Example: On 24 March 2026, inputting `next week 12PM` for a [reminder]({{ baseUrl }}/user-guide/notes.html#reminders) sets the reminder for 12:00PM 31 March 2026.
+Example: On 24 March 2026, inputting `next week 12PM` for a [reminder](#reminders-2) sets the reminder for 12:00PM 31 March 2026.
 </box>
 
 Once a valid date or time hsa been accepted as input, it will be displayed by B2B4U in the following formats:
@@ -325,8 +323,6 @@ Format: `clear`
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing a Contact
 
 To view the details of a contact, use the [`view` command](#viewing-a-specific-contact-view).
@@ -377,8 +373,6 @@ Format: `find [KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CON
 - Use the [`find` command](#finding-contacts-find) with keywords or field-specific prefixes to filter contacts (e.g. `find n/Alex t/friends`).
 - Use `find @INDEX` to find all contacts associated with the contact at that index.
 - Use [`find` without any arguments](#clearing-filters) to remove all active filters.
-
-<div style="page-break-after: always;"></div>
 
 **Sorting:**
 
@@ -536,8 +530,6 @@ Format: `help [COMMAND]`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Adding a contact: `add`
 
 Adds a contact to the contact list.
@@ -562,8 +554,6 @@ Examples:
 
 ![add contact]({{ baseUrl }}/images/addContact.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Similar contacts
 After a successful `add` command, the contact list will be reset to display every contact in the default sort order, then if there are similar contacts in the list, the contact list will be displayed to display the similar contacts.
 
@@ -578,8 +568,6 @@ Two contacts are similar if:
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Editing a contact: `edit`
 
@@ -605,8 +593,6 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Deleting a contact: `delete`
 
 Deletes the specified contact from the contact list.
@@ -627,8 +613,6 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Clearing all contacts: `clear`
 
 Clears all contacts from the contact list.
@@ -641,8 +625,6 @@ Format: `clear`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Listing all contacts: `list`
 
 Shows a list of all contacts in the contact list and resets contact order by oldest contact first.
@@ -654,8 +636,6 @@ Format: `list`
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Finding contacts: `find`
 
@@ -700,8 +680,6 @@ To remove the current filters and display every contact, use the `find` command 
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Sorting contacts: `sort`
 
@@ -769,8 +747,6 @@ Examples:
 
 ![add note]({{ baseUrl }}/images/addNote.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Edit a specific note
 
 Format: `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]`
@@ -785,8 +761,6 @@ Examples:
 
 ![edit note]({{ baseUrl }}/images/editNote.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Remove a specific note
 
 Format: `note INDEX cl/NOTE_INDEX`
@@ -798,8 +772,6 @@ Example:
 * `note 1 cl/2` removes the 2nd note from the 1st contact.
 
 ![remove specific note]({{ baseUrl }}/images/removeSpecificNote.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Remove the first N notes
 
@@ -815,8 +787,6 @@ Examples:
 
 ![remove notes]({{ baseUrl }}/images/removeNotes.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Clear all notes
 
 Format: `note INDEX ca/`
@@ -827,8 +797,6 @@ Example:
 * `note 1 ca/`
 
 ![remove all notes]({{ baseUrl }}/images/removeAllNotes.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Reminders
 
@@ -847,8 +815,6 @@ Users will be notified that the reminder of a contact is due within 7 days in th
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Undoing a command: `undo`
 
@@ -870,8 +836,6 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Redoing a command: `redo`
 
 Reverses the effect of an `undo` command, effectively re-applying the previously undone action.
@@ -891,8 +855,6 @@ Examples:
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing a specific contact: `view`
 
@@ -926,8 +888,6 @@ Format: `view files`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Closing the view panel: `close view`
 
 Closes the currently open contact detail or file list panel and returns to the main list view.
@@ -946,8 +906,6 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ### Open file: `file open/`
 
 Changes the contact list file being accessed to a different one in the data subfolder.
@@ -962,8 +920,6 @@ Examples:
 * If new_file.json does not exist, `file open/new_file` will create new_file.json and allow immediate access to it.
 
 ![Open file]({{ baseUrl }}/images/file-open.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a file: `file delete/`
 
@@ -981,8 +937,6 @@ Examples:
 
 ![Delete empty file]({{ baseUrl }}/images/deleteEmptyFile.png)
 
-<div style="page-break-after: always;"></div>
-
 * If oldContactList.json contains at least one contact, `file delete/oldContactList` will trigger an alert window to appear and prompt for confirmation.
 
 ![Delete file]({{ baseUrl }}/images/deleteFile.png)
@@ -990,8 +944,6 @@ Examples:
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Set theme: `theme`
 
@@ -1007,15 +959,11 @@ Format: `theme THEME_NAME`
 Command: `theme dark` <br>
 Perfect for late-night work.
 
-<div style="page-break-after: always;"></div>
-
 ### Light Mode: `light`
 ![Light Mode]({{ baseUrl }}/images/theme-light.png)
 
 Command: `theme light` <br>
 For when you're in well-lit conditions.
-
-<div style="page-break-after: always;"></div>
 
 ### Reading Mode: `book`
 ![Reading Mode]({{ baseUrl }}/images/theme-book.png)
@@ -1023,15 +971,11 @@ For when you're in well-lit conditions.
 Command: `theme book` <br>
 To lessen the strain on the eyes.
 
-<div style="page-break-after: always;"></div>
-
 ### Sakura Theme: `sakura`
 ![Sakura Theme]({{ baseUrl }}/images/theme-sakura.png)
 
 Command: `theme sakura` <br>
 For fans of the kawaii and pink aesthetic.
-
-<div style="page-break-after: always;"></div>
 
 ### Grass Theme: `grass`
 ![Grass Theme]({{ baseUrl }}/images/theme-grass.png)
@@ -1039,15 +983,11 @@ For fans of the kawaii and pink aesthetic.
 Command: `theme grass` <br>
 An alternate colour scheme that reduces eye strain.
 
-<div style="page-break-after: always;"></div>
-
 ### Techcore: `tech`
 ![Techcore Theme]({{ baseUrl }}/images/theme-tech.png)
 
 Command: `theme tech` <br>
 For those who want to appear like they're at the forefront of technology
-
-<div style="page-break-after: always;"></div>
 
 ### Jirai Kei: `jirai`
 ![Jirai Kei Theme]({{ baseUrl }}/images/theme-jirai.png)
@@ -1058,8 +998,6 @@ For fans of the Jirai Kei aesthetic.
 [(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program: `exit`
 
