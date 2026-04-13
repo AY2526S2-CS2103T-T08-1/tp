@@ -69,7 +69,13 @@
         "adding-a-note-to-a-contact": "Adding a note to a contact",
         "finding-contacts": "Finding contacts",
         "sorting-contacts": "Sorting contacts",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-effort": "Appendix: Effort",
+        "difficulty-level": "Difficulty Level",
+        "challenges-faced": "Challenges faced",
+        "effort-required": "Effort required",
+        "achievements": "Achievements",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements"
       },
       "headingKeywords": {}
     },
