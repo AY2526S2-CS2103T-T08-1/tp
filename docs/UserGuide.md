@@ -233,7 +233,9 @@ If an incorrectly input date/time is indeed recorded, the user should use one of
 
 **Name(**`n/`**):**
 - The contact's name.
-- Can only contain alphanumeric characters and spaces.
+- Can contain symbols `.` `'` `-` `_` `&` `/` and letter characters from any language.
+- First character must be a letter character.
+- Must be non-empty.
 
 **Phone number(**`p/`**):**
 - The contact's phone number.
@@ -277,7 +279,6 @@ To add a new contact, use the [`add` command](#adding-a-contact-add).
 Format: `add n/NAME (p/PHONE | e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
 - At least **one** (or both) of `p/PHONE` or `e/EMAIL` must be provided.
-- Names are standardized to **Title Case**.
 - After adding, if similar contacts exist, the list will filter to show them.
 
 **Examples:**
