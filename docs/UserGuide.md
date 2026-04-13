@@ -713,7 +713,6 @@ Examples:
 
 ### Sort order by field
 
-
 | Field          | Prefix        | Ascending: `asc`                                                                                                                                                                                                                     | Descending: `desc`                                                                                                                                                                                 |
 |----------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name           | `n/`          | Sort contacts by name, in alphabetical order.                                                                                                                                                                                        | Sort contacts by name, in reverse alphabetical order.                                                                                                                                              |
@@ -937,6 +936,8 @@ Examples:
 * If new_file.json does not exist, `file open/new_file` will create new_file.json and allow immediate access to it.
 
 ![Open file]({{ baseUrl }}/images/file-open.png)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a file: `file delete/`
 
