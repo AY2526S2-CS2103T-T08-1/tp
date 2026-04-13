@@ -534,25 +534,30 @@ Format: `help [COMMAND]`
 
 Adds a contact to the contact list.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
+Format: `add n/NAME (p/PHONE | e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A contact can have any number of tags (including 0). At least one of `p/PHONE_NUMBER` or `e/EMAIL` must be provided.
+**Tip:** A contact can have any number of tags (including 0). You must include **at least one** of `p/PHONE` or `e/EMAIL` (the parentheses mean “one or both”); you may supply both.
 </box>
-
-* Names are standardised to Title Case (e.g. `john doe` becomes `John Doe`).
-* Phone numbers accept digits, spaces, and `+`. Numbers starting with `+` (country code) must be 8–15 digits; otherwise 5–14 digits.
-* Tags accept alphanumeric strings in the format `TAG` or `TAG:RANK` (e.g. `friend`, `client:vip`).
-* `LAST_CONTACTED` accepts most conventional date/time formats (e.g. `22/02/2026`, `15 Apr`, `today`).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 * `add n/Alex Tan p/91234567`
-* `add n/Jane Smith e/jane@example.com lc/22/02/2026`
+* `add n/Jane Smith e/jane@example.com lc/22/Feb/2026`
 
 ![add contact]({{ baseUrl }}/images/addContact.png)
+
+### Duplicate contacts
+
+A contact is considered a **duplicate** of an existing contact if all of the following criteria hold:
+
+- Both contacts have the exact same name
+- Both contacts have the exact same phone number
+- Both contacts have the exact same email address
+
+If you try to add a duplicate contact, B2B4U will reject the command with the message: "This contact already exists in the address book".
 
 ### Similar contacts
 After a successful `add` command, the contact list will be reset to display every contact in the default sort order, then if there are similar contacts in the list, the contact list will be displayed to display the similar contacts.
@@ -562,6 +567,11 @@ Two contacts are similar if:
 - Both contacts share the same name
 - Both contacts share the same phone number
 - Both contacts share the same email address
+
+<box type="info" seamless>
+
+**Note:** Similar contact detection uses **exact matching** only. Names that appear similar to a human (e.g. "John Doe" and "John Doe Sr.") will not be flagged as similar unless they match exactly. The same applies to phone numbers and emails.
+</box>
 
 ![add contact]({{ baseUrl }}/images/addContact-similar.png)
 
@@ -641,7 +651,7 @@ Format: `list`
 
 Finds contacts whose fields match the specified search criteria.
 
-Format: `find [KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Format: `find [KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`
 or: `find @INDEX` to find contacts associated with the contact at INDEX
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
@@ -650,7 +660,7 @@ or: `find @INDEX` to find contacts associated with the contact at INDEX
     * Example: Given contact "Alex Yeoh" with note "to meet _on_ Jun 19, 2026"
         * `find Jun` will display contact "Alex Yeoh"
         * `find June` **will not** display contact "Alex Yeoh"
-* Prefixed searches (`n/`, `p/`, `e/`, `a/`) filter by the specified field using partial matching.
+* Prefixed searches (`n/`, `p/`, `e/`, `a/`, `lc/`) filter by the specified field using partial matching.
 * `t/TAG` filters by tag using **exact** matching (e.g. `t/friend` will not match a tag named `friends`).
 * All search conditions are combined with **AND** logic — only contacts satisfying **every** condition are returned.
 * At least one search condition must be provided.
@@ -699,18 +709,20 @@ Examples:
 * `sort lu/desc` sorts contacts by when they were last updated.
 * `sort n/asc t/vip:desc` sorts contacts alphabetically by name, with contacts tagged `vip` shown first. Contacts that are tagged `vip` will be sorted in decreasing `vip` rank.
 
+![sort lu/desc t/friends:asc n/asc]({{ baseUrl }}/images/sort.png)
+
 ### Sort order by field
 
 
-| Field                 | Ascending: `asc`                                                                                                                                                                                                                                                                                      | Descending: `desc`                                                                                                                                                                                                                                                 |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name: `n/`            | Sort contacts by name, in alphabetical order <br> ![sort n/asc]({{ baseUrl }}/images/sort-name-asc.png)                                                                                                                                                                                               | Sort contacts by name, in reverse alphabetical order  <br> ![sort n/desc]({{ baseUrl }}/images/sort-name-desc.png)                                                                                                                                                 |
-| Phone number: `p/`    | Sort contacts by phone number, in alphabetical order <br> <box type="info" seamless>**Note: ** Rather than sorting by the number value, the phone number is sorted similarly to a word. I.e. "12" will be sorted to be before "2".</box>  <br> ![sort p/asc]({{ baseUrl }}/images/sort-phone-asc.png) | Sort contacts by phone number, in reverse alphabetical order <br> ![sort p/desc]({{ baseUrl }}/images/sort-phone-desc.png)                                                                                                                                         |
-| Email: `e/`           | Sort contacts by email, in alphabetical order  <br> ![sort e/asc]({{ baseUrl }}/images/sort-email-asc.png)                                                                                                                                                                                            | Sort contacts by email, in reverse alphabetical order <br> ![sort e/desc]({{ baseUrl }}/images/sort-email-desc.png)                                                                                                                                                |
-| Address: `a/`         | Sort contacts by address, in alphabetical order  <br> ![sort a/asc]({{ baseUrl }}/images/sort-address-asc.png)                                                                                                                                                                                        | Sort contacts by address, in reverse alphabetical order <br> ![sort a/desc]({{ baseUrl }}/images/sort-address-desc.png)                                                                                                                                            |
-| Last updated: `lu/`   | Sort contacts by the least recently updated first  <br> ![sort lu/asc]({{ baseUrl }}/images/sort-lu-asc.png)                                                                                                                                                                                          | Sort contacts by the most recently updated first <br> ![sort lu/desc]({{ baseUrl }}/images/sort-lu-desc.png)                                                                                                                                                       |
-| Last contacted: `lc/` | Sort contacts by the least recently contacted first  <br> ![sort lc/asc]({{ baseUrl }}/images/sort-lc-asc.png)                                                                                                                                                                                        | Sort contacts by the most recently contacted first <br> ![sort lc/desc]({{ baseUrl }}/images/sort-lc-desc.png)                                                                                                                                                     |
-| Tag: `t/TAG_NAME/`    | Sort contacts by tag `TAG_NAME` first. Contacts that have a numerical `TAG_NAME` rank will be sorted in decreasing `TAG_NAME` rank(highest rank first, followed by non-numerical ranks). <br> ![sort t/TAG_NAME:asc]({{ baseUrl }}/images/sort-tag-asc.png)                                           | Sort contacts by tag `TAG_NAME` first. Contacts that have a numerical `TAG_NAME` rank will be sorted in increasing `TAG_NAME` rank(non-numerical ranks first, followed by lowest rank first). <br> ![sort t/TAG_NAME:desc]({{ baseUrl }}/images/sort-tag-desc.png) |
+| Field          | Prefix        | Ascending: `asc`                                                                                                                                                                                                                     | Descending: `desc`                                                                                                                                                                                 |
+|----------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name           | `n/`          | Sort contacts by name, in alphabetical order.                                                                                                                                                                                        | Sort contacts by name, in reverse alphabetical order.                                                                                                                                              |
+| Phone number   | `p/`          | Sort contacts by phone number, in alphabetical order. <box type="info" seamless>**Note: ** Rather than sorting by the number value, the phone number is sorted similarly to a word. I.e. "12" will be sorted to be before "2".</box> | Sort contacts by phone number, in reverse alphabetical order.                                                                                                                                      |
+| Email          | `e/`          | Sort contacts by email, in alphabetical order.                                                                                                                                                                                       | Sort contacts by email, in reverse alphabetical order.                                                                                                                                             |
+| Address        | `a/`          | Sort contacts by address, in alphabetical order.                                                                                                                                                                                     | Sort contacts by address, in reverse alphabetical order.                                                                                                                                           |
+| Last updated   | `lu/`         | Sort contacts by the least recently updated first.                                                                                                                                                                                   | Sort contacts by the most recently updated first.                                                                                                                                                  |
+| Last contacted | `lc/`         | Sort contacts by the least recently contacted first.                                                                                                                                                                                 | Sort contacts by the most recently contacted first.                                                                                                                                                |
+| Tag            | `t/TAG_NAME/` | Sort contacts by tag `TAG_NAME` first. <br> Contacts that have a numerical `TAG_NAME` rank will be sorted in decreasing `TAG_NAME` rank(highest rank first, followed by non-numerical ranks).                                        | Sort contacts by tag `TAG_NAME` first. <br> Contacts that have a numerical `TAG_NAME` rank will be sorted in increasing `TAG_NAME` rank(non-numerical ranks first, followed by lowest rank first). |
 
 ### Resetting sort order
 
@@ -739,6 +751,8 @@ Format: `note INDEX NOTE [on/TIME]`
 * Notes support **contact references** using the `@INDEX` syntax. When you include `@INDEX` in a note, it creates a link to the contact at that index. The reference is displayed as the contact's name in **bold and underlined** text.
 * If a referenced contact's name changes, the displayed name updates automatically.
 * If a referenced contact is deleted, the reference is replaced with the contact's name as plain text.
+* If a contact reference is corrupted (e.g. changed to an invalid value in the data file), it will be displayed as `@Unknown` in the note.
+* You cannot add a note that is **identical** to one already on that contact (same text **and** the same reminder time, if any). If you try, the command fails and no change is made.
 
 Examples:
 * `note 1 Likes to swim.`
@@ -754,6 +768,7 @@ Format: `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]`
 * Replaces the note at position `NOTE_INDEX` of the contact at the specified `INDEX` with `NEW_NOTE`.
 * `NOTE_INDEX` refers to the position of the note as displayed (starting from 1).
 * Optionally include `on/TIME` to set or update the reminder for the edited note.
+* After editing, the note must not match **another** note on the same contact (same text **and** the same reminder time, if any). Otherwise the command fails and the note is left unchanged.
 
 Examples:
 * `note 1 el/1 Updated note text.` replaces the 1st note of the 1st contact.
@@ -775,15 +790,15 @@ Example:
 
 ### Remove the first N notes
 
-Format: `note INDEX c/LINES_TO_REMOVE`
+Format: `note INDEX co/LINES_TO_REMOVE`
 
 * Removes the first `LINES_TO_REMOVE` notes from the contact at the specified `INDEX`.
 * `LINES_TO_REMOVE` must be a non-negative integer.
 * If `LINES_TO_REMOVE` exceeds the number of existing notes, all notes are removed.
 
 Examples:
-* `note 1 c/1` removes the first note from the 1st contact.
-* `note 2 c/3` removes the first 3 notes from the 2nd contact.
+* `note 1 co/1` removes the first note from the 1st contact.
+* `note 2 co/3` removes the first 3 notes from the 2nd contact.
 
 ![remove notes]({{ baseUrl }}/images/removeNotes.png)
 
@@ -801,7 +816,8 @@ Example:
 ### Reminders
 
 By including a `/on` prefix and a time afterwards in a `note`, users can create reminders attached to a contact, which is useful to scheduling meetings and events relating to those contacts. <br>
-Contacts with a reminder will gain a special `Reminder` tag and automatically be placed towards the top of the contact list.
+Contacts with a reminder will gain a special `Reminder` tag and automatically be placed towards the top of the contact list. <br>
+The input format for the time is [flexible](#flexible-time-input).
 
 ![Reminder]({{ baseUrl }}/images/notes-reminder.png)
 
@@ -822,9 +838,12 @@ Reverts the last executed command that modified data.
 
 Format: `undo`
 
-* Only commands that modify data can be undone (e.g. `add`, `edit`, `delete`, `note`, `clear`, `sort`).
-* Commands that do not modify data (`help`, `view`, `close view`, `list`, `find`, `undo`, `redo`, `exit`) are ignored by undo.
-* Displays the feedback of the undone command.
+* Only the following commands can be undone:
+    * Commands that modify contact list data: `add`, `edit`, `delete`, `note`, `clear`
+    * Commands that change the filter/sort patterns: `list`, `find`, `sort`
+    * Commands that modify application settings: `file`, `theme`
+* Commands that do not fall in the above categories (`help`, `view`, `close view`, `undo`, `redo`, `exit`) are ignored by undo.
+* Displays the feedback of the undone command after execution.
 
 Examples:
 * `delete 1` followed by `undo` restores the deleted contact.
@@ -838,13 +857,13 @@ Examples:
 
 ### Redoing a command: `redo`
 
-Reverses the effect of an `undo` command, effectively re-applying the previously undone action.
+Reverses the effect of an [`undo` command](#undoing-a-command-undo), effectively re-applying the previously undone action.
 
 Format: `redo`
 
 * Only applicable after an `undo` command has been executed.
-* Commands that do not modify data (`help`, `view`, `close view`, `list`, `find`, `undo`, `redo`, `exit`) are ignored by redo.
-* Displays the feedback of the redone command.
+* Restores the application state to the state prior to the previous `undo` command, as if said `undo` command was never executed at all.
+* Displays the feedback of the redone command after successful execution.
 
 Examples:
 * `delete 1` then `undo` then `redo` re-deletes the 1st contact.
@@ -879,8 +898,6 @@ Example:
 ### Viewing available files: `view files`
 
 Displays all the B2B4U contact list files in the data subfolder in a side panel, each with the number of contacts they contain.
-
-Image to be added
 
 Format: `view files`
 
@@ -951,49 +968,18 @@ Changes the theme in user.
 
 Format: `theme THEME_NAME`
 
-### Available themes
+### Supported themes
 
-### Dark Mode: `dark`
-![Dark Mode]({{ baseUrl }}/images/theme-dark.png)
+| Theme        | Description                                                               | Command        | Image                                                    |
+|--------------|---------------------------------------------------------------------------|----------------|----------------------------------------------------------|
+| Dark Mode    | Perfect for late-night work.                                              | `theme dark`   | ![Dark Mode]({{ baseUrl }}/images/theme-dark.png)        |
+| Light Mode   | For when you're in well-lit conditions.                                   | `theme light`  | ![Light Mode]({{ baseUrl }}/images/theme-light.png)      |
+| Reading Mode | To lessen the strain on the eyes.                                         | `theme book`   | ![Reading Mode]({{ baseUrl }}/images/theme-book.png)     |
+| Sakura Theme | For fans of the kawaii and pink aesthetic.                                | `theme sakura` | ![Sakura Theme]({{ baseUrl }}/images/theme-sakura.png)   |
+| Grass Theme  | An alternate colour scheme that reduces eye strain.                       | `theme grass`  | ![Grass Theme]({{ baseUrl }}/images/theme-grass.png)     |
+| Techcore     | For those who want to appear like they're at the forefront of technology. | `theme tech`   | ![Techcore Theme]({{ baseUrl }}/images/theme-tech.png)   |
+| Jirai Kei    | For fans of the Jirai Kei aesthetic.                                      | `theme jirai`  | ![Jirai Kei Theme]({{ baseUrl }}/images/theme-jirai.png) |
 
-Command: `theme dark` <br>
-Perfect for late-night work.
-
-### Light Mode: `light`
-![Light Mode]({{ baseUrl }}/images/theme-light.png)
-
-Command: `theme light` <br>
-For when you're in well-lit conditions.
-
-### Reading Mode: `book`
-![Reading Mode]({{ baseUrl }}/images/theme-book.png)
-
-Command: `theme book` <br>
-To lessen the strain on the eyes.
-
-### Sakura Theme: `sakura`
-![Sakura Theme]({{ baseUrl }}/images/theme-sakura.png)
-
-Command: `theme sakura` <br>
-For fans of the kawaii and pink aesthetic.
-
-### Grass Theme: `grass`
-![Grass Theme]({{ baseUrl }}/images/theme-grass.png)
-
-Command: `theme grass` <br>
-An alternate colour scheme that reduces eye strain.
-
-### Techcore: `tech`
-![Techcore Theme]({{ baseUrl }}/images/theme-tech.png)
-
-Command: `theme tech` <br>
-For those who want to appear like they're at the forefront of technology
-
-### Jirai Kei: `jirai`
-![Jirai Kei Theme]({{ baseUrl }}/images/theme-jirai.png)
-
-Command: `theme jirai` <br>
-For fans of the Jirai Kei aesthetic.
 
 [(Back to top)](#b2b4u-user-guide)
 
