@@ -75,6 +75,22 @@ public class ContactComparatorTest {
     }
 
     @Test
+    public void getDescription_identity_returnsDefaultOrder() {
+        assertEquals("default order", identityComparator.getDescription());
+    }
+
+    @Test
+    public void getDescription_singleField_returnsFieldAndOrder() {
+        assertEquals("name (ascending)", comparatorA1.getDescription());
+    }
+
+    @Test
+    public void getDescription_multipleFields_returnsCommaSeparated() {
+        assertEquals("last contacted (descending), tag 'friends' (descending), phone (ascending)",
+                comparatorB1.getDescription());
+    }
+
+    @Test
     public void hasAllComparators() {
         for (Field field : Field.values()) {
             for (Order order : Order.values()) {
@@ -91,7 +107,7 @@ public class ContactComparatorTest {
                 .withPhone("11111111")
                 .withEmail("alice@test.com")
                 .withAddress("A Street")
-                .withLastContacted("22/02/26")
+                .withLastContacted("22/Feb/26")
                 .withLastUpdated(LocalDateTime.of(2026, 2, 22, 9, 0))
                 .build();
 
@@ -121,7 +137,7 @@ public class ContactComparatorTest {
                 .withPhone("11111111")
                 .withEmail("alice@test.com")
                 .withAddress("A Street")
-                .withLastContacted("22/02/26")
+                .withLastContacted("22/Feb/26")
                 .withLastUpdated(LocalDateTime.of(2026, 2, 22, 9, 0))
                 .build();
 
