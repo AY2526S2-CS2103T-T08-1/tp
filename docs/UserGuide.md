@@ -62,7 +62,7 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
    Here are some commands to try:
 
    | Command                                                                          | Description                                  |
-   | -------------------------------------------------------------------------------- | -------------------------------------------- |
+   |----------------------------------------------------------------------------------|----------------------------------------------|
    | `list`                                                                           | Lists all contacts.                          |
    | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` | Adds a contact named `John Doe`.             |
    | `view 1`                                                                         | Opens the detail panel for the 1st contact.  |
@@ -72,6 +72,8 @@ Business to Business for You (B2B4U) is a **desktop app for managing contacts, o
    | `exit`                                                                           | Exits the app.                               |
 
 7. Refer to [Features](#features) below for the full list of commands, or visit each command's subpage for additional details.
+
+[(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -275,6 +277,8 @@ B2B4U data is saved as JSON files in `[JAR file location]/data/`. Advanced users
 
 To exit B2B4U, use the [`exit` command](#exiting-the-program-exit).
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -282,6 +286,8 @@ To exit B2B4U, use the [`exit` command](#exiting-the-program-exit).
 **Q: How do I transfer my data to another computer?**
 
 Install B2B4U on the new computer, then replace the empty data file it creates with the data file from your previous B2B4U home folder.
+
+[(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,6 +300,8 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 2. **Minimized Help Window:** If the Help Window is minimized and you run `help` again (via command, the Help menu, or `F1`), the original window remains minimized and no new window appears.
 
    *Fix:* Manually restore the minimized Help Window.
+
+[(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -326,15 +334,26 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 | **View available files** | `view files`   |                                                                                                                               |                                                                                                    |
 | **Change theme**         | `theme`        | `THEME_NAME`                                                                                                                  | `theme sakura`                                                                                     |
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ## Appendix: Command Details
 
+This appendix serves as a comprehensive reference for all commands available in B2B4U.
+Each command is explained in detail with its format, parameters, and examples of usage.
+
+<box type="info" seamless>
+<b>Note:</b> The commands are intended to be viewed from the feature list above, where you can click on each command to jump to its detailed explanation below.
+</box>
+
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Viewing help: `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -345,11 +364,13 @@ Format: `help [COMMAND]`
 * Without arguments, opens the help window with a link to the User Guide.
 * With a `COMMAND` argument (e.g. `help add`, `help note`), opens the help window with usage details and a direct link to the relevant section of the User Guide.
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Adding a contact: `add`
+### Adding a contact: `add`
 
 Adds a contact to the contact list.
 
@@ -386,11 +407,13 @@ Two contacts are similar if:
 
 ![add contact]({{ baseUrl }}/images/addContact-similar.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Editing a contact: `edit`
+### Editing a contact: `edit`
 
 Edits an existing contact in the contact list.
 
@@ -410,11 +433,13 @@ Examples:
 
 ![edit contact]({{ baseUrl }}/images/editContact.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Deleting a contact: `delete`
+### Deleting a contact: `delete`
 
 Deletes the specified contact from the contact list.
 
@@ -430,11 +455,13 @@ Examples:
 
 ![delete contact]({{ baseUrl }}/images/deleteContact.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Clearing all contacts: `clear`
+### Clearing all contacts: `clear`
 
 Clears all contacts from the contact list.
 
@@ -442,11 +469,13 @@ Format: `clear`
 
 ![clear]({{ baseUrl }}/images/clear.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Listing all contacts: `list`
+### Listing all contacts: `list`
 
 Shows a list of all contacts in the contact list and resets contact order by oldest contact first.
 
@@ -454,11 +483,13 @@ Format: `list`
 
 ![list contacts]({{ baseUrl }}/images/listContacts.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Finding contacts: `find`
+### Finding contacts: `find`
 
 Finds contacts whose fields match the specified search criteria.
 
@@ -498,11 +529,13 @@ To remove the current filters and display every contact, use the `find` command 
 <b>Note:</b> Changing or resetting the <code>find</code> filters has no impact on the current sort order. To reset both the applied filters and sort order at the same time, use the <a href="#listing-all-contacts-list"><code>list</code> command</a> instead.
 </box>
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Sorting contacts: `sort`
+### Sorting contacts: `sort`
 
 Sorts the currently displayed contacts by the specified field(s).
 
@@ -541,9 +574,11 @@ To reset the current sort order, use the `sort` command without any additional k
 <b>Note:</b> Changing or resetting the sort order has no impact on the current <code>find</code> filters. To reset both the applied filters and sort order at the same time, use the <a href="#listing-all-contacts-list"><code>list</code> command</a> instead. 
 </box>
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Managing notes/reminders for a contact: `note`
+### Managing notes/reminders for a contact: `note`
 
 Manages notes and reminders for an existing contact in the contact list.
 
@@ -641,11 +676,13 @@ Users will be notified that the reminder of a contact is due within 7 days in th
 
 ![Due Reminder]({{ baseUrl }}/images/notes-dueReminder.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Undoing a command: `undo`
+### Undoing a command: `undo`
 
 Reverts the last executed command that modified data.
 
@@ -661,11 +698,13 @@ Examples:
 
 ![undo command]({{ baseUrl }}/images/undoCommand.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Redoing a command: `redo`
+### Redoing a command: `redo`
 
 Reverses the effect of an `undo` command, effectively re-applying the previously undone action.
 
@@ -681,11 +720,13 @@ Examples:
 
 ![redo command]({{ baseUrl }}/images/redoCommand.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Viewing a specific contact: `view`
+### Viewing a specific contact: `view`
 
 Displays a specific contact's full details in a side panel.
 
@@ -701,9 +742,11 @@ Example:
 
 ![view contact]({{ baseUrl }}/images/viewContact.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Viewing available files: `view files`
+### Viewing available files: `view files`
 
 Displays all the B2B4U contact list files in the data subfolder in a side panel, each with the number of contacts they contain.
 
@@ -711,11 +754,13 @@ Image to be added
 
 Format: `view files`
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Closing the view panel: `close view`
+### Closing the view panel: `close view`
 
 Closes the currently open contact detail or file list panel and returns to the main list view.
 
@@ -729,11 +774,13 @@ Example:
 
 ![close view]({{ baseUrl }}/images/closeView.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Open file: `file open/`
+### Open file: `file open/`
 
 Changes the contact list file being accessed to a different one in the data subfolder.
 
@@ -750,7 +797,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-## Deleting a file: `file delete/`
+### Deleting a file: `file delete/`
 
 Deletes the specified file from the data subfolder.
 
@@ -772,17 +819,19 @@ Examples:
 
 ![Delete file]({{ baseUrl }}/images/deleteFile.png)
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Set theme: `theme`
+### Set theme: `theme`
 
 Changes the theme in user.
 
 Format: `theme THEME_NAME`
 
-## Available themes
+### Available themes
 
 ### Dark Mode: `dark`
 ![Dark Mode]({{ baseUrl }}/images/theme-dark.png)
@@ -838,12 +887,16 @@ For those who want to appear like they're at the forefront of technology
 Command: `theme jirai` <br>
 For fans of the Jirai Kei aesthetic.
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Exiting the program: `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
+
+[(Back to top)](#b2b4u-user-guide)
