@@ -233,18 +233,16 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Overview
 
-The edit command supports removing optional fields (phone, email, address, last contacted date) by supplying the field prefix with no argument. For example, `edit 1 p/` removes the phone number from the first contact.
+The `edit` command supports removing optional fields (phone, email, address, last contacted date) by supplying the field prefix with no argument. For example, `edit 1 p/` removes the phone number from the first contact.
 
 #### Implementation
 
-The following sequence diagram shows how the edit field removal mechanism works when the user executes `edit 1 p/`:
+The following sequence diagram shows how the edit command processes `edit 1 p/`:
 
 <puml src="{{ baseUrl }}/diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 
-1. `EditCommandParser` detects the empty value for the `p/` prefix and sets `clearPhone = true` in the `EditContactDescriptor`.
-2. `EditCommand#createEditedContact()` checks the clear flag — if `clearPhone` is true, `updatedPhone` is set to `Optional.empty()`.
-3. Before applying the edit, the command validates that the resulting contact retains at least a phone number or email address.
-4. The updated contact is saved to the model.
+1. `EditCommandParser` detects the empty `p/` prefix and sets `clearPhone = true` in the `EditContactDescriptor`.
+2. During execution, `EditCommand` validates the edited contact and saves it to the model.
 
 <div style="page-break-after: always;"></div>
 
@@ -345,6 +343,27 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### Data archiving
+
+#### Overview
+
+The `file open/` command allows the user to change to a different contact list file and archive their older contacts.
+For example, `file open/new_list` will begin accessing `new_list.json` while `addressbook.json` remains.
+
+#### Implementation
+
+The following sequence diagrams shows how the file management mechanism works when the user executes `file open/new_list`:
+
+<puml src="{{ baseUrl }}/diagrams/FileCommandParserDiagram.puml" alt="FileCommandParserDiagram" />
+
+1. `FileCommandParser` checks that the file name is valid.
+
+<puml src="{{ baseUrl }}/diagrams/FileOpenSequenceDiagram.puml" alt="FileOpenSequenceDiagram" />
+
+2. `FileOpenCommand` first sets the file path in the `UserPrefs` of the model and removes any user-input filters and sort orders.
+3. `FileOpenCommand` checks for the file at `data/new_list.json`, if it does not exist or an error arises when accessing it, a new empty file is created.
+4. The file data is saved to the model.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -423,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `B2B4U` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `B2B4U` application and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Check User Guide**
 
@@ -497,6 +516,187 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC7 - Add a note or reminder**
+
+**MSS**
+
+1. User requests to append a note to a contact identified by index in the displayed list.
+2. B2B4U parses the note text.
+3. B2B4U saves the new note on the contact.
+4. B2B4U displays confirmation with the contact’s updated notes.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact index is invalid.
+  * 1a1. B2B4U shows an error message.
+
+    Use case ends.
+
+* 2a. The new note is identical to an existing note on the same contact (same text and same reminder, if any).
+  * 2a1. B2B4U displays an error message; the contact’s notes are unchanged.
+
+    Use case ends.
+
+* 2b. Note contains `on/` prefix.
+  * 2b1. B2B4U parses the given time and stores the note as a reminder.
+
+    Use case resumes at step 3.
+
+* 2c. Note text includes one or more `@INDEX` references.
+  * 2c1. B2B4U resolves each valid `@INDEX` to the corresponding contact reference.
+
+    Use case resumes at step 3.
+
+* a. At any time, the note text cannot be successfully parsed.
+  * a1. B2B4U displays an error message; the contact’s notes are unchanged.
+
+    Use case ends
+
+**Use case: UC8 - Edit a note**
+
+**MSS**
+
+1. User requests to replace the content of a specific note line for a contact.
+2. B2B4U parses the new note text.
+3. B2B4U saves the updated note line.
+4. B2B4U displays confirmation with the contact’s updated notes.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact index or note line index is invalid.
+  * 1a1. B2B4U shows an error message.
+
+    Use case ends.
+
+* 2a. The edited note would be identical to another existing note on the same contact.
+  * 2a1. B2B4U shows an error message; the note line is unchanged.
+
+    Use case ends.
+
+* 2b. Note contains `on/` prefix.
+    * 2b1. B2B4U parses the given time and stores the note as a reminder.
+
+      Use case resumes at step 3.
+
+* 2c. Note text includes one or more `@INDEX` references.
+    * 2c1. B2B4U resolves each valid `@INDEX` to the corresponding contact reference.
+
+      Use case resumes at step 3.
+
+* a. At any time, the note text cannot be successfully parsed.
+    * a1. B2B4U displays an error message; the contact’s notes are unchanged.
+
+      Use case ends
+
+**Use case: UC9 - Remove or clear notes**
+
+**MSS**
+
+1. User requests to remove one or more note lines from a contact, or clear all notes for that contact.
+2. B2B4U updates the contact’s note list to no longer include the indicated notes.
+3. B2B4U displays confirmation.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact index or a specified note index is invalid.
+  * 1a1. B2B4U shows an error message.
+
+    Use case ends.
+
+* 1b. The contact has no notes but the user requests removal by line index.
+  * 1b1. B2B4U shows an error message.
+
+    Use case ends.
+
+**Use case: UC10 - Undo or redo a change**
+
+**MSS**
+
+1. User requests to undo the most recent reversible change, or to redo a change that was just undone.
+2. B2B4U restores the model to the earlier or later saved snapshot.
+3. B2B4U displays confirmation of action.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No snapshot is available in the requested direction.
+  * 1a1. B2B4U shows an error message.
+
+    Use case ends.
+
+**Use case: UC11 - Open a different contact data file**
+
+**MSS**
+
+1. User requests to use another file for contact list data.
+2. B2B4U updates the active file path, and loads data from that file.
+3. B2B4U displays the resulting contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The file name is invalid.
+  * 1a1. B2B4U shows an error message.
+
+    Use case ends.
+
+* 1b. The file exists but its contents cannot be loaded as valid data.
+  * 1b1. B2B4U creates a new empty contact list for that file.
+
+    Use case resumes at step 3.
+
+* 1c. The requested file does not yet exist.
+  * 1c1. B2B4U creates an empty contact list and a new file for the given file name.
+
+    Use case resumes at step 3.
+
+**Use case: UC12 - Delete a contact data file**
+
+**MSS**
+
+1. User requests to delete a contact data file.
+2. B2B4U requests confirmation from the user to delete the file.
+3. User confirms deletion.
+4. B2B4U removes the file from storage.
+5. B2B4U displays confirmation of successful file deletion.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The requested file is the one currently in use.
+  * 1a1. B2B4U shows an error message; no file is deleted.
+
+    Use case ends.
+
+* 1b. The file does not exist, is not a valid data file, deletion is aborted, or another error occurs.
+  * 1b1. B2B4U shows an error message.
+
+    Use case ends.
+
+* 1c. The target file is empty.
+  * 1c1. B2B4U skips confirmation and proceeds with deletion.
+
+    Use case resumes at step 4.
+
+* 3a. User denies confirmation.
+  * 3a1. B2B4U aborts deletion and shows an error message.
+
+    Use case ends.
+
+* 3b. Confirmation is pending.
+  * 3b1. The app remains blocked by the confirmation dialog until the user provides a response.
+
+    Use case resumes at step 3.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -543,16 +743,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Ensure **Java 17 or later** is installed.
 
-   2. Double-click the jar file <br>
+   1. Download the latest `B2B4U.jar` from the [releases page](https://github.com/AY2526S2-CS2103T-T08-1/tp/releases) and copy into an empty folder.
+
+   1. Open a terminal in the folder and run `java -jar B2B4U.jar`. <br>
      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running `java -jar B2B4U.jar`.<br>
      Expected: The most recent window size and location is retained.
 
 ### Deleting a contact
