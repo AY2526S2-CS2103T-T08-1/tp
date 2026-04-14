@@ -376,6 +376,8 @@ The input format of `TIME` is [flexible](#flexible-time-input).
 
 ![reminder]({{ baseUrl }}/images/reminder.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering and Sorting the Contact List
 
 By default, B2B4U displays all contacts sorted by **most urgent reminder** first, followed by **most recently contacted**.
@@ -418,8 +420,8 @@ To switch themes, use the [`theme THEME_NAME` command](#set-theme-theme).
 
 Available themes:
 
-| Theme                                                                     | Command        |
-| ------------------------------------------------------------------------- | -------------- |
+| Theme                              | Command        |
+|------------------------------------|----------------|
 | [Dark mode](#dark-mode-dark)       | `theme dark`   |
 | [Light mode](#light-mode-light)    | `theme light`  |
 | [Reading mode](#reading-mode-book) | `theme book`   |
@@ -427,6 +429,8 @@ Available themes:
 | [Grass](#grass-theme-grass)        | `theme grass`  |
 | [Techcore](#techcore-tech)         | `theme tech`   |
 | [Jirai Kei](#jirai-kei-jirai)      | `theme jirai`  |
+
+<div style="page-break-after: always;"></div>
 
 ### Saving Data
 
@@ -440,8 +444,6 @@ B2B4U supports multiple data files, which is useful for keeping separate contact
 - To open a data file, use the [`file open/FILE_NAME` command](#open-file-file-open).
 - To delete a data file, use the [`file delete/FILE_NAME` command](#deleting-a-file-file-delete).
 - To close the file list panel, use the [`close view` command](#closing-the-view-panel-close-view). The file list shares the same panel used to view contact details.
-
-<div style="page-break-after: always;"></div>
 
 ### Editing the Data File Directly
 
