@@ -3,6 +3,9 @@
 skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -11,31 +14,52 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> EditCommand : execute(m)
-activate EditCommand
+[-> LogicManager : execute("edit 1 p/")
+activate LogicManager
 
-EditCommand -> EditCommand : createEditedContact()
-activate EditCommand
+LogicManager -> AddressBookParser : parseCommand("edit 1 p/")
+activate AddressBookParser
 
-note right of EditCommand
-  Applies changes from EditContactDescriptor
-  to the target contact. Clear flags (e.g.
-  clearPhone) remove optional fields.
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("1 p/")
+activate EditCommandParser
+
+note right of EditCommandParser
+  Detects empty "p/" prefix,
+  sets clearPhone = true in
+  EditContactDescriptor
 end note
 
-EditCommand --> EditCommand : editedContact
-deactivate EditCommand
-
-EditCommand -> EditCommand : validate(editedContact)
+create EditCommand
+EditCommandParser -> EditCommand
 activate EditCommand
 
-note right of EditCommand
-  Checks that the edited contact
-  retains at least a phone or email
-end note
-
-EditCommand --> EditCommand
+EditCommand --> EditCommandParser :
 deactivate EditCommand
+
+EditCommandParser --> AddressBookParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditCommand : execute(m)
+activate EditCommand
+
+EditCommand -> Model : validate(editedContact)
+activate Model
+
+Model --> EditCommand
+deactivate Model
 
 EditCommand -> Model : setContact(contactToEdit, editedContact)
 activate Model
@@ -56,7 +80,9 @@ activate CommandResult
 CommandResult --> EditCommand
 deactivate CommandResult
 
-[<-- EditCommand : r
+EditCommand --> LogicManager : r
 deactivate EditCommand
 
+[<--LogicManager
+deactivate LogicManager
 @enduml
