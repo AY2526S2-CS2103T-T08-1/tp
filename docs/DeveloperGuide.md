@@ -23,6 +23,7 @@
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -75,6 +76,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in
@@ -98,6 +101,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -143,6 +148,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** :
@@ -182,6 +189,8 @@ phrases.
 
 `JsonAdaptedContact` persists `lastUpdated`, `lastContacted`, and `notes` alongside the other contact fields.
 
+<div style="page-break-after: always;"></div>
+
 <box type="info" seamless>
 
 **Note:** The diagram below is an **alternative** (arguably more OOP) design: a central `Tag` list on `AddressBook` that
@@ -214,6 +223,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -232,6 +243,8 @@ The following sequence diagram shows how the edit command processes `edit 1 p/`:
 
 1. `EditCommandParser` detects the empty `p/` prefix and sets `clearPhone = true` in the `EditContactDescriptor`.
 2. During execution, `EditCommand` validates the edited contact and saves it to the model.
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -329,8 +342,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Save an 'undo/redo' version of each command.
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Data archiving
 
@@ -714,6 +725,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Displayed list**: A subset of contacts displayed after applying a search, filtering, or sorting operation.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for Manual Testing**
 

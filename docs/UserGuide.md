@@ -37,6 +37,7 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
   - [FAQ](#faq)
   - [Known Issues](#known-issues)
   - [Command Summary](#command-summary)
+  - [Appendix: Command Details](#appendix-command-details)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,6 +58,8 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
      java -jar B2B4U.jar
      ```
 
+<div style="page-break-after: always;"></div>
+
 5. Within a few seconds, a GUI similar to the one below should appear. The app launches with **sample data** preloaded.
 
    ![Ui]({{ baseUrl }}/images/Ui.png)
@@ -66,7 +69,7 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
    Here are some commands to try:
 
    | Command                                                                          | Description                                  |
-   | -------------------------------------------------------------------------------- | -------------------------------------------- |
+   |----------------------------------------------------------------------------------|----------------------------------------------|
    | `list`                                                                           | Lists all contacts.                          |
    | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` | Adds a contact named `John Doe`.             |
    | `view 1`                                                                         | Opens the detail panel for the 1st contact.  |
@@ -77,7 +80,11 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
 
 7. Refer to [Features](#features) below for the full list of commands, or visit each command's subpage for additional details.
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -108,6 +115,8 @@ B2B4U is designed for **consultants at medium-sized consulting or PR agencies** 
   ![unknown command]({{ baseUrl }}/images/unknownCommand.png)
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Flexible Time Input
 
@@ -167,6 +176,8 @@ The date/time input should fall into at least one of the following patterns, rat
 | Big-endian            | `YEAR/MONTH/DAY` | `2026 Oct 31` |
 | Reverse middle-endian | `YEAR/DAY/MONTH` | `2026 31 Oct` |
 
+<div style="page-break-after: always;"></div>
+
 - Partial date + time(containing only `DAY`, `MONTH` and `TIME`):
 
 | Pattern                 | Format           | Example         |
@@ -209,7 +220,7 @@ The date/time input should fall into at least one of the following patterns, rat
 
 The keyword input is case-insensitive. <br>
 Only one of such keywords may be used in a singular input regarding time, and if used, it can replace the above "month" and "day" input requirements entirely. <br>
-Example: On 24 March 2026, inputting `next week 12PM` for a [reminder]({{ baseUrl }}/user-guide/notes.html#reminders) sets the reminder for 12:00PM 31 March 2026.
+Example: On 24 March 2026, inputting `next week 12PM` for a [reminder](#reminders-2) sets the reminder for 12:00PM 31 March 2026.
 </box>
 
 Once a valid date or time hsa been accepted as input, it will be displayed by B2B4U in the following formats:
@@ -278,7 +289,7 @@ If an incorrectly input date/time is indeed recorded, the user should use one of
 
 ### Adding Contacts
 
-To add a new contact, use the [`add` command]({{ baseUrl }}/user-guide/add-contact.html).
+To add a new contact, use the [`add` command](#adding-a-contact-add).
 
 Format: `add n/NAME (p/PHONE | e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
@@ -291,7 +302,7 @@ Format: `add n/NAME (p/PHONE | e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]�
 
 ### Editing Contacts
 
-To edit an existing contact, use the [`edit` command]({{ baseUrl }}/user-guide/edit-contact.html).
+To edit an existing contact, use the [`edit` command](#editing-a-contact-edit).
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
 
@@ -305,8 +316,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED]
 
 ### Deleting Contacts
 
-- To delete a specific contact, use the [`delete` command]({{ baseUrl }}/user-guide/delete-contact.html).
-- To delete all contacts at once, use the [`clear` command]({{ baseUrl }}/user-guide/clear-contacts.html).
+- To delete a specific contact, use the [`delete` command](#deleting-a-contact-delete).
+- To delete all contacts at once, use the [`clear` command](#clearing-all-contacts-clear).
 
 #### Delete a Specific Contact
 
@@ -330,7 +341,7 @@ Format: `clear`
 
 ### Viewing a Contact
 
-To view the details of a contact, use the [`view` command]({{ baseUrl }}/user-guide/view.html).
+To view the details of a contact, use the [`view` command](#viewing-a-specific-contact-view).
 
 Format: `view INDEX`
 
@@ -340,21 +351,21 @@ Format: `view INDEX`
 **Example:**
 - `view 1` — opens the detail panel for the 1st contact.
 
-To close the detail panel, use the [`close view` command]({{ baseUrl }}/user-guide/close-view.html).
+To close the detail panel, use the [`close view` command](#closing-the-view-panel-close-view).
 
 Format: `close view`
 
 ### Managing Notes for a Contact
 
-To manage notes and reminders for a contact, use the [`note` command]({{ baseUrl }}/user-guide/notes.html).
+To manage notes and reminders for a contact, use the [`note` command](#managing-notes-reminders-for-a-contact-note).
 
-| Operation                                                                                | Format                                        | Description                                                                                |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [**Add a note**]({{ baseUrl }}/user-guide/notes.html#add-a-note)                         | `note INDEX NOTE [on/TIME]`                   | Appends a note to the contact. Including `on/TIME` turns it into a [reminder](#reminders). |
-| [**Edit a note**]({{ baseUrl }}/user-guide/notes.html#edit-a-specific-note)              | `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]` | Replaces the note at the specified position.                                               |
-| [**Remove a specific note**]({{ baseUrl }}/user-guide/notes.html#remove-a-specific-note) | `note INDEX cl/NOTE_INDEX`                    | Removes the note at the specified position.                                                |
-| [**Remove first N notes**]({{ baseUrl }}/user-guide/notes.html#remove-the-first-n-notes) | `note INDEX co/LINES_TO_REMOVE`               | Removes the first *N* notes, where *N* = `LINES_TO_REMOVE`.                                |
-| [**Clear all notes**]({{ baseUrl }}/user-guide/notes.html#clear-all-notes)               | `note INDEX ca/`                              | Removes all notes from the contact.                                                        |
+| Operation                                             | Format                                        | Description                                                                                |
+|-------------------------------------------------------|-----------------------------------------------|--------------------------------------------------------------------------------------------|
+| [**Add a note**](#add-a-note)                         | `note INDEX NOTE [on/TIME]`                   | Appends a note to the contact. Including `on/TIME` turns it into a [reminder](#reminders). |
+| [**Edit a note**](#edit-a-specific-note)              | `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]` | Replaces the note at the specified position.                                               |
+| [**Remove a specific note**](#remove-a-specific-note) | `note INDEX cl/NOTE_INDEX`                    | Removes the note at the specified position.                                                |
+| [**Remove first N notes**](#remove-the-first-n-notes) | `note INDEX co/LINES_TO_REMOVE`               | Removes the first *N* notes, where *N* = `LINES_TO_REMOVE`.                                |
+| [**Clear all notes**](#clear-all-notes)               | `note INDEX ca/`                              | Removes all notes from the contact.                                                        |
 
 Notes support **contact references** using the `@INDEX` syntax, which creates a bidirectional association between two contacts. Both contacts will appear when searching for either one using `find @INDEX`.
 
@@ -375,47 +386,47 @@ B2B4U also provides commands to filter and sort the contact list, which is usefu
 
 Format: `find [KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`
 
-- Use the [`find` command]({{ baseUrl }}/user-guide/find-contacts.html) with keywords or field-specific prefixes to filter contacts (e.g. `find n/Alex t/friends`).
+- Use the [`find` command](#finding-contacts-find) with keywords or field-specific prefixes to filter contacts (e.g. `find n/Alex t/friends`).
 - Use `find @INDEX` to find all contacts associated with the contact at that index.
-- Use [`find` without any arguments]({{ baseUrl }}/user-guide/find-contacts.html#clearing-filters) to remove all active filters.
+- Use [`find` without any arguments](#clearing-filters) to remove all active filters.
 
 **Sorting:**
 
 Format: `sort [n/asc | desc] [p/asc | desc] [e/asc | desc] [a/asc | desc] [lu/asc | desc] [lc/asc | desc] [t/TAG_NAME:asc | desc]…`
 
-- Use the [`sort` command]({{ baseUrl }}/user-guide/sort-contacts.html) with field prefixes and `asc` or `desc` to specify the [sort direction]({{ baseUrl }}/user-guide/sort-contacts.html#sort-order-by-field) (e.g. `sort n/asc` to sort by name A–Z, `sort lc/desc` to sort by last contacted, newest first).
-- Use [`sort` without any arguments]({{ baseUrl }}/user-guide/sort-contacts.html#resetting-sort-order) to reset to the default sort order.
+- Use the [`sort` command](#sorting-contacts-sort) with field prefixes and `asc` or `desc` to specify the [sort direction](#sort-order-by-field) (e.g. `sort n/asc` to sort by name A–Z, `sort lc/desc` to sort by last contacted, newest first).
+- Use [`sort` without any arguments](#resetting-sort-order) to reset to the default sort order.
 
 Active filters and sort orders are preserved independently — running `sort` will not clear your current filter, and vice versa.
 
 Note that the following commands may also affect the active filter or sort order:
-- A [`list` command]({{ baseUrl }}/user-guide/list-contacts.html) displays all contacts in the default sort order.
-- An [`add` command]({{ baseUrl }}/user-guide/add-contact.html#similar-contacts) resets the sort order and may filter to show only similar contacts.
+- A [`list` command](#listing-all-contacts-list) displays all contacts in the default sort order.
+- An [`add` command](#adding-a-contact-add) resets the sort order and may filter to show only [similar contacts](#similar-contacts).
 
 ### Undo and Redo
 
 B2B4U supports undoing and redoing commands to help recover from mistakes.
 
-- To undo the last command, use the [`undo` command]({{ baseUrl }}/user-guide/undo-command.html).
-- To redo the last undone command, use the [`redo` command]({{ baseUrl }}/user-guide/redo-command.html).
+- To undo the last command, use the [`undo` command](#undoing-a-command-undo).
+- To redo the last undone command, use the [`redo` command](#redoing-a-command-redo).
 
 ### Setting the Theme
 
 B2B4U includes several color palettes (called "themes") to customize the look of the app.
 
-To switch themes, use the [`theme THEME_NAME` command]({{ baseUrl }}/user-guide/set-theme.html).
+To switch themes, use the [`theme THEME_NAME` command](#set-theme-theme).
 
 Available themes:
 
 | Theme                                                                     | Command        |
 | ------------------------------------------------------------------------- | -------------- |
-| [Dark mode]({{ baseUrl }}/user-guide/set-theme.html#dark-mode-dark)       | `theme dark`   |
-| [Light mode]({{ baseUrl }}/user-guide/set-theme.html#light-mode-light)    | `theme light`  |
-| [Reading mode]({{ baseUrl }}/user-guide/set-theme.html#reading-mode-book) | `theme book`   |
-| [Sakura]({{ baseUrl }}/user-guide/set-theme.html#sakura-theme-sakura)     | `theme sakura` |
-| [Grass]({{ baseUrl }}/user-guide/set-theme.html#grass-theme-grass)        | `theme grass`  |
-| [Techcore]({{ baseUrl }}/user-guide/set-theme.html#techcore-tech)         | `theme tech`   |
-| [Jirai Kei]({{ baseUrl }}/user-guide/set-theme.html#jirai-kei-jirai)      | `theme jirai`  |
+| [Dark mode](#dark-mode-dark)       | `theme dark`   |
+| [Light mode](#light-mode-light)    | `theme light`  |
+| [Reading mode](#reading-mode-book) | `theme book`   |
+| [Sakura](#sakura-theme-sakura)     | `theme sakura` |
+| [Grass](#grass-theme-grass)        | `theme grass`  |
+| [Techcore](#techcore-tech)         | `theme tech`   |
+| [Jirai Kei](#jirai-kei-jirai)      | `theme jirai`  |
 
 ### Saving Data
 
@@ -425,10 +436,12 @@ B2B4U automatically saves your data to disk after any command that modifies it. 
 
 B2B4U supports multiple data files, which is useful for keeping separate contact lists (e.g. work vs. personal contacts). All data files must be stored in the data folder: `[JAR file location]/data/`.
 
-- To view all available data files, use the [`view files` command]({{ baseUrl }}/user-guide/view.html#viewing-available-files-view-files).
-- To open a data file, use the [`file open/FILE_NAME` command]({{ baseUrl }}/user-guide/file.html#open-file-file-open).
-- To delete a data file, use the [`file delete/FILE_NAME` command]({{ baseUrl }}/user-guide/file.html#deleting-a-file-file-delete).
-- To close the file list panel, use the [`close view` command]({{ baseUrl }}/user-guide/close-view.html). The file list shares the same panel used to view contact details.
+- To view all available data files, use the [`view files` command](#viewing-available-files-view-files).
+- To open a data file, use the [`file open/FILE_NAME` command](#open-file-file-open).
+- To delete a data file, use the [`file delete/FILE_NAME` command](#deleting-a-file-file-delete).
+- To close the file list panel, use the [`close view` command](#closing-the-view-panel-close-view). The file list shares the same panel used to view contact details.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing the Data File Directly
 
@@ -442,7 +455,9 @@ B2B4U data is saved as JSON files in `[JAR file location]/data/`. Advanced users
 
 ### Exiting B2B4U
 
-To exit B2B4U, use the [`exit` command]({{ baseUrl }}/user-guide/exit-program.html).
+To exit B2B4U, use the [`exit` command](#exiting-the-program-exit).
+
+[(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -451,6 +466,8 @@ To exit B2B4U, use the [`exit` command]({{ baseUrl }}/user-guide/exit-program.ht
 **Q: How do I transfer my data to another computer?**
 
 Install B2B4U on the new computer, then replace the empty data file it creates with the data file from your previous B2B4U home folder.
+
+[(Back to top)](#b2b4u-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -464,14 +481,16 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 
    *Fix:* Manually restore the minimized Help Window.
 
+[(Back to top)](#b2b4u-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
 | Action                   | Format         | Parameters                                                                                                                    | Examples                                                                                           |
-| ------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+|--------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | **Help**                 | `help`         | `[COMMAND]`                                                                                                                   | `help add`                                                                                         |
-| **Add contact**          | `add`          | `n/NAME (p/PHONE \| e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`                                                         | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add contact**          | `add`          | `n/NAME (p/PHONE \| e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`                                                        | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Edit contact**         | `edit`         | `INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`                                                 | `edit 2 n/James Lee e/jameslee@example.com`                                                        |
 | **Delete contact**       | `delete`       | `INDEX`                                                                                                                       | `delete 3`                                                                                         |
 | **Clear all contacts**   | `clear`        |                                                                                                                               |                                                                                                    |
@@ -494,3 +513,550 @@ Install B2B4U on the new computer, then replace the empty data file it creates w
 | **Delete file**          | `file delete/` | `FILE_NAME`                                                                                                                   | `file delete/OldContactList`                                                                       |
 | **View available files** | `view files`   |                                                                                                                               |                                                                                                    |
 | **Change theme**         | `theme`        | `THEME_NAME`                                                                                                                  | `theme sakura`                                                                                     |
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Appendix: Command Details
+
+This appendix serves as a comprehensive reference for all commands available in B2B4U.
+Each command is explained in detail with its format, parameters, and examples of usage.
+
+<box type="info" seamless>
+<b>Note:</b> The commands are intended to be viewed from the feature list above, where you can click on each command to jump to its detailed explanation below.
+</box>
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Viewing help: `help`
+
+Shows a message explaining how to access the help page.
+
+![help message]({{ baseUrl }}/images/helpMessage.png)
+
+Format: `help [COMMAND]`
+
+* Without arguments, opens the help window with a link to the User Guide.
+* With a `COMMAND` argument (e.g. `help add`, `help note`), opens the help window with usage details and a direct link to the relevant section of the User Guide.
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Adding a contact: `add`
+
+Adds a contact to the contact list.
+
+Format: `add n/NAME (p/PHONE | e/EMAIL) [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
+
+<box type="tip" seamless>
+
+**Tip:** A contact can have any number of tags (including 0). You must include **at least one** of `p/PHONE` or `e/EMAIL` (the parentheses mean “one or both”); you may supply both.
+</box>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Alex Tan p/91234567`
+* `add n/Jane Smith e/jane@example.com lc/22/Feb/2026`
+
+![add contact]({{ baseUrl }}/images/addContact.png)
+
+### Duplicate contacts
+
+A contact is considered a **duplicate** of an existing contact if all of the following criteria hold:
+
+- Both contacts have the exact same name
+- Both contacts have the exact same phone number
+- Both contacts have the exact same email address
+
+If you try to add a duplicate contact, B2B4U will reject the command with the message: "This contact already exists in the address book".
+
+<div style="page-break-after: always;"></div>
+
+### Similar contacts
+After a successful `add` command, the contact list will be reset to display every contact in the default sort order, then if there are similar contacts in the list, the contact list will be displayed to display the similar contacts.
+
+Two contacts are similar if:
+
+- Both contacts share the same name
+- Both contacts share the same phone number
+- Both contacts share the same email address
+
+<box type="info" seamless>
+
+**Note:** Similar contact detection uses **exact matching** only. Names that appear similar to a human (e.g. "John Doe" and "John Doe Sr.") will not be flagged as similar unless they match exactly. The same applies to phone numbers and emails.
+</box>
+
+![add contact]({{ baseUrl }}/images/addContact-similar.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Editing a contact: `edit`
+
+Edits an existing contact in the contact list.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 lc/today` Updates the last contacted date of the 3rd contact to today.
+
+![edit contact]({{ baseUrl }}/images/editContact.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Deleting a contact: `delete`
+
+Deletes the specified contact from the contact list.
+
+Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+![delete contact]({{ baseUrl }}/images/deleteContact.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Clearing all contacts: `clear`
+
+Clears all contacts from the contact list.
+
+Format: `clear`
+
+![clear]({{ baseUrl }}/images/clear.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Listing all contacts: `list`
+
+Shows a list of all contacts in the contact list and resets contact order by oldest contact first.
+
+Format: `list`
+
+![list contacts]({{ baseUrl }}/images/listContacts.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Finding contacts: `find`
+
+Finds contacts whose fields match the specified search criteria.
+
+Format: `find [KEYWORD]… [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lc/LAST_CONTACTED] [t/TAG]…`
+or: `find @INDEX` to find contacts associated with the contact at INDEX
+
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* Unprefixed `KEYWORD`s search across all fields (name, phone, email, address, notes, tags) using partial matching. Each keyword must appear somewhere in the contact.
+    * Note: As months are abbreviated in reminders, a search with the full name of a month exceeding 3 letters in length will not successfully filter for reminders with that month.
+    * Example: Given contact "Alex Yeoh" with note "to meet _on_ Jun 19, 2026"
+        * `find Jun` will display contact "Alex Yeoh"
+        * `find June` **will not** display contact "Alex Yeoh"
+
+<div style="page-break-after: always;"></div>
+
+* Prefixed searches (`n/`, `p/`, `e/`, `a/`, `lc/`) filter by the specified field using partial matching.
+* `t/TAG` filters by tag using **exact** matching (e.g. `t/friend` will not match a tag named `friends`).
+* All search conditions are combined with **AND** logic — only contacts satisfying **every** condition are returned.
+* At least one search condition must be provided.
+* `find @INDEX` performs a **bidirectional** cross-reference lookup on the contact at the given index:
+    * It finds all contacts that are **referenced by** the target contact's notes (via `@INDEX` references).
+    * It also finds all contacts whose notes **reference** the target contact.
+    * This allows you to see all associations regardless of which direction the reference was made.
+
+Examples:
+* `find John` returns contacts containing `john` in any field.
+* `find n/Alex` returns contacts with `Alex` in their name.
+* `find p/94` returns contacts with `94` in their phone number.
+* `find a/street t/friends` returns contacts that have `street` in their address **and** the exact tag `friends`.
+* `find @1` shows all contacts associated with the 1st contact — both contacts referenced in their notes and contacts that reference them.
+* If Contact 1's notes contain `@2` (a reference to Contact 2), both `find @1` and `find @2` will show the association between them.
+
+![find contacts]({{ baseUrl }}/images/findContacts.png)
+
+### Clearing filters
+
+To remove the current filters and display every contact, use the `find` command without any additional keywords.
+
+<box type="info" seamless>
+
+**Note:** Changing or resetting the `find` filters has no impact on the current sort order. To reset both the applied filters and sort order at the same time, use the [`list` command](#listing-all-contacts-list) instead.
+
+</box>
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Sorting contacts: `sort`
+
+Sorts the currently displayed contacts by the specified field(s).
+
+Format: `sort [n/asc | desc] [p/asc | desc] [e/asc | desc] [a/asc | desc] [lu/asc | desc] [lc/asc | desc] [t/TAG_NAME:asc | desc]…`
+
+* Sorts by the fields indicated by each prefix, in the order the prefixes are given.
+* `n/` — sort by name, `p/` — sort by phone, `e/` — sort by email, `a/` — sort by address, `lu/` — sort by last updated, `lc/` — sort by last contacted.
+* `t/TAG_NAME` — contacts with the ranked tag `TAG_NAME` are displayed at the top.
+* At least one sort criterion must be provided.
+* Sort criterions from separate `sort` commands can stack.
+* Older sort criterion given priority in sorting.
+
+Examples:
+* `sort n/asc` sorts all contacts alphabetically by name.
+* `sort lu/desc` sorts contacts by when they were last updated.
+* `sort n/asc t/vip:desc` sorts contacts alphabetically by name, with contacts tagged `vip` shown first. Contacts that are tagged `vip` will be sorted in decreasing `vip` rank.
+
+![sort lu/desc t/friends:asc n/asc]({{ baseUrl }}/images/sort.png)
+
+<div style="page-break-after: always;"></div>
+
+### Sort order by field
+
+| Field          | Prefix        | Ascending: `asc`                                                                                                                                                                                                                     | Descending: `desc`                                                                                                                                                                                 |
+|----------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name           | `n/`          | Sort contacts by name, in alphabetical order.                                                                                                                                                                                        | Sort contacts by name, in reverse alphabetical order.                                                                                                                                              |
+| Phone number   | `p/`          | Sort contacts by phone number, in alphabetical order. <box type="info" seamless>**Note: ** Rather than sorting by the number value, the phone number is sorted similarly to a word. I.e. "12" will be sorted to be before "2".</box> | Sort contacts by phone number, in reverse alphabetical order.                                                                                                                                      |
+| Email          | `e/`          | Sort contacts by email, in alphabetical order.                                                                                                                                                                                       | Sort contacts by email, in reverse alphabetical order.                                                                                                                                             |
+| Address        | `a/`          | Sort contacts by address, in alphabetical order.                                                                                                                                                                                     | Sort contacts by address, in reverse alphabetical order.                                                                                                                                           |
+| Last updated   | `lu/`         | Sort contacts by the least recently updated first.                                                                                                                                                                                   | Sort contacts by the most recently updated first.                                                                                                                                                  |
+| Last contacted | `lc/`         | Sort contacts by the least recently contacted first.                                                                                                                                                                                 | Sort contacts by the most recently contacted first.                                                                                                                                                |
+| Tag            | `t/TAG_NAME/` | Sort contacts by tag `TAG_NAME` first. <br> Contacts that have a numerical `TAG_NAME` rank will be sorted in decreasing `TAG_NAME` rank(highest rank first, followed by non-numerical ranks).                                        | Sort contacts by tag `TAG_NAME` first. <br> Contacts that have a numerical `TAG_NAME` rank will be sorted in increasing `TAG_NAME` rank(non-numerical ranks first, followed by lowest rank first). |
+
+### Resetting sort order
+
+To reset the current sort order, use the `sort` command without any additional keywords.
+
+<box type="info" seamless>
+
+**Note:** Changing or resetting the sort order has no impact on the current `find` filters. To reset both the applied filters and sort order at the same time, use the [`list` command](#listing-all-contacts-list) instead.
+
+</box>
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Managing notes/reminders for a contact: `note`
+
+Manages notes and reminders for an existing contact in the contact list.
+
+### Add a note
+
+Format: `note INDEX NOTE [on/TIME]`
+
+* Appends `NOTE` to the contact at the specified `INDEX`. The index **must be a positive integer** 1, 2, 3, …​
+* New notes are stacked underneath existing ones.
+* `TIME` can accept most conventional date/time formats and may omit the year. If unable to parse as a date, it will be saved as a plain string.
+* Filling the `on/TIME` field turns the note into a [reminder](#reminders). The system will warn of reminders due within 1 week.
+* Notes support **contact references** using the `@INDEX` syntax. When you include `@INDEX` in a note, it creates a link to the contact at that index. The reference is displayed as the contact's name in **bold and underlined** text.
+* If a referenced contact's name changes, the displayed name updates automatically.
+* If a referenced contact is deleted, the reference is replaced with the contact's name as plain text.
+* If a contact reference is corrupted (e.g. changed to an invalid value in the data file), it will be displayed as `@Unknown` in the note.
+* You cannot add a note that is **identical** to one already on that contact (same text **and** the same reminder time, if any). If you try, the command fails and no change is made.
+
+Examples:
+* `note 1 Likes to swim.`
+* `note 2 Follow up call on/15 Apr`
+* `note 1 Worked with @2` — creates a reference to the 2nd contact in the note.
+
+![add note]({{ baseUrl }}/images/addNote.png)
+
+<div style="page-break-after: always;"></div>
+
+### Edit a specific note
+
+Format: `note INDEX el/NOTE_INDEX NEW_NOTE [on/TIME]`
+
+* Replaces the note at position `NOTE_INDEX` of the contact at the specified `INDEX` with `NEW_NOTE`.
+* `NOTE_INDEX` refers to the position of the note as displayed (starting from 1).
+* Optionally include `on/TIME` to set or update the reminder for the edited note.
+* After editing, the note must not match **another** note on the same contact (same text **and** the same reminder time, if any). Otherwise the command fails and the note is left unchanged.
+
+Examples:
+* `note 1 el/1 Updated note text.` replaces the 1st note of the 1st contact.
+* `note 2 el/3 Follow up call on/15 Apr` replaces the 3rd note for the 2nd contact and sets a reminder.
+
+![edit note]({{ baseUrl }}/images/editNote.png)
+
+<div style="page-break-after: always;"></div>
+
+### Remove a specific note
+
+Format: `note INDEX cl/NOTE_INDEX`
+
+* Removes the note at position `NOTE_INDEX` from the contact at the specified `INDEX`.
+* `NOTE_INDEX` refers to the position of the note as displayed (starting from 1).
+
+Example:
+* `note 1 cl/2` removes the 2nd note from the 1st contact.
+
+![remove specific note]({{ baseUrl }}/images/removeSpecificNote.png)
+
+<div style="page-break-after: always;"></div>
+
+### Remove the first N notes
+
+Format: `note INDEX co/LINES_TO_REMOVE`
+
+* Removes the first `LINES_TO_REMOVE` notes from the contact at the specified `INDEX`.
+* `LINES_TO_REMOVE` must be a non-negative integer.
+* If `LINES_TO_REMOVE` exceeds the number of existing notes, all notes are removed.
+
+Examples:
+* `note 1 co/1` removes the first note from the 1st contact.
+* `note 2 co/3` removes the first 3 notes from the 2nd contact.
+
+![remove notes]({{ baseUrl }}/images/removeNotes.png)
+
+<div style="page-break-after: always;"></div>
+
+### Clear all notes
+
+Format: `note INDEX ca/`
+
+* Removes all notes from the contact at the specified `INDEX`.
+
+Example:
+* `note 1 ca/`
+
+![remove all notes]({{ baseUrl }}/images/removeAllNotes.png)
+
+<div style="page-break-after: always;"></div>
+
+### Reminders
+
+By including a `/on` prefix and a time afterwards in a `note`, users can create reminders attached to a contact, which is useful to scheduling meetings and events relating to those contacts. <br>
+Contacts with a reminder will gain a special `Reminder` tag and automatically be placed towards the top of the contact list. <br>
+The input format for the time is [flexible](#flexible-time-input).
+
+![Reminder]({{ baseUrl }}/images/notes-reminder.png)
+
+<div style="page-break-after: always;"></div>
+
+Users will be notified that the reminder of a contact is due within 7 days in the following ways:
+- The `Reminder` tag of the contact will turn reddish
+- The contact will be placed at the very top of the contact list, above other contacts without a due reminder
+- A reminder window will pop-up during startup
+
+![Due Reminder]({{ baseUrl }}/images/notes-dueReminder.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Undoing a command: `undo`
+
+Reverts the last executed command that modified data.
+
+Format: `undo`
+
+* Only the following commands can be undone:
+    * Commands that modify contact list data: `add`, `edit`, `delete`, `note`, `clear`
+    * Commands that change the filter/sort patterns: `list`, `find`, `sort`
+    * Commands that modify application settings: `file`, `theme`
+* Commands that do not fall in the above categories (`help`, `view`, `close view`, `undo`, `redo`, `exit`) are ignored by undo.
+* Displays the feedback of the undone command after execution.
+
+Examples:
+* `delete 1` followed by `undo` restores the deleted contact.
+* `edit 1 n/New Name` followed by `undo` reverts the name change.
+
+![undo command]({{ baseUrl }}/images/undoCommand.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Redoing a command: `redo`
+
+Reverses the effect of an [`undo` command](#undoing-a-command-undo), effectively re-applying the previously undone action.
+
+Format: `redo`
+
+* Only applicable after an `undo` command has been executed.
+* Restores the application state to the state prior to the previous `undo` command, as if said `undo` command was never executed at all.
+* Displays the feedback of the redone command after successful execution.
+
+Examples:
+* `delete 1` then `undo` then `redo` re-deletes the 1st contact.
+* `edit 1 n/New Name` then `undo` then `redo` re-applies the name change.
+
+![redo command]({{ baseUrl }}/images/redoCommand.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Viewing a specific contact: `view`
+
+Displays a specific contact's full details in a side panel.
+
+Format: `view INDEX`
+
+* Displays the contact at the specified `INDEX` in a separate panel.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If the viewed contact is subsequently edited (e.g. via `edit` or `note`), the detail panel updates automatically to reflect the changes.
+
+Example:
+* `view 1` displays the details of the 1st contact.
+
+![view contact]({{ baseUrl }}/images/viewContact.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Viewing available files: `view files`
+
+Displays all the B2B4U contact list files in the data subfolder in a side panel, each with the number of contacts they contain.
+
+Format: `view files`
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Closing the view panel: `close view`
+
+Closes the currently open contact detail or file list panel and returns to the main list view.
+
+Format: `close view`
+
+* Does not require any index or additional parameters.
+* If no contact or file list panel is currently open, the command executes without error and does nothing.
+
+Example:
+* `close view`
+
+![close view]({{ baseUrl }}/images/closeView.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Open file: `file open/`
+
+Changes the contact list file being accessed to a different one in the data subfolder.
+
+Format: `file open/FILE_NAME`
+
+* Accesses the file named `FILE_NAME`.json in the data subfolder.
+* If `FILE_NAME`.json does not already exist, it will be created with an empty contact list.
+* `FILE_NAME` can only contain **Alphanumeric characters and/or the underscore '_' character**.
+
+Examples:
+* If new_file.json does not exist, `file open/new_file` will create new_file.json and allow immediate access to it.
+
+![Open file]({{ baseUrl }}/images/file-open.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Deleting a file: `file delete/`
+
+Deletes the specified file from the data subfolder.
+
+Format: `file delete/FILE_NAME`
+
+* Deletes the file named `FILE_NAME`.json in the data subfolder.
+* `FILE_NAME`.json **must exist in the data subfolder**.
+* `FILE_NAME`.json **cannot be the currently accessed file**.
+* If `FILE_NAME`.json is not empty, an alert window will pop up and require confirmation of deletion.
+
+Examples:
+* If empty.json does not contain any contacts, `file delete/empty` will delete said file without issue.
+
+![Delete empty file]({{ baseUrl }}/images/deleteEmptyFile.png)
+
+<div style="page-break-after: always;"></div>
+
+* If oldContactList.json contains at least one contact, `file delete/oldContactList` will trigger an alert window to appear and prompt for confirmation.
+
+![Delete file]({{ baseUrl }}/images/deleteFile.png)
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Set theme: `theme`
+
+Changes the theme to one of 7 supported themes.
+
+Format: `theme THEME_NAME`
+
+| Theme        | Description                                                               | Command        | Image                                                    |
+|--------------|---------------------------------------------------------------------------|----------------|----------------------------------------------------------|
+| Dark Mode    | Perfect for late-night work.                                              | `theme dark`   | ![Dark Mode]({{ baseUrl }}/images/theme-dark.png)        |
+| Light Mode   | For when you're in well-lit conditions.                                   | `theme light`  | ![Light Mode]({{ baseUrl }}/images/theme-light.png)      |
+| Reading Mode | To lessen the strain on the eyes.                                         | `theme book`   | ![Reading Mode]({{ baseUrl }}/images/theme-book.png)     |
+| Sakura Theme | For fans of the kawaii and pink aesthetic.                                | `theme sakura` | ![Sakura Theme]({{ baseUrl }}/images/theme-sakura.png)   |
+| Grass Theme  | An alternate colour scheme that reduces eye strain.                       | `theme grass`  | ![Grass Theme]({{ baseUrl }}/images/theme-grass.png)     |
+| Techcore     | For those who want to appear like they're at the forefront of technology. | `theme tech`   | ![Techcore Theme]({{ baseUrl }}/images/theme-tech.png)   |
+| Jirai Kei    | For fans of the Jirai Kei aesthetic.                                      | `theme jirai`  | ![Jirai Kei Theme]({{ baseUrl }}/images/theme-jirai.png) |
+
+
+[(Back to top)](#b2b4u-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[(Back to top)](#b2b4u-user-guide)
