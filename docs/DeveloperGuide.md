@@ -24,6 +24,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -53,6 +55,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
@@ -74,6 +78,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 <puml src="{{ baseUrl }}/diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -98,6 +104,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -143,6 +151,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** :
@@ -182,15 +192,7 @@ phrases.
 
 `JsonAdaptedContact` persists `lastUpdated`, `lastContacted`, and `notes` alongside the other contact fields.
 
-<box type="info" seamless>
-
-**Note:** The diagram below is an **alternative** (arguably more OOP) design: a central `Tag` list on `AddressBook` that
-`Contact` references, so each unique tag exists once. **The running app does not use this structure**—`AddressBook` only
-contains a `UniqueContactList`, and each `Contact` owns its own `Tag` instances as in the main model diagram above.
-
-<puml src="{{ baseUrl }}/diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -213,6 +215,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -245,6 +249,8 @@ The following sequence diagram shows how the edit command processes `edit 1 p/`:
   * Pros: Fewer fields — reuses the existing `Optional<Phone>` field.
   * Cons: Sentinel values are error-prone and harder to reason about. Validation logic in `Phone`, `Email`, etc. would need special-case handling.
 
+<div style="page-break-after: always;"></div>
+
 ### Undo/redo feature
 
 The undo/redo mechanism is facilitated by `Snapshot`. It stores key information regarding a `Model`, stored internally as an `List<Pair<String, Snapshot>>` named `snapshots` and an `int snapshotPosition` is used to indicate the `Snapshot` being used. Additionally, `Model` implements the following methods:
@@ -272,6 +278,8 @@ Step 3. The user executes `delete 7` to delete the 7th contact which happens to 
 **Note:** If a command fails its execution, it will not call `Model#saveSnapshot(feedback)`, so no new `snapshot` will be created.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 Step 4. The user now decides that deleting the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#moveSnapshot(-1)`, which will decrement `snapshotPosition`, and restores `ModelManager` with data given by the `snapshotPosition`-th `snapshot`.
 
@@ -330,7 +338,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+<div style="page-break-after: always;"></div>
 
 ### Data archiving
 
@@ -701,6 +709,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
 12. Should be packaged in a single JAR file of 100MB or less in size.
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -759,6 +769,8 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
     Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a contact
 
 1. Adding a contact with all fields
@@ -814,6 +826,8 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `find` (no arguments)<br>
     Expected: All filters are cleared and all contacts are shown.
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting contacts
 
@@ -873,6 +887,8 @@ While we initially encountered difficulties with more complex components such as
 effective collaboration allowed us to overcome these hurdles and accomplish our objectives for B2B4U.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
